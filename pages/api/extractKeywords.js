@@ -1,6 +1,8 @@
 // pages/api/extractKeywords.js
 import OpenAI from "openai";
 
+import { mockKeywords } from "@/mockdata";
+
 const openai = new OpenAI(process.env.OPENAI_API_KEY);
 
 export default async function handler(req, res) {
@@ -19,9 +21,10 @@ export default async function handler(req, res) {
         model: "gpt-4o",
       });
 
-      //   const keywords = completion.choices[0].message.content;
-      const keywords = JSON.parse(completion.choices[0].message.content);
-      console.log(keywords);
+      // Un-comment the line below to use the AI API instead of the mock data
+      // const keywords = JSON.parse(completion.choices[0].message.content);
+
+      const keywords = mockKeywords;
 
       res.status(200).json({ keywords });
     } catch (error) {
