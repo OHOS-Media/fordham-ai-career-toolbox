@@ -1,0 +1,69 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  AI Toolbox Lambda API
+
+  Contains multiple Lambda functions for different AI Career tools
+
+Globals:
+  Function:
+    Timeout: 30
+    Runtime: nodejs20.x
+    Environment:
+      Variables:
+        OPENAI_API_KEY: !Ref OpenAIKey
+
+Parameters:
+  OpenAIKey:
+    Type: String
+    Description: "OpenAI API Key"
+
+Resources:
+  KeywordExtractorFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: lambdas/keyword-extractor/
+      Handler: app.lambdaHandler
+      Events:
+        ExtractKeywords:
+          Type: Api
+          Properties:
+            Path: /extract-keywords
+            Method: post
+
+  BulletPointEnhancerFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: lambdas/bullet-point-enhancer/
+      Handler: app.lambdaHandler
+      Events:
+        EnhanceBulletPoints:
+          Type: Api
+          Properties:
+            Path: /enhance-bullet-points
+            Method: post
+
+  # PlaceholderForFutureToolFunction:
+  #   Type: AWS::Serverless::Function
+  #   Properties:
+  #     CodeUri: lambdas/placeholder-for-future-tool/
+  #     Handler: app.lambdaHandler
+  #     Events:
+  #       FutureTool:
+  #         Type: Api
+  #         Properties:
+  #           Path: /future-tool
+  #           Method: post
+
+Outputs:
+  KeywordExtractorApi:
+    Description: "API Gateway endpoint URL for Keyword Extractor function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/extract-keywords/"
+
+  BulletPointEnhancerApi:
+    Description: "API Gateway endpoint URL for Bullet Point Enhancer function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/enhance-bullet-points/"
+
+  # FutureToolApi:
+  #   Description: "API Gateway endpoint URL for Placeholder for Future Tool function"
+  #   Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/future-tool/"
