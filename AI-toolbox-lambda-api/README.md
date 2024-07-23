@@ -1,127 +1,196 @@
-# lambda-api
+# AI Toolbox Lambda API
 
-This project contains source code and supporting files for a serverless application that you can deploy with the SAM CLI. It includes the following files and folders.
+## Overview
 
-- hello-world - Code for the application's Lambda function.
-- events - Invocation events that you can use to invoke the function.
-- hello-world/tests - Unit tests for the application code. 
-- template.yaml - A template that defines the application's AWS resources.
+The AI Toolbox Lambda API is a serverless application built using AWS SAM (Serverless Application Model) that provides a set of AI-powered tools. This application includes endpoints for extracting keywords from job descriptions and enhancing resume bullet points to better match job descriptions. 
 
-The application uses several AWS resources, including Lambda functions and an API Gateway API. These resources are defined in the `template.yaml` file in this project. You can update the template to add AWS resources through the same deployment process that updates your application code.
+## Features
 
-If you prefer to use an integrated development environment (IDE) to build and test your application, you can use the AWS Toolkit.  
-The AWS Toolkit is an open source plug-in for popular IDEs that uses the SAM CLI to build and deploy serverless applications on AWS. The AWS Toolkit also adds a simplified step-through debugging experience for Lambda function code. See the following links to get started.
+1. **Keyword Extractor**
+   - Extracts job-related keywords from a provided job description.
+   
+2. **Bullet Point Enhancer**
+   - Enhances resume bullet points based on a provided job description.
 
-* [CLion](https://docs.aws.amazon.com/toolkit-for-jetbrains/latest/userguide/welcome.html)
-* [GoLand](https://docs.aws.amazon.com/toolkit-for-jetbrains/latest/userguide/welcome.html)
-* [IntelliJ](https://docs.aws.amazon.com/toolkit-for-jetbrains/latest/userguide/welcome.html)
-* [WebStorm](https://docs.aws.amazon.com/toolkit-for-jetbrains/latest/userguide/welcome.html)
-* [Rider](https://docs.aws.amazon.com/toolkit-for-jetbrains/latest/userguide/welcome.html)
-* [PhpStorm](https://docs.aws.amazon.com/toolkit-for-jetbrains/latest/userguide/welcome.html)
-* [PyCharm](https://docs.aws.amazon.com/toolkit-for-jetbrains/latest/userguide/welcome.html)
-* [RubyMine](https://docs.aws.amazon.com/toolkit-for-jetbrains/latest/userguide/welcome.html)
-* [DataGrip](https://docs.aws.amazon.com/toolkit-for-jetbrains/latest/userguide/welcome.html)
-* [VS Code](https://docs.aws.amazon.com/toolkit-for-vscode/latest/userguide/welcome.html)
-* [Visual Studio](https://docs.aws.amazon.com/toolkit-for-visual-studio/latest/user-guide/welcome.html)
+## Prerequisites
 
-## Deploy the sample application
+- AWS CLI configured with appropriate IAM permissions.
+- AWS SAM CLI installed.
+- Node.js and npm installed.
 
-The Serverless Application Model Command Line Interface (SAM CLI) is an extension of the AWS CLI that adds functionality for building and testing Lambda applications. It uses Docker to run your functions in an Amazon Linux environment that matches Lambda. It can also emulate your application's build environment and API.
+## Setup
 
-To use the SAM CLI, you need the following tools.
+### 1. Clone the Repository
 
-* SAM CLI - [Install the SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-install.html)
-* Node.js - [Install Node.js 20](https://nodejs.org/en/), including the NPM package management tool.
-* Docker - [Install Docker community edition](https://hub.docker.com/search/?type=edition&offering=community)
+```sh
+git clone https://github.com/OHOS-Media/fordham-ai-career-toolbox.git
+cd fordham-ai-career-toolbox
+```
 
-To build and deploy your application for the first time, run the following in your shell:
+### 2. Install Dependencies
 
-```bash
+```sh
+cd AI-toolbox-lambda-api
+npm install
+```
+
+### 3. Environment Variables
+
+Set up environment variables for sensitive data. For example, use AWS Secrets Manager or environment variables to manage the OpenAI API key.
+
+### 4. AWS SAM Deployment
+
+#### Build
+
+```sh
 sam build
+```
+
+#### Deploy
+
+```sh
 sam deploy --guided
 ```
 
-The first command will build the source of your application. The second command will package and deploy your application to AWS, with a series of prompts:
+Follow the prompts to configure the deployment parameters. Ensure you replace the OpenAI API key with an environment variable or a secure reference.
 
-* **Stack Name**: The name of the stack to deploy to CloudFormation. This should be unique to your account and region, and a good starting point would be something matching your project name.
-* **AWS Region**: The AWS region you want to deploy your app to.
-* **Confirm changes before deploy**: If set to yes, any change sets will be shown to you before execution for manual review. If set to no, the AWS SAM CLI will automatically deploy application changes.
-* **Allow SAM CLI IAM role creation**: Many AWS SAM templates, including this example, create AWS IAM roles required for the AWS Lambda function(s) included to access AWS services. By default, these are scoped down to minimum required permissions. To deploy an AWS CloudFormation stack which creates or modifies IAM roles, the `CAPABILITY_IAM` value for `capabilities` must be provided. If permission isn't provided through this prompt, to deploy this example you must explicitly pass `--capabilities CAPABILITY_IAM` to the `sam deploy` command.
-* **Save arguments to samconfig.toml**: If set to yes, your choices will be saved to a configuration file inside the project, so that in the future you can just re-run `sam deploy` without parameters to deploy changes to your application.
+## Usage
 
-You can find your API Gateway Endpoint URL in the output values displayed after deployment.
+### Endpoints
 
-## Use the SAM CLI to build and test locally
+#### 1. Keyword Extractor
 
-Build your application with the `sam build` command.
+- **Endpoint**: `/extract-keywords`
+- **Method**: `POST`
+- **Request Body**:
+  ```json
+  {
+    "jobDescription": "Your job description here..."
+  }
+  ```
+- **Response**:
+  ```json
+  {
+    "keywords": [
+      "keyword1",
+      "keyword2",
+      "keyword3",
+      ...
+    ]
+  }
+  ```
 
-```bash
-lambda-api$ sam build
+#### 2. Bullet Point Enhancer
+
+- **Endpoint**: `/enhance-bullet-points`
+- **Method**: `POST`
+- **Request Body**:
+  ```json
+  {
+    "resume": "Your resume here...",
+    "jobDescription": "Your job description here..."
+  }
+  ```
+- **Response**:
+  ```json
+  [
+    {
+      "Experience 1": [
+        "enhanced bullet point 1",
+        "enhanced bullet point 2",
+        ...
+      ]
+    },
+    ...
+  ]
+  ```
+
+### Example API Calls
+
+#### Keyword Extractor Example
+
+**Request**:
+```json
+{
+  "jobDescription": "Qualifications Interest and excitement about problem solving and complex systems An aptitude for systems thinking and information architecture Experience in planning and running discovery – identify what input is needed and how best to get that input Interaction design skills (both on desktop and mobile) Experience in running collaborative workshops to communicate users needs and collaborate with both business and engineering to reach the best solution An aptitude for simplifying complexity and transforming data into valuable information Eagerness to learn, a track record for being self-driven, and experience managing multiple projects at the same time Benefits You join an inclusive, collaborative and global community where you have the opportunity to fuel the creative journey A modern office environment designed to foster productivity, creativity, and teamwork An attractive and comprehensive benefits package including medical, dental, vision, life & disability coverage, and 401K + employer matching Voluntary benefits like company-paid identity theft protection and resources for pets, mental health and meditation resources, industry-leading fertility coverage, fully paid leave for childbirth or bonding, fully paid leave for caregivers, programs for loved ones with developmental disabilities and neurodiversity, subsidized back-up child and elder care, and reimbursement for adoption, surrogacy, tuition and student loans We invest in your professional growth & development Time off for a winter recess Responsibilities You would be part of the product design team (both US and EU based) and would be working on strategic products and initiatives You would collaborate closely with product managers, various internal stakeholders, and engineering Support one of our key Product areas by owning the design and UX of all features and apps in this area Work within a complex system of content and permissions, dealing with a huge amount of data Contribute to the roadmap – collaborate with the rest of the product team to discover, define and prioritize product work Constantly work at creating value for our users by suggesting elegant and simple design solutions that solve their problems and seize new opportunities Coordinate with the rest of the product design team/PMs in other teams to create a consistent experience language, and seamless connections between apps Collaborate with other product designers on their projects to give feedback, collaborate, lead or mentor"
+}
 ```
 
-The SAM CLI installs dependencies defined in `hello-world/package.json`, creates a deployment package, and saves it in the `.aws-sam/build` folder.
-
-Test a single function by invoking it directly with a test event. An event is a JSON document that represents the input that the function receives from the event source. Test events are included in the `events` folder in this project.
-
-Run functions locally and invoke them with the `sam local invoke` command.
-
-```bash
-lambda-api$ sam local invoke HelloWorldFunction --event events/event.json
+**Response**:
+```json
+{
+  "keywords": [
+    "problem solving",
+    "complex systems",
+    "systems thinking",
+    "information architecture",
+    "discovery planning",
+    "input identification",
+    "interaction design",
+    "desktop and mobile design",
+    "collaborative workshops",
+    "user needs",
+    "business collaboration",
+    "engineering collaboration",
+    "simplifying complexity",
+    "transforming data",
+    "self-driven",
+    "managing multiple projects",
+    "product design team",
+    "UX design",
+    "content and permissions",
+    "design solutions"
+  ]
+}
 ```
 
-The SAM CLI can also emulate your application's API. Use the `sam local start-api` to run the API locally on port 3000.
+#### Bullet Point Enhancer Example
 
-```bash
-lambda-api$ sam local start-api
-lambda-api$ curl http://localhost:3000/
+**Request**:
+```json
+{
+  "resume": "Katherine Scott Baltimore, MD | 410-555-0157 | katherinescott@email.com Summary &nbsp; Certified IT Specialist dedicated to providing exceptional customer support for all IT issues. Comfortable working with software and hardware systems in a fast-paced environment. Education &nbsp; Longwood Southern University 2020 Bachelor of Science in computer science Experience &nbsp; Franklin and Lopez Industries, Baltimore, Maryland, IT Support Specialist May 2021 – Current Provides IT support for customers and employees Installs and monitors hardware and software systems Regularly monitors computer systems for potential security threats Optimizes systems to improve technology efficiency by up to seven percent Runs a dedicated customer support line for questions or concerns M Andrews Technologies, Baltimore, Maryland, IT Specialist May 2020 – May 2021 Tested computer system vulnerabilities Installed any necessary security measures or updates Monitored network performance and noted areas for improvement Certifications &nbsp; Certified Ethical Hacker, EC-Council, 2020 Computing Technology Industry Association Network+ Certification, 2020 Skills &nbsp; Information security Customer service Problem-solving Computer system monitoring",
+  "jobDescription": "Qualifications\nInterest and excitement about problem solving and complex systems\nAn aptitude for systems thinking and information architecture\nExperience in planning and running discovery – identify what input is needed and how best to get that input\nInteraction design skills (both on desktop and mobile)\nExperience in running collaborative workshops to communicate users needs and collaborate with both business and engineering to reach the best solution\nAn aptitude for simplifying complexity and transforming data into valuable information\nEagerness to learn, a track record for being self-driven, and experience managing multiple projects at the same time\nBenefits\nYou join an inclusive, collaborative and global community where you have the opportunity to fuel the creative journey\nA modern office environment designed to foster productivity, creativity, and teamwork\nAn attractive and comprehensive benefits package including medical, dental, vision, life %26 disability coverage, and 401K + employer matching\nVoluntary benefits like company-paid identity theft protection and resources for pets, mental health and meditation resources, industry-leading fertility coverage, fully paid leave for childbirth or bonding, fully paid leave for caregivers, programs for loved ones with developmental disabilities and neurodiversity, subsidized back-up child and elder care, and reimbursement for adoption, surrogacy, tuition and student loans\nWe invest in your professional growth %26 development\nTime off for a winter recess\nResponsibilities\nYou would be part of the product design team (both US and EU based) and would be working on strategic products and initiatives\nYou would collaborate closely with product managers, various internal stakeholders, and engineering\nSupport one of our key Product areas by owning the design and UX of all features and apps in this area\nWork within a complex system of content and permissions, dealing with a huge amount of data\nContribute to the roadmap – collaborate with the rest of the product team to discover, define and prioritize product work\nConstantly work at creating value for our users by suggesting elegant and simple design solutions that solve their problems and seize new opportunities\nCoordinate with the rest of the product design team/PMs in other teams to create a consistent experience language, and seamless connections between apps\nCollaborate with other product designers on their projects to give feedback, collaborate, lead or mentor"
+}
 ```
 
-The SAM CLI reads the application template to determine the API's routes and the functions that they invoke. The `Events` property on each function's definition includes the route and method for each path.
-
-```yaml
-      Events:
-        HelloWorld:
-          Type: Api
-          Properties:
-            Path: /hello
-            Method: get
+**Response**:
+```json
+[
+  {
+    "Franklin and Lopez Industries, Baltimore, Maryland, IT Support Specialist": [
+      "Provides IT support for customers and employees, ensuring effective communication",
+      "Installs and monitors hardware and software systems, focusing on secure communication and network platforms",
+      "Regularly monitors computer systems for potential security threats in the cyber domain",
+      "Optimizes systems to improve technology efficiency by up to seven percent, incorporating knowledge management techniques",
+      "Runs a dedicated customer support line for questions or concerns, maintaining a culture of innovation"
+    ]
+  },
+  {
+    "M Andrews Technologies, Baltimore, Maryland, IT Specialist": [
+      "Tested computer system vulnerabilities, contributing to military intelligence and secure communication",
+      "Installed any necessary security measures or updates to support the Naval network environment",
+      "Monitored network performance and noted areas for improvement, driving interoperability"
+    ]
+  }
+]
 ```
 
-## Add a resource to your application
-The application template uses AWS Serverless Application Model (AWS SAM) to define application resources. AWS SAM is an extension of AWS CloudFormation with a simpler syntax for configuring common serverless application resources such as functions, triggers, and APIs. For resources not included in [the SAM specification](https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md), you can use standard [AWS CloudFormation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html) resource types.
+## Development
 
-## Fetch, tail, and filter Lambda function logs
+### Running Locally
 
-To simplify troubleshooting, SAM CLI has a command called `sam logs`. `sam logs` lets you fetch logs generated by your deployed Lambda function from the command line. In addition to printing the logs on the terminal, this command has several nifty features to help you quickly find the bug.
+You can use the following npm scripts to build and deploy the application locally:
 
-`NOTE`: This command works for all AWS Lambda functions; not just the ones you deploy using SAM.
+- **Build and Deploy**:
+  ```sh
+  npm run lambda
+  ```
 
-```bash
-lambda-api$ sam logs -n HelloWorldFunction --stack-name lambda-api --tail
-```
+### Contributing
 
-You can find more information and examples about filtering Lambda function logs in the [SAM CLI Documentation](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-logging.html).
+Please make sure to update tests as appropriate.
 
-## Unit tests
+## License
 
-Tests are defined in the `hello-world/tests` folder in this project. Use NPM to install the [Mocha test framework](https://mochajs.org/) and run unit tests.
-
-```bash
-lambda-api$ cd hello-world
-hello-world$ npm install
-hello-world$ npm run test
-```
-
-## Cleanup
-
-To delete the sample application that you created, use the AWS CLI. Assuming you used your project name for the stack name, you can run the following:
-
-```bash
-sam delete --stack-name lambda-api
-```
-
-## Resources
-
-See the [AWS SAM developer guide](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/what-is-sam.html) for an introduction to SAM specification, the SAM CLI, and serverless application concepts.
-
-Next, you can use AWS Serverless Application Repository to deploy ready to use Apps that go beyond hello world samples and learn how authors developed their applications: [AWS Serverless Application Repository main page](https://aws.amazon.com/serverless/serverlessrepo/)
+Distributed under the MIT
