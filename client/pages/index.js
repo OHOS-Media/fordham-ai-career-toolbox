@@ -1,20 +1,25 @@
 // pages/index.js
-import { useState } from 'react';
-import ErrorAlert from '@/components/ErrorAlert';
+import { useState } from "react";
+import ErrorAlert from "@/components/ErrorAlert";
+import LoginPopup from "@/components/LoginPopup";
 
 export default function Home() {
-  const [jobDescription, setJobDescription] = useState('');
+  const [jobDescription, setJobDescription] = useState("");
   const [keywords, setKeywords] = useState([]);
   const [errorAlertActive, setErrorAlertActive] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState("");
+
+  // Login state
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [showLoginPopup, setShowLoginPopup] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const response = await fetch('/api/extractKeywords', {
-      method: 'POST',
+    const response = await fetch("/api/extractKeywords", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({ jobDescription }),
     });
@@ -32,9 +37,32 @@ export default function Home() {
     setKeywords(data.keywords);
   };
 
+  const handleLoginLogout = () => {
+    if (isLoggedIn) {
+      // Perform logout logic here
+      setIsLoggedIn(false);
+    } else {
+      // Show login popup
+      setShowLoginPopup(true);
+    }
+  };
+
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100">
       <div className="relative bg-white p-8 rounded shadow-md w-96">
+        {/* Show Login Popup*/}
+        <div className="flex justify-between items-center mb-4">
+          <h1 className="text-2xl">Keyword Extractor</h1>
+          <button
+            onClick={handleLoginLogout}
+            className={`px-4 py-2 rounded ${
+              isLoggedIn ? "bg-red-500" : "bg-green-500"
+            } text-white`}
+          >
+            {isLoggedIn ? "Logout" : "Login"}
+          </button>
+        </div>
+
         {/* If the Error Alert is active render it */}
         {errorAlertActive && (
           <ErrorAlert
@@ -44,7 +72,7 @@ export default function Home() {
             setErrorAlertActive={setErrorAlertActive}
           />
         )}
-        <h1 className="text-2xl mb-4">Keyword Extractor</h1>
+
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <textarea
@@ -73,6 +101,11 @@ export default function Home() {
           </div>
         )}
       </div>
+
+      {/* Popup */}
+      {showLoginPopup && (
+        <LoginPopup onClose={() => setShowLoginPopup(false)} />
+      )}
     </div>
   );
 }

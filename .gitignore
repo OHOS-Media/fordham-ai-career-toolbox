@@ -1,39 +1,88 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# Dependencies
+node_modules
+/client/node_modules
+/server/node_modules
 
-# Vscode
-.vscode
+# Build outputs
+/.next
+/client/.next
+/client/out
+/client/build
+/server/build
+/server/dist
 
-# dependencies
-/node_modules
-/.pnp
-.pnp.js
-.yarn/install-state.gz
+# Environment variables
+.env
+.env.*
+/client/.env*
+/server/.env*
 
-# testing
-/coverage
+# local env files
+.env
+.env*.local
+/client/.env*.local
+/server/.env*.local
+.pnp.**.env
+server/.env
 
-# next.js
-/.next/
-/out/
-
-# production
-/build
-
-# misc
-.DS_Store
-*.pem
-
-# debug
+# Logs
+*.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# local env files
-.env*.local
+# OS generated files
+.DS_Store
 
-# vercel
-.vercel
+# IDE/Editor folders
+.vscode
+.idea
 
-# typescript
+# Next.js
+.next
+out
+
+# Debug logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Local Netlify folder
+.netlify
+
+# TypeScript
 *.tsbuildinfo
 next-env.d.ts
+
+# Testing
+/coverage
+/client/coverage
+/server/coverage
+
+# Misc
+*.pem
+
+# Yarn
+.yarn/cache
+.yarn/unplugged
+.yarn/build-state.yml
+.yarn/install-state.gz
+.pnp.*
+
+# Package manager locks (uncomment if you want to ignore these)
+# package-lock.json
+# yarn.lock
+
+# Cache directories
+.cache
+.parcel-cache
+
+# Serverless
+.serverless
+
+# DynamoDB Local files
+.dynamodb
+
+# Temporary files
+*.swp
+*.swo

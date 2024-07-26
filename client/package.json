@@ -10,7 +10,10 @@
     "lambda": "cd AI-toolbox-lambda-api && sam build && sam deploy"
   },
   "dependencies": {
+    "mongodb": "^6.8.0",
+    "moongoose": "^0.0.5",
     "next": "14.2.4",
+    "next-auth": "^4.24.7",
     "openai": "^4.53.0",
     "react": "^18",
     "react-dom": "^18"
