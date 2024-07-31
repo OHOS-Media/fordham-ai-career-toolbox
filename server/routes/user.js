@@ -13,6 +13,8 @@ const isAuthenticated = (req, res, next) => {
 
 // User route to get user data
 router.get("/user", isAuthenticated, (req, res) => {
+  console.log("Session:", req.session);
+  console.log("User:", req.user);
   console.log("User route accessed, user:", req.user);
   res.json({
     id: req.user.id,

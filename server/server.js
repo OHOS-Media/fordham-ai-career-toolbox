@@ -10,20 +10,29 @@ const app = express();
 // Database connection
 require("./config/db");
 
-// CORS configuration
+// CORS configuration for the client URL
 const corsOptions = {
   origin: process.env.CLIENT_URL,
   credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization'],
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: [
+    "Origin",
+    "X-Requested-With",
+    "Content-Type",
+    "Accept",
+    "Authorization",
+  ],
 };
 
 app.use(cors(corsOptions));
 
-// Handle preflight requests
-app.options('*', cors(corsOptions));
+// Handle preflight requests for all routes
+app.options("*", cors(corsOptions));
 
 app.use(cors({ origin: process.env.CLIENT_URL, credentials: true }));
+
+// Trust the first proxy to enable cookie sharing between the client and the server
+app.set("trust proxy", 1);
 
 // Middleware
 app.use(express.json());
@@ -33,6 +42,12 @@ app.use(
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
+    cookie: {
+      secure: process.env.NODE_ENV === "production", // Use secure cookies in production
+      httpOnly: true,
+      sameSite: "none", // Required for cross-site cookie
+      maxAge: 30 * 24 * 60 * 60 * 1000, // 20 days
+    },
   })
 );
 
