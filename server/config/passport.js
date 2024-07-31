@@ -1,3 +1,4 @@
+// config/passport.js
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const User = require("../models/User");
 
@@ -7,7 +8,7 @@ module.exports = function (passport) {
       {
         clientID: process.env.GOOGLE_CLIENT_ID,
         clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-        callbackURL: "/auth/google/callback",
+        callbackURL: process.env.GOOGLE_CALLBACK_URL,
       },
       async (accessToken, refreshToken, profile, done) => {
         try {
@@ -33,14 +34,17 @@ module.exports = function (passport) {
   );
 
   passport.serializeUser((user, done) => {
+    console.log("Serializing user:", user.id);
     done(null, user.id);
   });
 
   passport.deserializeUser(async (id, done) => {
     try {
       const user = await User.findById(id);
+      console.log("Deserializing user:", id, !!user);
       done(null, user);
     } catch (error) {
+      console.error("Deserialization error:", error);
       done(error, null);
     }
   });
