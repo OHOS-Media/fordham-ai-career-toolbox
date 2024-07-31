@@ -31,6 +31,11 @@ require('./config/passport')(passport);
 app.use('/auth', require('./routes/auth'));
 app.use('/api', require('./routes/user'));
 
+// Test route
+app.get('/', (req, res) => {
+  res.send('AI Career Toolbox server is running!');
+});
+
 // Error handling middleware (move this to the end)
 app.use(require('./utils/errorHandler'));
 
