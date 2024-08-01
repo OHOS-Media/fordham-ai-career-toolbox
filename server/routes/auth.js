@@ -10,12 +10,12 @@ router.get(
 );
 
 // Google OAuth callback route
-router.get(
-  "/google/callback",
-  passport.authenticate("google", { failureRedirect:`/` }),
+router.get('/google/callback', 
+  passport.authenticate('google', { failureRedirect: '/login' }),
   (req, res) => {
-    // Redirect to the client's profile page
-    console.log("Google auth successful, user:", req.user);
+    // console.log('Google callback - User:', req.user ? req.user.id : 'No user');
+    // console.log('Google callback - Session:', req.sessionID);
+    // console.log('Google callback - Is Authenticated:', req.isAuthenticated());
     res.redirect(`${process.env.CLIENT_URL}/profile`);
   }
 );

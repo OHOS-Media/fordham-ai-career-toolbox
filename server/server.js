@@ -3,9 +3,11 @@ const express = require("express");
 const mongoose = require("mongoose");
 const passport = require("passport");
 const session = require("express-session");
+const MongoStore = require("connect-mongo");
 const cors = require("cors");
 
 const app = express();
+mongoose.set("strictQuery", true);
 
 // Database connection
 require("./config/db");
@@ -29,8 +31,6 @@ app.use(cors(corsOptions));
 // Handle preflight requests for all routes
 app.options("*", cors(corsOptions));
 
-app.use(cors({ origin: process.env.CLIENT_URL, credentials: true }));
-
 // Trust the first proxy to enable cookie sharing between the client and the server
 app.set("trust proxy", 1);
 
@@ -42,11 +42,15 @@ app.use(
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
+    store: MongoStore.create({
+      mongoUrl: process.env.MONGODB_URI,
+      collectionName: "sessions",
+    }),
     cookie: {
-      secure: process.env.NODE_ENV === "production", // Use secure cookies in production
+      maxAge: 1000 * 60 * 60 * 24 * 7, // 1 week
       httpOnly: true,
-      sameSite: "none", // Required for cross-site cookie
-      maxAge: 30 * 24 * 60 * 60 * 1000, // 20 days
+      secure: process.env.NODE_ENV === "production",
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
     },
   })
 );
@@ -56,6 +60,14 @@ app.use(passport.initialize());
 app.use(passport.session());
 require("./config/passport")(passport);
 
+app.use((req, res, next) => {
+  console.log('Request URL:', req.url);
+  console.log('SessionID:', req.sessionID);
+  console.log('Session:', JSON.stringify(req.session, null, 2));
+  console.log('Is Authenticated:', req.isAuthenticated());
+  console.log('User:', req.user ? req.user._id : 'No user');
+  next();
+});
 // Routes
 app.use("/auth", require("./routes/auth"));
 app.use("/api", require("./routes/user"));

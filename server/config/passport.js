@@ -25,6 +25,8 @@ module.exports = function (passport) {
             user.profilePicture = profile.photos[0].value;
             await user.save();
           }
+
+          // console.log('Google Strategy: User found/created:', user.id);
           return done(null, user);
         } catch (error) {
           return done(error, null);
