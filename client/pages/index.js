@@ -1,7 +1,9 @@
 // pages/index.js
 import { useState } from "react";
 import ErrorAlert from "@/components/ErrorAlert";
+import Nav from "@/components/Nav/Nav";
 import LoginPopup from "@/components/LoginPopup";
+
 
 export default function Home() {
   const [jobDescription, setJobDescription] = useState("");
@@ -49,6 +51,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center">
+      <Nav />
       <div className="relative bg-tertiary p-8 rounded shadow-md w-96">
         {/* Show Login Popup*/}
         <div className="flex justify-between items-center mb-4">
