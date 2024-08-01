@@ -1,7 +1,9 @@
 // pages/index.js
 import { useState } from "react";
 import ErrorAlert from "@/components/ErrorAlert";
+import Nav from "@/components/Nav/Nav";
 import LoginPopup from "@/components/LoginPopup";
+
 
 export default function Home() {
   const [jobDescription, setJobDescription] = useState("");
@@ -48,16 +50,17 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100">
-      <div className="relative bg-white p-8 rounded shadow-md w-96">
+    <div className="min-h-screen flex flex-col items-center justify-center">
+      <Nav />
+      <div className="relative bg-tertiary p-8 rounded shadow-md w-96">
         {/* Show Login Popup*/}
         <div className="flex justify-between items-center mb-4">
           <h1 className="text-2xl">Keyword Extractor</h1>
           <button
             onClick={handleLoginLogout}
             className={`px-4 py-2 rounded ${
-              isLoggedIn ? "bg-red-500" : "bg-green-500"
-            } text-white`}
+              isLoggedIn ? "error-state" : "bg-primary"
+            } text-neutral`}
           >
             {isLoggedIn ? "Logout" : "Login"}
           </button>
@@ -76,7 +79,7 @@ export default function Home() {
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <textarea
-              className="w-full p-2 border border-gray-300 rounded"
+              className="w-full p-2 border border-secondary rounded"
               rows="5"
               placeholder="Enter job description..."
               value={jobDescription}
@@ -84,7 +87,7 @@ export default function Home() {
             ></textarea>
           </div>
           <button
-            className="w-full bg-blue-500 text-white p-2 rounded"
+            className="w-full bg-primary text-neutral p-2 rounded"
             type="submit"
           >
             Extract Keywords
@@ -93,7 +96,7 @@ export default function Home() {
         {keywords?.length > 0 && (
           <div className="mt-4">
             <h2 className="text-xl">Extracted Keywords:</h2>
-            <ul className="mt-2 bg-gray-200 p-2 rounded list-disc list-inside">
+            <ul className="mt-2 bg-neutral p-2 rounded list-disc list-inside">
               {keywords.map((keyword, index) => (
                 <li key={index}>{keyword}</li>
               ))}

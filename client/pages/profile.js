@@ -71,13 +71,13 @@ export default function Profile() {
 
   if (error) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100">
-        <div className="bg-white p-8 rounded shadow-md w-96">
-          <h1 className="text-2xl mb-4 text-red-500">Error</h1>
+      <div className="min-h-screen flex flex-col items-center justify-center bg-neutral">
+        <div className="bg-tertiary p-8 rounded shadow-md w-96">
+          <h1 className="text-2xl mb-4 text-error-state">Error</h1>
           <p>{error}</p>
           <button
             onClick={() => router.push("/")}
-            className="mt-4 w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600 transition-colors"
+            className="mt-4 w-full bg-primary text-neutral p-2 rounded hover:bg-secondary transition-colors"
           >
             Go to Home
           </button>
@@ -92,8 +92,8 @@ export default function Profile() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100">
-      <div className="bg-white p-8 rounded shadow-md w-96">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-neutral">
+      <div className="bg-tertiary p-8 rounded shadow-md w-96">
         <div className="flex items-center mb-4">
           <div className="w-16 h-16 mr-4 rounded-full overflow-hidden">
             <Image
@@ -106,13 +106,13 @@ export default function Profile() {
           </div>
           <div>
             <h1 className="text-2xl">Profile</h1>
-            <p className="text-gray-600">Welcome, {user.displayName}!</p>
+            <p className="text-secondary">Welcome, {user.displayName}!</p>
           </div>
         </div>
         <p className="mb-4">Email: {user.email}</p>
         <button
           onClick={handleLogout}
-          className="w-full bg-red-500 text-white p-2 rounded hover:bg-red-600 transition-colors"
+          className="w-full bg-primary text-neutral p-2 rounded hover:bg-error-state transition-colors"
         >
           Logout
         </button>
