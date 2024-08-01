@@ -3,6 +3,7 @@ import { useState } from "react";
 import ErrorAlert from "@/components/ErrorAlert";
 import Nav from "@/components/Nav/Nav";
 import LoginPopup from "@/components/LoginPopup";
+import Hero from "@/components/LandingPage/Hero/Hero";
 
 
 export default function Home() {
@@ -50,12 +51,12 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center">
-      <Nav />
+    <div className="min-h-screen flex flex-col items-center justify-center gap-5">
+      <Hero />
       <div className="relative bg-tertiary p-8 rounded shadow-md w-96">
         {/* Show Login Popup*/}
         <div className="flex justify-between items-center mb-4">
-          <h1 className="text-2xl">Keyword Extractor</h1>
+          <h4>Keyword Extractor</h4>
           <button
             onClick={handleLoginLogout}
             className={`px-4 py-2 rounded ${
