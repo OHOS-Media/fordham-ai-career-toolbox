@@ -20,6 +20,7 @@ export default function Nav() {
   // Login state
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [showLoginPopup, setShowLoginPopup] = useState(false);
 
