@@ -35,7 +35,7 @@ yarn-error.log*
 .DS_Store
 
 # IDE/Editor folders
-.vscode
+# .vscode
 .idea
 
 # Next.js

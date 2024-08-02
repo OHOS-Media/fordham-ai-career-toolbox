@@ -15,9 +15,7 @@ router.get("/test", (req, res) => {
     timestamp: new Date().toISOString(),
     // Add any other relevant information you want to check
     mongodbConnected: !!process.env.MONGODB_URI,
-    googleAuthConfigured: !!(
-      process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET
-    ),
+    googleAuthConfigured: !!(process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET),
     sessionSecretConfigured: !!process.env.SESSION_SECRET,
   });
 });
