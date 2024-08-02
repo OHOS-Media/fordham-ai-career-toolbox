@@ -1,4 +1,3 @@
-// config/passport.js
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const User = require("../models/User");
 
@@ -12,12 +11,22 @@ module.exports = function (passport) {
       },
       async (accessToken, refreshToken, profile, done) => {
         try {
+          // Check if the email domain is fordham.edu
+          const email = profile.emails[0].value;
+
+          // Comment out the following {if} check to check Authorization/Profile Feature
+          if (!email.endsWith("@fordham.edu")) {
+            return done(null, false, {
+              message: "Only Fordham University personnel are allowed.",
+            });
+          }
+
           let user = await User.findOne({ googleId: profile.id });
           if (!user) {
             user = await User.create({
               googleId: profile.id,
               displayName: profile.displayName,
-              email: profile.emails[0].value,
+              email: email,
               profilePicture: profile.photos[0].value,
             });
           } else {
@@ -26,7 +35,6 @@ module.exports = function (passport) {
             await user.save();
           }
 
-          // console.log('Google Strategy: User found/created:', user.id);
           return done(null, user);
         } catch (error) {
           return done(error, null);
@@ -36,17 +44,14 @@ module.exports = function (passport) {
   );
 
   passport.serializeUser((user, done) => {
-    console.log("Serializing user:", user.id);
     done(null, user.id);
   });
 
   passport.deserializeUser(async (id, done) => {
     try {
       const user = await User.findById(id);
-      console.log("Deserializing user:", id, !!user);
       done(null, user);
     } catch (error) {
-      console.error("Deserialization error:", error);
       done(error, null);
     }
   });

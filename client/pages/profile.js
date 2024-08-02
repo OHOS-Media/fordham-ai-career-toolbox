@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
+import Link from "next/link";
+import Button from "@/components/Button";
 
 export default function Profile() {
   const [user, setUser] = useState(null);
@@ -19,11 +21,12 @@ export default function Profile() {
             "Content-Type": "application/json",
           },
         });
-        console.log("Fetch response:", response);
         if (response.ok) {
           const userData = await response.json();
-          console.log("User data:", userData);
           setUser(userData);
+        } else if (response.status === 401) {
+          // User is not authenticated
+          router.push("/");
         } else {
           const errorData = await response.json();
           throw new Error(errorData.error || "Failed to fetch user data");
@@ -37,7 +40,7 @@ export default function Profile() {
     };
 
     fetchUser();
-  }, []);
+  }, [router]);
 
   const handleLogout = async () => {
     try {
@@ -46,9 +49,7 @@ export default function Profile() {
         credentials: "include",
       });
       if (response.ok) {
-        // Clear user data from state
         setUser(null);
-        // Redirect to home page
         router.push("/");
       } else {
         throw new Error("Logout failed");
@@ -60,7 +61,11 @@ export default function Profile() {
   };
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-neutral">
+        <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-primary"></div>
+      </div>
+    );
   }
 
   if (error) {
@@ -69,20 +74,28 @@ export default function Profile() {
         <div className="bg-tertiary p-8 rounded shadow-md w-96">
           <h1 className="text-2xl mb-4 text-error-state">Error</h1>
           <p>{error}</p>
-          <button
-            onClick={() => router.push("/")}
-            className="mt-4 w-full bg-primary text-neutral p-2 rounded hover:bg-secondary transition-colors"
-          >
-            Go to Home
-          </button>
+          <Link href="/">
+            <p className="mt-4 block w-full bg-primary text-neutral p-2 rounded hover:bg-secondary transition-colors text-center">
+              Go to Home
+            </p>
+          </Link>
         </div>
       </div>
     );
   }
 
   if (!user) {
-    router.push("/");
-    return null;
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center bg-neutral">
+        <div className="bg-tertiary p-8 rounded shadow-md w-96">
+          <h1 className="text-2xl mb-4">Not Logged In</h1>
+          <p>Please log in to view your profile.</p>
+          <Link href="/">
+            <Button text="Go to Home" />
+          </Link>
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -104,12 +117,12 @@ export default function Profile() {
           </div>
         </div>
         <p className="mb-4">Email: {user.email}</p>
-        <button
-          onClick={handleLogout}
-          className="w-full bg-primary text-neutral p-2 rounded hover:bg-error-state transition-colors"
-        >
-          Logout
-        </button>
+        <Link href="/">
+          <Button onClick={handleLogout} text="Log out" />
+        </Link>
+        <Link href="/">
+          <Button text="Go to Home" />
+        </Link>
       </div>
     </div>
   );

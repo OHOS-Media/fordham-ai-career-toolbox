@@ -1,5 +1,5 @@
 // pages/index.js
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ErrorAlert from "@/components/ErrorAlert";
 import Nav from "@/components/Nav/Nav";
 import LoginPopup from "@/components/LoginPopup";
@@ -13,6 +13,24 @@ export default function Home() {
   // Login state
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showLoginPopup, setShowLoginPopup] = useState(false);
+
+  useEffect(() => {
+    // Check login status on component mount
+    checkLoginStatus();
+  }, []);
+
+  const checkLoginStatus = async () => {
+    try {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/user`, {
+        credentials: "include",
+      });
+      if (response.ok) {
+        setIsLoggedIn(true);
+      }
+    } catch (error) {
+      console.error("Failed to check login status:", error);
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -38,14 +56,35 @@ export default function Home() {
     setKeywords(data.keywords);
   };
 
-  const handleLoginLogout = () => {
+  const handleLoginLogout = async () => {
     if (isLoggedIn) {
-      // Perform logout logic here
-      setIsLoggedIn(false);
+      try {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/auth/logout`, {
+          method: "GET",
+          credentials: "include",
+        });
+        if (response.ok) {
+          setIsLoggedIn(false);
+        }
+      } catch (error) {
+        console.error("Logout failed:", error);
+        setErrorMessage("Logout failed. Please try again.");
+        setErrorAlertActive(true);
+      }
     } else {
-      // Show login popup
       setShowLoginPopup(true);
     }
+  };
+
+  const handleLoginSuccess = () => {
+    setIsLoggedIn(true);
+    setShowLoginPopup(false);
+  };
+
+  const handleLoginFailure = (message) => {
+    setErrorMessage(message || "Login failed. Please try again.");
+    setErrorAlertActive(true);
+    setShowLoginPopup(false);
   };
 
   return (
@@ -102,7 +141,13 @@ export default function Home() {
       </div>
 
       {/* Popup */}
-      {showLoginPopup && <LoginPopup onClose={() => setShowLoginPopup(false)} />}
+      {showLoginPopup && (
+        <LoginPopup
+          onClose={() => setShowLoginPopup(false)}
+          onLoginSuccess={handleLoginSuccess}
+          onLoginFailure={handleLoginFailure}
+        />
+      )}
     </div>
   );
 }

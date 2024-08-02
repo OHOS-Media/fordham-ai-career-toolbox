@@ -12,7 +12,7 @@ const navData = {
 };
 
 export default function Nav() {
-  console.log(navData);
+  // console.log(navData);
   return (
     <nav className="absolute top-0 left-0 p-6 flex justify-between w-full">
       <Logo />

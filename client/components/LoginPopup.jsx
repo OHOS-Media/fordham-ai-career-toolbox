@@ -1,8 +1,41 @@
-import React from "react";
+import React, { useEffect } from "react";
 
-const LoginPopup = ({ onClose }) => {
+const LoginPopup = ({ onClose, onLoginSuccess, onLoginFailure }) => {
+  // This useEffect hook listens for messages from the popup window.
+  useEffect(() => {
+    const handleMessage = (event) => {
+      // If the message is "success", call onLoginSuccess and onClose.
+      if (event.data === "success") {
+        onLoginSuccess();
+        onClose();
+      } else if (typeof event.data === "string" && event.data.startsWith("{")) {
+        try {
+          const data = JSON.parse(event.data);
+
+          // If the message is a JSON object with a status of "failure", call onLoginFailure and onClose.
+          if (data.status === "failure") {
+            // Send the message to the onLoginFailure function and close the popup.
+            onLoginFailure(data.message);
+            onClose();
+          }
+        } catch (error) {
+          console.error("Error parsing message:", error);
+        }
+      }
+    };
+
+    window.addEventListener("message", handleMessage);
+    return () => window.removeEventListener("message", handleMessage);
+  }, [onClose, onLoginSuccess, onLoginFailure]);
+
   const handleGoogleLogin = () => {
-    window.location.href = `${process.env.NEXT_PUBLIC_SERVER_URL}/auth/google`;
+    const width = 500;
+    const height = 600;
+    const left = (window.innerWidth - width) / 2;
+    const top = (window.innerHeight - height) / 2;
+    const url = `${process.env.NEXT_PUBLIC_SERVER_URL}/auth/google`;
+
+    window.open(url, "googleLoginPopup", `width=${width},height=${height},left=${left},top=${top}`);
   };
 
   return (

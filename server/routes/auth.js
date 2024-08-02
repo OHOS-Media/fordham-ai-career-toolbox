@@ -9,14 +9,22 @@ router.get("/google", passport.authenticate("google", { scope: ["profile", "emai
 // Google OAuth callback route
 router.get(
   "/google/callback",
-  passport.authenticate("google", { failureRedirect: "/login" }),
+  passport.authenticate("google", {
+    failureRedirect: "/auth/google/failure",
+    failureMessage: true,
+  }),
   (req, res) => {
-    // console.log('Google callback - User:', req.user ? req.user.id : 'No user');
-    // console.log('Google callback - Session:', req.sessionID);
-    // console.log('Google callback - Is Authenticated:', req.isAuthenticated());
-    res.redirect(`${process.env.CLIENT_URL}/profile`);
+    res.send('<script>window.opener.postMessage("success", "*"); window.close();</script>');
   }
 );
+
+// Failure route
+router.get("/google/failure", (req, res) => {
+  const errorMessage = req.session.messages ? req.session.messages[0] : "Authentication failed";
+  res.send(
+    `<script>window.opener.postMessage(JSON.stringify({ status: "failure", message: "${errorMessage}" }), "*"); window.close();</script>`
+  );
+});
 
 router.get("/logout", (req, res) => {
   req.logout(function (err) {
