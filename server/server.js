@@ -17,13 +17,7 @@ const corsOptions = {
   origin: process.env.CLIENT_URL,
   credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  allowedHeaders: [
-    "Origin",
-    "X-Requested-With",
-    "Content-Type",
-    "Accept",
-    "Authorization",
-  ],
+  allowedHeaders: ["Origin", "X-Requested-With", "Content-Type", "Accept", "Authorization"],
 };
 
 app.use(cors(corsOptions));
@@ -61,11 +55,11 @@ app.use(passport.session());
 require("./config/passport")(passport);
 
 app.use((req, res, next) => {
-  console.log('Request URL:', req.url);
-  console.log('SessionID:', req.sessionID);
-  console.log('Session:', JSON.stringify(req.session, null, 2));
-  console.log('Is Authenticated:', req.isAuthenticated());
-  console.log('User:', req.user ? req.user._id : 'No user');
+  console.log("Request URL:", req.url);
+  console.log("SessionID:", req.sessionID);
+  console.log("Session:", JSON.stringify(req.session, null, 2));
+  console.log("Is Authenticated:", req.isAuthenticated());
+  console.log("User:", req.user ? req.user._id : "No user");
   next();
 });
 // Routes

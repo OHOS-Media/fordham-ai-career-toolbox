@@ -15,10 +15,7 @@ const LoginPopup = ({ onClose }) => {
         >
           Login with Google
         </button>
-        <button
-          onClick={onClose}
-          className="mt-4 secondary hover:text-primary"
-        >
+        <button onClick={onClose} className="mt-4 secondary hover:text-primary">
           Close
         </button>
       </div>

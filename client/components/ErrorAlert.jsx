@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect } from "react";
 
 export default function ErrorAlert({
   errorMessage,
@@ -6,12 +6,11 @@ export default function ErrorAlert({
   errorAlertActive,
   setErrorAlertActive,
 }) {
-
   // Clear the error message after 5s
   useEffect(() => {
     async function clearError() {
       setTimeout(() => {
-        setErrorMessage('');
+        setErrorMessage("");
         setErrorAlertActive(false);
       }, 5000);
     }

@@ -11,17 +11,14 @@ export default function Profile() {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await fetch(
-          `${process.env.NEXT_PUBLIC_SERVER_URL}/api/user`,
-          {
-            method: "GET",
-            credentials: "include",
-            headers: {
-              Accept: "application/json",
-              "Content-Type": "application/json",
-            },
-          }
-        );
+        const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/user`, {
+          method: "GET",
+          credentials: "include",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+        });
         console.log("Fetch response:", response);
         if (response.ok) {
           const userData = await response.json();
@@ -44,13 +41,10 @@ export default function Profile() {
 
   const handleLogout = async () => {
     try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_SERVER_URL}/auth/logout`,
-        {
-          method: "GET",
-          credentials: "include",
-        }
-      );
+      const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/auth/logout`, {
+        method: "GET",
+        credentials: "include",
+      });
       if (response.ok) {
         // Clear user data from state
         setUser(null);

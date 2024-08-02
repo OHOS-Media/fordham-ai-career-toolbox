@@ -4,7 +4,6 @@ import ErrorAlert from "@/components/ErrorAlert";
 import Nav from "@/components/Nav/Nav";
 import LoginPopup from "@/components/LoginPopup";
 
-
 export default function Home() {
   const [jobDescription, setJobDescription] = useState("");
   const [keywords, setKeywords] = useState([]);
@@ -86,10 +85,7 @@ export default function Home() {
               onChange={(e) => setJobDescription(e.target.value)}
             ></textarea>
           </div>
-          <button
-            className="w-full bg-primary text-neutral p-2 rounded"
-            type="submit"
-          >
+          <button className="w-full bg-primary text-neutral p-2 rounded" type="submit">
             Extract Keywords
           </button>
         </form>
@@ -106,9 +102,7 @@ export default function Home() {
       </div>
 
       {/* Popup */}
-      {showLoginPopup && (
-        <LoginPopup onClose={() => setShowLoginPopup(false)} />
-      )}
+      {showLoginPopup && <LoginPopup onClose={() => setShowLoginPopup(false)} />}
     </div>
   );
 }
