@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Button from "./Button";
-import { useAuth } from "./context/AuthContext";
+import { useAuth } from "../context/AuthContext";
 
 export default function UserMenu() {
   const { isAuthenticated, user, login, logout } = useAuth();

@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import Link from "next/link";
 import Button from "@/components/Button";
-import { useAuth } from "@/components/context/AuthContext";
+import { useAuth } from "@/context/AuthContext";
 import Layout from "@/components/Layout";
 
 export default function Profile() {
