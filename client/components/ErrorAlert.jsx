@@ -1,26 +1,24 @@
 import { useEffect } from "react";
 
-export default function ErrorAlert({
-  errorMessage,
-  setErrorMessage,
-  errorAlertActive,
-  setErrorAlertActive,
-}) {
-  // Clear the error message after 5s
+export default function ErrorAlert({ errorMessage, onClose }) {
   useEffect(() => {
-    async function clearError() {
-      setTimeout(() => {
-        setErrorMessage("");
-        setErrorAlertActive(false);
-      }, 5000);
-    }
+    const timer = setTimeout(() => {
+      onClose();
+    }, 5000);
 
-    clearError();
-  }, [errorAlertActive]);
+    return () => clearTimeout(timer);
+  }, [errorMessage, onClose]);
+
+  if (!errorMessage) return null;
 
   return (
-    <div className="absolute flex justify-center -top-8 left-0 w-full text-red-600">
-      <p>{errorMessage}</p>
+    <div className="fixed top-0 left-0 right-0 z-50 p-4 bg-error-state text-neutral">
+      <div className="container mx-auto flex justify-between items-center">
+        <p>{errorMessage}</p>
+        <button onClick={onClose} className="text-neutral hover:text-primary-dark">
+          ✕
+        </button>
+      </div>
     </div>
   );
 }

@@ -3,7 +3,8 @@ import NavLink from "./NavLink";
 import Button from "../Button";
 
 import Link from "next/link";
-import { useAuth } from "../../context/AuthContext";
+import { useAuth } from "@/context/AuthContext";
+import ErrorAlert from "../ErrorAlert";
 
 const navData = {
   links: [
@@ -14,7 +15,7 @@ const navData = {
 };
 
 export default function Nav() {
-  const { isAuthenticated, login, user } = useAuth();
+  const { isAuthenticated, login, user, error, setError } = useAuth();
 
   return (
     <nav className="absolute top-0 left-0 p-6 flex justify-between w-full">
@@ -34,6 +35,14 @@ export default function Nav() {
           <Button text="Log In" onClick={login} />
         )}
       </div>
+      {error && (
+        <ErrorAlert
+          errorMessage={error}
+          setErrorMessage={setError}
+          errorAlertActive={!!error}
+          setErrorAlertActive={() => setError(null)}
+        />
+      )}
     </nav>
   );
 }

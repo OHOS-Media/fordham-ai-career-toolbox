@@ -1,17 +1,20 @@
 import React, { createContext, useState, useContext, useEffect, useCallback } from "react";
 import { useRouter } from "next/router";
-import { useApi } from "@/hooks/useApi";
+import { useApi } from "../hooks/useApi";
+import ErrorAlert from "@/components/ErrorAlert";
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
   const router = useRouter();
-  const { request, error: apiError } = useApi();
+  const { request } = useApi();
 
   const loadUser = useCallback(async () => {
     try {
+      setLoading(true);
       const userData = await request("/api/user");
       setUser(userData);
     } catch (error) {
@@ -27,6 +30,8 @@ export const AuthProvider = ({ children }) => {
   }, [loadUser]);
 
   const login = useCallback(() => {
+    setLoading(true);
+    setError(null);
     const width = 500;
     const height = 600;
     const left = (window.innerWidth - width) / 2;
@@ -42,13 +47,19 @@ export const AuthProvider = ({ children }) => {
       router.push("/");
     } catch (error) {
       console.error("Logout failed", error);
+      setError("Logout failed. Please try again.");
     }
   }, [request, router]);
 
   useEffect(() => {
     const handleMessage = (event) => {
-      if (event.data === "success") {
+      if (event.origin !== process.env.NEXT_PUBLIC_SERVER_URL) return;
+
+      if (event.data.type === "LOGIN_SUCCESS") {
         loadUser();
+      } else if (event.data.type === "LOGIN_ERROR") {
+        setError(event.data.message);
+        setLoading(false);
       }
     };
 
@@ -57,9 +68,8 @@ export const AuthProvider = ({ children }) => {
   }, [loadUser]);
 
   return (
-    <AuthContext.Provider
-      value={{ isAuthenticated: !!user, user, login, logout, loading, error: apiError }}
-    >
+    <AuthContext.Provider value={{ isAuthenticated: !!user, user, login, logout, loading }}>
+      <ErrorAlert errorMessage={error} onClose={() => setError(null)} />
       {children}
     </AuthContext.Provider>
   );
