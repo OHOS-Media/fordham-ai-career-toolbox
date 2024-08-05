@@ -1,4 +1,3 @@
-// routes/auth.js
 const express = require("express");
 const passport = require("passport");
 const router = express.Router();
@@ -9,21 +8,39 @@ router.get("/google", passport.authenticate("google", { scope: ["profile", "emai
 // Google OAuth callback route
 router.get(
   "/google/callback",
-  passport.authenticate("google", {
-    failureRedirect: "/auth/google/failure",
-    failureMessage: true,
-  }),
+  passport.authenticate("google", { failureRedirect: "/auth/login-failed" }),
   (req, res) => {
-    res.send('<script>window.opener.postMessage("success", "*"); window.close();</script>');
+    res.send(`
+      <html>
+        <body>
+          <script>
+            window.opener.postMessage({ type: "LOGIN_SUCCESS" }, "${process.env.CLIENT_URL}");
+            window.close();
+          </script>
+        </body>
+      </html>
+    `);
   }
 );
 
-// Failure route
-router.get("/google/failure", (req, res) => {
-  const errorMessage = req.session.messages ? req.session.messages[0] : "Authentication failed";
-  res.send(
-    `<script>window.opener.postMessage(JSON.stringify({ status: "failure", message: "${errorMessage}" }), "*"); window.close();</script>`
-  );
+// Login failed route
+router.get("/login-failed", (req, res) => {
+  res.send(`
+    <html>
+      <body>
+        <script>
+          window.opener.postMessage(
+            { 
+              type: "LOGIN_ERROR", 
+              message: "Only Fordham University personnel are allowed." 
+            }, 
+            "${process.env.CLIENT_URL}"
+          );
+          window.close();
+        </script>
+      </body>
+    </html>
+  `);
 });
 
 router.get("/logout", (req, res) => {
