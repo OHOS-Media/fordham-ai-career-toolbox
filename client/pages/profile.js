@@ -1,15 +1,22 @@
-import { useRouter } from "next/router";
+import { useEffect } from "react";
+import { useAuth } from "@/context/AuthContext";
 import Image from "next/image";
 import Link from "next/link";
 import Button from "@/components/Button";
-import { useAuth } from "@/context/AuthContext";
 import Layout from "@/components/Layout";
+import { useRouter } from "next/router";
 
 export default function Profile() {
   const { user, loading, logout } = useAuth();
   const router = useRouter();
 
-  if (loading) {
+  useEffect(() => {
+    if (!loading && !user) {
+      router.push("/");
+    }
+  }, [user, loading, router]);
+
+  if (typeof window === "undefined" || loading) {
     return (
       <Layout>
         <div className="min-h-screen flex items-center justify-center bg-neutral">
@@ -20,7 +27,6 @@ export default function Profile() {
   }
 
   if (!user) {
-    router.push("/");
     return null;
   }
 
@@ -44,7 +50,7 @@ export default function Profile() {
             </div>
           </div>
           <p className="mb-4">Email: {user.email}</p>
-          <Button text="Log out" onClick={logout} className="mb-2" />
+          <Button onClick={logout} text="Log out" className="mb-2" />
           <Link href="/">
             <Button text="Go to Home" className="w-full" />
           </Link>

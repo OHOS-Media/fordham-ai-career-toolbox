@@ -9,8 +9,8 @@ export default function Logo() {
       <Image
         src={FordhamLogo}
         alt="Fordham Logo"
-        width={200}  // Adjust this value as needed
-        height={100}  // Adjust this value as needed
+        width={200} // Adjust this value as needed
+        height={100} // Adjust this value as needed
       />
     </Link>
   );
