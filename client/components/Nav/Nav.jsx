@@ -3,6 +3,7 @@ import NavLink from "./NavLink";
 import Button from "../Button";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useAuth } from "@/context/AuthContext";
 import ErrorAlert from "../ErrorAlert";
 
@@ -29,7 +30,15 @@ export default function Nav() {
         ))}
         {isAuthenticated ? (
           <Link href="/profile">
-            <Button text={user.displayName} />
+            <div className="w-12 h-12 mr-4 rounded-full overflow-hidden">
+              <Image
+                src={user.profilePicture}
+                alt={user.displayName}
+                width={64}
+                height={64}
+                className="object-cover"
+              />
+            </div>
           </Link>
         ) : (
           <Button text="Log In" onClick={login} />
