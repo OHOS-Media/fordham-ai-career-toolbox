@@ -15,11 +15,11 @@ module.exports = function (passport) {
           const email = profile.emails[0].value;
 
           // Comment out the following {if} check to check Authorization/Profile Feature
-          if (!email.endsWith("@fordham.edu")) {
-            return done(null, false, {
-              message: "Only Fordham University personnel are allowed.",
-            });
-          }
+          // if (!email.endsWith("@fordham.edu")) {
+          //   return done(null, false, {
+          //     message: "Only Fordham University personnel are allowed.",
+          //   });
+          // }
 
           let user = await User.findOne({ googleId: profile.id });
           if (!user) {
