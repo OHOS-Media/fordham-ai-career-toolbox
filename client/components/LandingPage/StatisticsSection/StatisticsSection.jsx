@@ -9,8 +9,8 @@ const statisticsSectionData = [
 const StatisticsSection = () => {
   return (
     <div className="flex w-full justify-evenly pb-16 border-b border-grey">
-      {statisticsSectionData.map((stat) => (
-        <StatTag number={stat.number} text={stat.text} />
+      {statisticsSectionData.map((stat, idx) => (
+        <StatTag number={stat.number} text={stat.text} key={idx} />
       ))}
     </div>
   );

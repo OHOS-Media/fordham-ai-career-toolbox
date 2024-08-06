@@ -21,8 +21,8 @@ const DemoSection = () => {
         <p className="mt-4 mx-4 text-md">{demoSectionData.description}</p>
 
         <div className="flex flex-col gap-4 mx-4">
-          {demoSectionData.checkBoxTitles.map((boxTitle) => (
-            <CheckboxLabel text={boxTitle} />
+          {demoSectionData.checkBoxTitles.map((boxTitle, idx) => (
+            <CheckboxLabel text={boxTitle} key={idx} />
           ))}
         </div>
       </div>
