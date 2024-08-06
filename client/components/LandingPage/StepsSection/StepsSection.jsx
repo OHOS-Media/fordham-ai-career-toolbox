@@ -24,9 +24,9 @@ const StepsSection = () => {
 
       <div className="flex justify-center mt-10">
         <StepCard number={stepSectionData.step1.number} text={stepSectionData.step1.text} />
-        <Arrow margin={"mt-8"} />
+        <Arrow margin={"mt-8 mx-4"} />
         <StepCard number={stepSectionData.step2.number} text={stepSectionData.step2.text} />
-        <Arrow margin={"mt-8"} />
+        <Arrow margin={"mt-8 mx-4"} />
         <StepCard number={stepSectionData.step3.number} text={stepSectionData.step3.text} />
       </div>
     </div>
