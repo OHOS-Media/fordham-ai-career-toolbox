@@ -30,7 +30,7 @@ const AccordionItem = ({ question, answer }) => {
         />
       </div>
 
-      <div className={`accordion-answer ${isOpen ? "open" : ""}`} ref={answerRef}>
+      <div className={`accordion-answer ${isOpen ? "mt-4" : ""}`} ref={answerRef}>
         <p>{answer}</p>
       </div>
     </div>
