@@ -23,7 +23,7 @@ export const mockKeywords = [
 
 export const mockBulletPoints = [
   {
-    'Franklin and Lopez Industries, Baltimore, Maryland, IT Support Specialist':
+    'Franklin and Lopez Industries, IT Support Specialist':
       [
         'Provides IT support for customers and employees, ensuring effective communication',
         'Installs and monitors hardware and software systems, focusing on secure communication and network platforms',
@@ -33,14 +33,14 @@ export const mockBulletPoints = [
       ],
   },
   {
-    'M Andrews Technologies, Baltimore, Maryland, IT Specialist': [
+    'M Andrews Technologies, IT Specialist': [
       'Tested computer system vulnerabilities, contributing to military intelligence and secure communication',
       'Installed any necessary security measures or updates to support the Naval network environment',
       'Monitored network performance and noted areas for improvement, driving interoperability',
     ],
   },
   {
-    'Tech Solutions Inc., Baltimore, Maryland, Systems Administrator': [
+    'Tech Solutions Inc., Systems Administrator': [
       'Managed and maintained server infrastructure, ensuring high availability and reliability',
       'Developed and implemented backup and disaster recovery plans to safeguard data integrity',
       'Collaborated with cross-functional teams to design and deploy scalable network solutions',
@@ -48,7 +48,7 @@ export const mockBulletPoints = [
     ],
   },
   {
-    'CyberSafe Systems, Baltimore, Maryland, Network Security Engineer': [
+    'CyberSafe Systems, Network Security Engineer': [
       'Designed and implemented network security measures to protect against cyber threats',
       'Conducted regular security audits and vulnerability assessments to identify and mitigate risks',
       'Provided training to staff on best practices for network security and data protection',
