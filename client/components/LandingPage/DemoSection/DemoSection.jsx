@@ -17,8 +17,8 @@ const DemoSection = () => {
   return (
     <div className="flex justify-evenly w-full bg-tertiary py-20">
       <div className="flex flex-col w-2/5 gap-4">
-        <h1 className="text-center leading-tight">{demoSectionData.title}</h1>
-        <p className="mt-4 mx-4 text-md">{demoSectionData.description}</p>
+        <h3 className="h3 text-center leading-tight">{demoSectionData.title}</h3>
+        <p className="h6 mt-4 mx-4">{demoSectionData.description}</p>
 
         <div className="flex flex-col gap-4 mx-4">
           {demoSectionData.checkBoxTitles.map((boxTitle, idx) => (

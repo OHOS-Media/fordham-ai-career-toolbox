@@ -9,25 +9,44 @@
 }
 
 @layer base {
-  h1 {
-    @apply text-h1
+  /* Headings */
+  .h1 {
+    @apply text-h1 font-bold text-secondary;
+  }
+  .h2 {
+    @apply text-h2 font-semibold text-secondary;
+  }
+  .h3 {
+    @apply text-h3 font-semibold text-secondary;
+  }
+  .h4 {
+    @apply text-h4 font-medium text-secondary;
+  }
+  .h5 {
+    @apply text-h5 font-medium text-secondary;
+  }
+  .h6 {
+    @apply text-h6 font-medium text-secondary;
   }
 
-  h2 {
-    @apply text-h2
+  /* Body text */
+  .body-text {
+    @apply text-base text-secondary leading-normal;
+  }
+  .body-text-large {
+    @apply text-lg text-secondary leading-relaxed;
+  }
+  .body-text-small {
+    @apply text-sm text-secondary leading-normal;
+  }
+  .body-text {
+    @apply text-base text-secondary;
   }
 
-  h3 {
-    @apply text-h3
+  /* Buttons */
+  .button-primary {
+    @apply bg-primary text-neutral px-6 py-2 rounded font-bold hover:bg-opacity-90 transition-colors;
   }
-
-  h4 {
-    @apply text-h4
-  }
-}
-
-h1, h2, h3, h4 {
-  font-weight: bold;
 }
 
 .accordion-answer {
