@@ -9,38 +9,77 @@
 }
 
 @layer base {
+
   /* Headings */
+  .h1,
+  .h2,
+  .h3 {
+    letter-spacing: -0.1125rem;
+    line-height: 3.625rem;
+  }
+
   .h1 {
     @apply text-h1 font-bold text-secondary;
   }
+
   .h2 {
-    @apply text-h2 font-semibold text-secondary;
+    @apply text-h2 font-bold text-secondary;
   }
+
   .h3 {
-    @apply text-h3 font-semibold text-secondary;
+    @apply text-h3 font-bold text-secondary;
   }
+
   .h4 {
-    @apply text-h4 font-medium text-secondary;
+    @apply text-h4 font-bold text-secondary;
+    letter-spacing: -0.01rem
   }
+
   .h5 {
     @apply text-h5 font-medium text-secondary;
   }
+
   .h6 {
     @apply text-h6 font-medium text-secondary;
   }
 
   /* Body text */
-  .body-text {
-    @apply text-base text-secondary leading-normal;
+  .body-txt-lg,
+  .body-txt-lg-bold {
+    @apply text-lg;
+    letter-spacing: -0.02083rem;
+    line-height: -0.01471rem;
   }
-  .body-text-large {
-    @apply text-lg text-secondary leading-relaxed;
+
+  .body-txt-lg-bold {
+    @apply font-bold;
   }
-  .body-text-small {
-    @apply text-sm text-secondary leading-normal;
+
+  .body-txt-md,
+  .body-txt-md-bold {
+    @apply text-md;
+    line-height: -0.00625rem;
   }
-  .body-text {
+
+  .body-txt-md {
+    letter-spacing: -0.0125rem;
+  }
+
+  .body-txt-md-bold {
+    @apply font-bold;
+    letter-spacing: -0.01875rem;
+  }
+
+  .body-txt {
     @apply text-base text-secondary;
+    letter-spacing: -0.00625rem;
+    line-height: -0.00833rem;
+  }
+
+  .body-txt-sm {
+    @apply text-sm;
+    letter-spacing: -0.00294rem;
+    line-height: -0.00385rem;
   }
 
   /* Buttons */
