@@ -1,12 +1,20 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useApi } from "@/hooks/useApi";
 import ErrorAlert from "@/components/ErrorAlert";
 import Layout from "@/components/Layout";
+import ToolboxStep1 from "@/components/ToolboxPage/ToolboxStep1";
+import ToolboxStep2 from "@/components/ToolboxPage/ToolboxStep2";
+import ToolboxStep3 from "@/components/ToolboxPage/ToolboxStep3";
+import ToolboxStep4 from "@/components/ToolboxPage/ToolboxStep4";
+import ToolboxEnd from "@/components/ToolboxPage/ToolboxEnd";
+import Button from "@/components/Button";
 
 export default function Toolbox() {
   const [jobDescription, setJobDescription] = useState("");
   const [keywords, setKeywords] = useState([]);
   const { request, loading, error } = useApi();
+  const [toolboxActive, setToolboxActive] = useState(true);
+  const [activeStep, setActiveStep] = useState(1);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -22,10 +30,56 @@ export default function Toolbox() {
     }
   };
 
+  const decrementStep = () => {
+    if (activeStep > 1) {
+      setActiveStep(activeStep - 1);
+    }
+    return;
+  };
+
+  const incrementStep = () => {
+    if (activeStep < 5) {
+      setActiveStep(activeStep + 1);
+    }
+    return;
+  };
+
+  useEffect(() => {
+    if (activeStep > 4) {
+      setToolboxActive(false);
+    }
+  }, [activeStep])
+
+  const renderStep = () => {
+    switch (activeStep) {
+      case 1:
+        return <ToolboxStep1 />;
+      case 2:
+        return <ToolboxStep2 />;
+      case 3:
+        return <ToolboxStep3 />;
+      case 4:
+        return <ToolboxStep4 />;
+    }
+  };
+
   return (
     <Layout>
       <div className="min-h-screen flex flex-col items-center justify-center bg-neutral">
-        <div className="bg-tertiary p-8 rounded shadow-md w-96">
+        {toolboxActive ? (
+          <div className="flex flex-col items-center justify-between bg-grey p-8 rounded-md h-96 w-1/2">
+            <div className="w-full">{renderStep()}</div>
+
+            <div className="flex w-full justify-between">
+              <Button text={"prev"} onClick={decrementStep} />
+              <Button text={"next"} onClick={incrementStep} />
+            </div>
+          </div>
+        ) : (
+          <ToolboxEnd />
+        )}
+
+        {/* <div className="bg-tertiary p-8 rounded shadow-md w-96">
           <h1 className="text-2xl mb-4">Keyword Extractor</h1>
 
           {error && <ErrorAlert errorMessage={error} />}
@@ -58,7 +112,7 @@ export default function Toolbox() {
               </ul>
             </div>
           )}
-        </div>
+        </div> */}
       </div>
     </Layout>
   );
