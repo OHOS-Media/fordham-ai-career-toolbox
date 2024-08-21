@@ -48,7 +48,7 @@ export default function Toolbox() {
     if (activeStep > 4) {
       setToolboxActive(false);
     }
-  }, [activeStep])
+  }, [activeStep]);
 
   const renderStep = () => {
     switch (activeStep) {
