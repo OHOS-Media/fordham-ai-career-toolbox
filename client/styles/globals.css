@@ -70,10 +70,15 @@
     letter-spacing: -0.01875rem;
   }
 
-  .body-txt {
+  .body-txt,
+  .body-txt-bold {
     @apply text-base text-secondary;
     letter-spacing: -0.00625rem;
     line-height: -0.00833rem;
+  }
+
+  .body-txt-bold {
+    @apply font-bold;
   }
 
   .body-txt-sm {

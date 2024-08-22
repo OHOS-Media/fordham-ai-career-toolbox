@@ -46,7 +46,7 @@ export default function Profile() {
 
           <div className="flex flex-col items-center">
             <h1 className="h1">{user.displayName}</h1>
-            <p className="text-secondary">{user.email}</p>
+            <p className="body-txt-md text-secondary">{user.email}</p>
           </div>
         </div>
 

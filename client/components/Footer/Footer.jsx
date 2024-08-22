@@ -28,7 +28,7 @@ const Footer = () => {
         <div className="w-fit">
           <Logo />
         </div>
-        <p className="color-secondary opacity-70">{footerData.description}</p>
+        <p className="body-txt color-secondary opacity-70">{footerData.description}</p>
 
         <div className="flex gap-8">
           {footerData.socialLinks.map((link, idx) => (
