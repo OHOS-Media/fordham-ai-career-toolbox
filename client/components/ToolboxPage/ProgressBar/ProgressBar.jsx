@@ -10,8 +10,8 @@ const toolboxStepsData = [
 export default function ProgressBar({ activeStep }) {
   return (
     <div className="flex">
-      {toolboxStepsData.map((step) => (
-        <ProgressNumber step={step} activeStep={activeStep} />
+      {toolboxStepsData.map((step, idx) => (
+        <ProgressNumber step={step} activeStep={activeStep} key={idx} />
       ))}
     </div>
   );

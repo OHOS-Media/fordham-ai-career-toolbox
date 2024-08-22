@@ -70,7 +70,7 @@ export default function Toolbox() {
         {toolboxActive ? (
           <div className="flex flex-col gap-10 w-3/5">
             <ProgressBar activeStep={activeStep} />
-            
+
             <div className="flex flex-col items-center justify-between bg-grey p-8 rounded-md h-96 w-full">
               <div className="w-full">{renderStep()}</div>
 
