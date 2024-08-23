@@ -8,6 +8,7 @@ import ToolboxStep3 from "@/components/ToolboxPage/ToolboxStep3";
 import ToolboxStep4 from "@/components/ToolboxPage/ToolboxStep4";
 import ToolboxEnd from "@/components/ToolboxPage/ToolboxEnd";
 import Button from "@/components/Button";
+import ProgressBar from "@/components/ToolboxPage/ProgressBar/ProgressBar";
 
 export default function Toolbox() {
   const [jobDescription, setJobDescription] = useState("");
@@ -65,14 +66,18 @@ export default function Toolbox() {
 
   return (
     <Layout>
-      <div className="min-h-screen flex flex-col items-center justify-center bg-neutral">
+      <div className="min-h-screen flex flex-col gap-10 items-center justify-center bg-neutral">
         {toolboxActive ? (
-          <div className="flex flex-col items-center justify-between bg-grey p-8 rounded-md h-96 w-1/2">
-            <div className="w-full">{renderStep()}</div>
+          <div className="flex flex-col gap-10 w-3/5">
+            <ProgressBar activeStep={activeStep} />
 
-            <div className="flex w-full justify-between">
-              <Button text={"prev"} onClick={decrementStep} />
-              <Button text={"next"} onClick={incrementStep} />
+            <div className="flex flex-col items-center justify-between bg-grey p-8 rounded-md h-96 w-full">
+              <div className="w-full">{renderStep()}</div>
+
+              <div className="flex w-full justify-between">
+                <Button text={"prev"} onClick={decrementStep} />
+                <Button text={"next"} onClick={incrementStep} />
+              </div>
             </div>
           </div>
         ) : (
