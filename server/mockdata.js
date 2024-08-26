@@ -1,4 +1,4 @@
-export const mockKeywords = [
+const mockKeywords = [
   'Effective communication',
   'secure communication',
   'cyber domain',
@@ -21,7 +21,7 @@ export const mockKeywords = [
   'Officer Candidate School',
 ];
 
-export const mockBulletPoints = [
+const mockBulletPoints = [
   {
     'Franklin and Lopez Industries, IT Support Specialist':
       [
@@ -56,3 +56,5 @@ export const mockBulletPoints = [
     ],
   },
 ];
+
+module.exports = { mockKeywords, mockBulletPoints }
