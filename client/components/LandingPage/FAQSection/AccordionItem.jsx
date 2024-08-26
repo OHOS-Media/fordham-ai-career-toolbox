@@ -20,7 +20,7 @@ const AccordionItem = ({ question, answer }) => {
       className="m-4 p-4 hover:cursor-pointer border border-tertiary"
     >
       <div className="flex justify-between">
-        <p className="text-md font-bold ">{question}</p>
+        <p className="body-txt-md-bold">{question}</p>
         <Image
           src={TriangleArrow}
           width={22}
@@ -31,7 +31,7 @@ const AccordionItem = ({ question, answer }) => {
       </div>
 
       <div className={`accordion-answer ${isOpen ? "mt-4" : ""}`} ref={answerRef}>
-        <p>{answer}</p>
+        <p className="body-txt">{answer}</p>
       </div>
     </div>
   );

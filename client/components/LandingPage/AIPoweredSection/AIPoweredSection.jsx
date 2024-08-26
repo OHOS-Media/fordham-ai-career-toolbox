@@ -9,7 +9,7 @@ const AIPoweredSection = () => {
   return (
     <div className="flex flex-col items-center w-1/2">
       <AIPoweredBadge />
-      <p className="h6 mt-8 text-center">{aiPoweredSectionData.description}</p>
+      <p className="body-txt mt-8 text-center">{aiPoweredSectionData.description}</p>
     </div>
   );
 };

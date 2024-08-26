@@ -5,7 +5,7 @@ const CheckboxLabel = ({ text }) => {
   return (
     <div className="flex gap-2">
       <Image src={CheckBox} alt="Demo Screenshot" width={22} height={22} />
-      <p>{text}</p>
+      <p className="body-txt">{text}</p>
     </div>
   );
 };
