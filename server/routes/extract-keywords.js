@@ -4,28 +4,33 @@ const OpenAI = require("openai");
 
 const openai = new OpenAI(process.env.OPENAI_API_KEY);
 
+const { mockKeywords } = require('../mockdata')
+
 router.post("/extract-keywords", async (req, res) => {
   try {
     const { jobDescription } = req.body;
-    console.log("Received job description:", jobDescription);
 
     if (!jobDescription) {
       return res.status(400).json({ error: "Job description is required" });
     }
 
-    console.log("Sending request to OpenAI");
-    const completion = await openai.chat.completions.create({
-      messages: [
-        { role: "system", content: "You are an expert career consultant." },
-        {
-          role: "user",
-          content: `Extract job-related keywords and key phrases from the following job description, limit to the top 20 most important:\n\n${jobDescription}. Format the response as an array of strings.`,
-        },
-      ],
-      model: "gpt-4o",
-    });
+    // Un-comment the line below to use the AI API instead of the mock data
+    // console.log("Sending request to OpenAI");
+    // const completion = await openai.chat.completions.create({
+    //   messages: [
+    //     { role: "system", content: "You are an expert career consultant." },
+    //     {
+    //       role: "user",
+    //       content: `Extract job-related keywords and key phrases from the following job description, limit to the top 20 most important:\n\n${jobDescription}. Format the response as an array of strings.`,
+    //     },
+    //   ],
+    //   model: "gpt-4o",
+    // });
 
-    const keywords = JSON.parse(completion.choices[0].message.content);
+    // const keywords = JSON.parse(completion.choices[0].message.content);
+
+    // Remove the line below to use the AI API
+    const keywords = mockKeywords;
     console.log("Extracted keywords:", keywords);
 
     res.json({ keywords });
