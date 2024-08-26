@@ -5,9 +5,11 @@ import { mockKeywords } from "@/mockdata";
 
 const openai = new OpenAI(process.env.OPENAI_API_KEY);
 
+console.log('Request to API called');
 export default async function handler(req, res) {
   if (req.method === "POST") {
     const { jobDescription } = req.body;
+
 
     try {
       const completion = await openai.chat.completions.create({
