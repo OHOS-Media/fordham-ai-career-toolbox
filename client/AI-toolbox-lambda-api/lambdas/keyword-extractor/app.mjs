@@ -1,18 +1,3 @@
-/**
- *
- * Event doc: https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-lambda-proxy-integrations.html#api-gateway-simple-proxy-for-lambda-input-format
- * @param {Object} event - API Gateway Lambda Proxy Input Format
- *
- * Context doc: https://docs.aws.amazon.com/lambda/latest/dg/nodejs-prog-model-context.html
- * @param {Object} context
- *
- * Return doc: https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-lambda-proxy-integrations.html
- * @returns {Object} object - API Gateway Lambda Proxy Output Format
- *
- */
-
-// Rename this file to app.mjs
-
 import OpenAI from "openai";
 
 const openai = new OpenAI(process.env.OPENAI_API_KEY);
@@ -22,9 +7,21 @@ export const lambdaHandler = async (event, context) => {
   try {
     console.log("event:", event);
 
-    // Extract jobDescription from query parameters
-    const jobDescription = event.queryStringParameters.jobDescription;
+    let jobDescription;
+    if (event.body) {
+      // Parse the body if it's a string
+      const body = typeof event.body === "string" ? JSON.parse(event.body) : event.body;
+      jobDescription = body.jobDescription;
+    } else if (event.queryStringParameters) {
+      // Fallback to query parameters if body is not present
+      jobDescription = event.queryStringParameters.jobDescription;
+    }
+
     console.log("jobDescription:", jobDescription);
+
+    if (!jobDescription) {
+      throw new Error("Job description is missing from the request");
+    }
 
     const completion = await openai.chat.completions.create({
       messages: [
@@ -42,14 +39,24 @@ export const lambdaHandler = async (event, context) => {
 
     response = {
       statusCode: 200,
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*", // Be more specific in production
+        "Access-Control-Allow-Credentials": true,
+      },
       body: JSON.stringify({ keywords }),
     };
   } catch (error) {
     console.error("error:", error);
     response = {
       statusCode: 500,
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*", // Be more specific in production
+        "Access-Control-Allow-Credentials": true,
+      },
       body: JSON.stringify({
-        error: "Failed to extract keywords" && error.message,
+        error: "Failed to extract keywords: " + error.message,
       }),
     };
   }

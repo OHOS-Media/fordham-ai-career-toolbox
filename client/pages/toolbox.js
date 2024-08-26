@@ -20,10 +20,10 @@ export default function Toolbox() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log('handleSubmit called')
+    console.log("handleSubmit called");
 
     try {
-      const data = await request("/api/extractKeywords", {
+      const data = await request("/api/extract-keywords", {
         method: "POST",
         body: JSON.stringify({ jobDescription }),
       });
