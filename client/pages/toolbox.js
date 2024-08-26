@@ -20,14 +20,14 @@ export default function Toolbox() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log("handleSubmit called");
-
     try {
       const data = await request("/api/extract-keywords", {
         method: "POST",
         body: JSON.stringify({ jobDescription }),
       });
+
       setKeywords(data.keywords);
+      console.log("Keywords:", data.keywords);
 
       incrementStep();
     } catch (error) {
@@ -67,7 +67,7 @@ export default function Toolbox() {
           />
         );
       case 2:
-        return <ToolboxStep2 />;
+        return <ToolboxStep2 keywords={keywords} />;
       case 3:
         return <ToolboxStep3 />;
       case 4:
@@ -85,11 +85,6 @@ export default function Toolbox() {
 
             <div className="flex flex-col items-center justify-between bg-grey p-8 rounded-md h-full w-5/6">
               <div className="w-full">{renderStep()}</div>
-
-              <div className="flex w-full justify-between">
-                <Button text={"prev"} onClick={decrementStep} />
-                <Button text={"next"} onClick={incrementStep} />
-              </div>
             </div>
           </div>
         ) : (
