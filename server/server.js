@@ -52,6 +52,7 @@ app.use(
 // Passport middleware
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(express.json());
 require("./config/passport")(passport);
 
 app.use((req, res, next) => {
@@ -66,6 +67,7 @@ app.use((req, res, next) => {
 app.use("/auth", require("./routes/auth"));
 app.use("/api", require("./routes/user"));
 app.use("/api", require("./routes/test"));
+app.use("/api", require("./routes/extract-keywords"));
 app.use("/api", require("./routes/resume"));
 
 // Test route

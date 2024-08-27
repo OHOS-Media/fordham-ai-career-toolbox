@@ -21,11 +21,15 @@ export default function Toolbox() {
     e.preventDefault();
 
     try {
-      const data = await request("/api/extractKeywords", {
+      const data = await request("/api/extract-keywords", {
         method: "POST",
         body: JSON.stringify({ jobDescription }),
       });
+
       setKeywords(data.keywords);
+      console.log("Keywords:", data.keywords);
+
+      incrementStep();
     } catch (error) {
       console.error("Failed to extract keywords", error);
     }
@@ -54,9 +58,16 @@ export default function Toolbox() {
   const renderStep = () => {
     switch (activeStep) {
       case 1:
-        return <ToolboxStep1 />;
+        return (
+          <ToolboxStep1
+            handleSubmit={handleSubmit}
+            jobDescription={jobDescription}
+            setJobDescription={setJobDescription}
+            loading={loading}
+          />
+        );
       case 2:
-        return <ToolboxStep2 />;
+        return <ToolboxStep2 keywords={keywords} />;
       case 3:
         return <ToolboxStep3 />;
       case 4:
@@ -67,17 +78,13 @@ export default function Toolbox() {
   return (
     <Layout>
       <div className="min-h-screen flex flex-col gap-10 items-center justify-center bg-neutral">
+        {error && <ErrorAlert errorMessage={error} />}
         {toolboxActive ? (
-          <div className="flex flex-col gap-10 w-3/5">
+          <div className="flex flex-col items-center gap-10 w-3/5 h-[40rem] mt-10">
             <ProgressBar activeStep={activeStep} />
 
-            <div className="flex flex-col items-center justify-between bg-grey p-8 rounded-md h-96 w-full">
+            <div className="flex flex-col items-center justify-between bg-grey p-8 rounded-md h-full w-5/6">
               <div className="w-full">{renderStep()}</div>
-
-              <div className="flex w-full justify-between">
-                <Button text={"prev"} onClick={decrementStep} />
-                <Button text={"next"} onClick={incrementStep} />
-              </div>
             </div>
           </div>
         ) : (
@@ -87,26 +94,6 @@ export default function Toolbox() {
         {/* <div className="bg-tertiary p-8 rounded shadow-md w-96">
           <h1 className="text-2xl mb-4">Keyword Extractor</h1>
 
-          {error && <ErrorAlert errorMessage={error} />}
-
-          <form onSubmit={handleSubmit}>
-            <div className="mb-4">
-              <textarea
-                className="w-full p-2 border border-secondary rounded"
-                rows="5"
-                placeholder="Enter job description..."
-                value={jobDescription}
-                onChange={(e) => setJobDescription(e.target.value)}
-              ></textarea>
-            </div>
-            <button
-              className="w-full bg-primary text-neutral p-2 rounded"
-              type="submit"
-              disabled={loading}
-            >
-              {loading ? "Extracting..." : "Extract Keywords"}
-            </button>
-          </form>
           {keywords?.length > 0 && (
             <div className="mt-4">
               <h2 className="text-xl">Extracted Keywords:</h2>

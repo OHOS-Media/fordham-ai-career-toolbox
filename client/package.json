@@ -14,7 +14,7 @@
     "moongoose": "^0.0.5",
     "next": "14.2.4",
     "next-auth": "^4.24.7",
-    "openai": "^4.53.0",
+    "openai": "^4.56.0",
     "react": "^18",
     "react-dom": "^18"
   },

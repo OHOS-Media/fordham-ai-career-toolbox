@@ -37,6 +37,7 @@ server/
    GOOGLE_CLIENT_ID=
    GOOGLE_CLIENT_SECRET=
    SESSION_SECRET=
+   OPENAI_API_KEY=
    ```
 
 3. Start the server:
@@ -48,6 +49,7 @@ server/
 - `GET /auth/google`: Google OAuth authentication
 - `GET /auth/logout`: User logout
 - `GET /api/user`: Get current user information
+- `POST /api/extract-keywords`: Send a request to the OpenAI API for keyword extraction
 - (Add other API endpoints here)
 
 ## Database
