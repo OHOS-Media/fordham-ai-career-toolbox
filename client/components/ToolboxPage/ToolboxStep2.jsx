@@ -21,8 +21,11 @@ export default function ToolboxStep2({ keywords, handleDone, incrementStep }) {
               {word}
             </Keyword>
           ))}
-          <button className="bg-neutral p-2 rounded" onClick={handleShowAll}>
-            Show More
+          <button
+            className="bg-neutral p-[.5em] rounded body-txt hover:text-primary"
+            onClick={handleShowAll}
+          >
+            {showAll ? "Show Less" : "Show More"}
           </button>
         </div>
       </div>
