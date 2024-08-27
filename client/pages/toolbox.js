@@ -7,8 +7,8 @@ import ToolboxStep2 from "@/components/ToolboxPage/ToolboxStep2";
 import ToolboxStep3 from "@/components/ToolboxPage/ToolboxStep3";
 import ToolboxStep4 from "@/components/ToolboxPage/ToolboxStep4";
 import ToolboxEnd from "@/components/ToolboxPage/ToolboxEnd";
-import Button from "@/components/Button";
 import ProgressBar from "@/components/ToolboxPage/ProgressBar/ProgressBar";
+import BackButton from "@/components/ToolboxPage/BackButton";
 
 export default function Toolbox() {
   const [jobDescription, setJobDescription] = useState("");
@@ -33,6 +33,10 @@ export default function Toolbox() {
     } catch (error) {
       console.error("Failed to extract keywords", error);
     }
+  };
+
+  const handleDone = () => {
+    setActiveStep(5);
   };
 
   const decrementStep = () => {
@@ -67,7 +71,9 @@ export default function Toolbox() {
           />
         );
       case 2:
-        return <ToolboxStep2 keywords={keywords} />;
+        return (
+          <ToolboxStep2 keywords={keywords} handleDone={handleDone} incrementStep={incrementStep} />
+        );
       case 3:
         return <ToolboxStep3 />;
       case 4:
@@ -80,31 +86,22 @@ export default function Toolbox() {
       <div className="min-h-screen flex flex-col gap-10 items-center justify-center bg-neutral">
         {error && <ErrorAlert errorMessage={error} />}
         {toolboxActive ? (
-          <div className="flex flex-col items-center gap-10 w-3/5 h-[40rem] mt-10">
+          <div className="flex flex-col items-center gap-10 w-3/5 h-[40rem] max-h-[40rem] mt-10">
             <ProgressBar activeStep={activeStep} />
 
-            <div className="flex flex-col items-center justify-between bg-grey p-8 rounded-md h-full w-5/6">
-              <div className="w-full">{renderStep()}</div>
+            <div className="flex flex-col items-center justify-between relative bg-grey p-8 rounded-md h-full w-5/6">
+              {activeStep > 1 && (
+                <div className="absolute -left-16" onClick={decrementStep}>
+                  <BackButton />
+                </div>
+              )}
+
+              <div className="w-full h-full">{renderStep()}</div>
             </div>
           </div>
         ) : (
           <ToolboxEnd />
         )}
-
-        {/* <div className="bg-tertiary p-8 rounded shadow-md w-96">
-          <h1 className="text-2xl mb-4">Keyword Extractor</h1>
-
-          {keywords?.length > 0 && (
-            <div className="mt-4">
-              <h2 className="text-xl">Extracted Keywords:</h2>
-              <ul className="mt-2 bg-neutral p-2 rounded list-disc list-inside">
-                {keywords.map((keyword, index) => (
-                  <li key={index}>{keyword}</li>
-                ))}
-              </ul>
-            </div>
-          )}
-        </div> */}
       </div>
     </Layout>
   );
