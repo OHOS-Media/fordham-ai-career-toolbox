@@ -68,6 +68,7 @@ app.use("/auth", require("./routes/auth"));
 app.use("/api", require("./routes/user"));
 app.use("/api", require("./routes/test"));
 app.use("/api", require("./routes/extract-keywords"));
+app.use("/api", require("./routes/resume"));
 
 // Test route
 app.get("/", (req, res) => {
