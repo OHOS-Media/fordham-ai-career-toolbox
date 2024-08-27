@@ -12,6 +12,7 @@ module.exports = {
       tertiary: "#EAEAFD",
       "error-state": "#EC473C",
       neutral: "#FFFFFF",
+      "dark-grey": "#A6A6A6",
       grey: "#F2F4F5",
     },
     fontSize: {
