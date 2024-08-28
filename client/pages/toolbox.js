@@ -9,6 +9,7 @@ import ToolboxStep4 from "@/components/ToolboxPage/ToolboxStep4";
 import ToolboxEnd from "@/components/ToolboxPage/ToolboxEnd";
 import ProgressBar from "@/components/ToolboxPage/ProgressBar/ProgressBar";
 import BackButton from "@/components/ToolboxPage/BackButton";
+import ExitConfirmationModal from "@/components/ToolboxPage/ExitConfirmationModal";
 
 export default function Toolbox() {
   const [jobDescription, setJobDescription] = useState("");
@@ -16,6 +17,7 @@ export default function Toolbox() {
   const { request, loading, error } = useApi();
   const [toolboxActive, setToolboxActive] = useState(true);
   const [activeStep, setActiveStep] = useState(1);
+  const [exitModalActive, setExitModalActive] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -36,6 +38,7 @@ export default function Toolbox() {
   };
 
   const handleDone = () => {
+    setExitModalActive(false);
     setActiveStep(5);
   };
 
@@ -72,7 +75,11 @@ export default function Toolbox() {
         );
       case 2:
         return (
-          <ToolboxStep2 keywords={keywords} handleDone={handleDone} incrementStep={incrementStep} />
+          <ToolboxStep2
+            keywords={keywords}
+            setExitModalActive={setExitModalActive}
+            incrementStep={incrementStep}
+          />
         );
       case 3:
         return <ToolboxStep3 />;
@@ -83,8 +90,19 @@ export default function Toolbox() {
 
   return (
     <Layout>
-      <div className="min-h-screen flex flex-col gap-10 items-center justify-center bg-neutral">
+      <div className="min-h-screen flex flex-col gap-10 items-center justify-center bg-neutral relative">
         {error && <ErrorAlert errorMessage={error} />}
+
+        {exitModalActive && (
+          <>
+            <ExitConfirmationModal
+              setExitModalActive={setExitModalActive}
+              handleDone={handleDone}
+            />{" "}
+            <div className="min-h-screen h-[200vh] min-w-full bg-secondary/30 absolute z-20 backdrop-filter backdrop-blur-[0.8px]"></div>
+          </>
+        )}
+
         {toolboxActive ? (
           <div className="flex flex-col items-center gap-10 w-3/5 h-[40rem] max-h-[40rem] mt-10">
             <ProgressBar activeStep={activeStep} />
