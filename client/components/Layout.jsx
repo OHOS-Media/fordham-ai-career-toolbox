@@ -3,7 +3,7 @@ import Nav from "./Nav/Nav";
 
 const Layout = ({ children }) => {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col overflow-hidden">
       <Nav />
       <main className="flex-grow">{children}</main>
       <Footer />

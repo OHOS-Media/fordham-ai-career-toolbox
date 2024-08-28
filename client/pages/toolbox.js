@@ -99,7 +99,7 @@ export default function Toolbox() {
               setExitModalActive={setExitModalActive}
               handleDone={handleDone}
             />{" "}
-            <div className="min-h-screen min-w-full bg-secondary/30 absolute z-20 backdrop-filter backdrop-blur-[0.8px]"></div>
+            <div className="min-h-screen h-[200vh] min-w-full bg-secondary/30 absolute z-20 backdrop-filter backdrop-blur-[0.8px]"></div>
           </>
         )}
 
