@@ -23,7 +23,7 @@ export default function ExitConfirmationModal({ setExitModalActive, handleDone }
           className="bg-grey border text-secondary hover:bg-dark-grey/20"
           onClick={handleCancel}
         />
-        <Button text={"Im Done"} onClick={handleDone} />
+        <Button text={"I'm done"} onClick={handleDone} />
       </div>
     </div>
   );
