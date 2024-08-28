@@ -5,6 +5,8 @@ const passport = require("passport");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
 const cors = require("cors");
+const passwordProtection = require("./middleware/passwordProtection");
+const cookieParser = require("cookie-parser");
 
 const app = express();
 mongoose.set("strictQuery", true);
@@ -28,8 +30,6 @@ app.options("*", cors(corsOptions));
 // Trust the first proxy to enable cookie sharing between the client and the server
 app.set("trust proxy", 1);
 
-// Middleware
-app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(
   session({
@@ -48,6 +48,22 @@ app.use(
     },
   })
 );
+// Middleware
+app.use(express.json());
+app.use(cookieParser());
+
+// Apply password protection to all routes except the password verification route
+app.use((req, res, next) => {
+  if (req.path === "/api/verify-password") {
+    return next();
+  }
+  passwordProtection(req, res, next);
+});
+
+// Password verification route
+app.post("/api/verify-password", passwordProtection, (req, res) => {
+  res.json({ success: true });
+});
 
 // Passport middleware
 app.use(passport.initialize());
