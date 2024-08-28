@@ -19,7 +19,7 @@ export default function Nav() {
   const { isAuthenticated, login, user, error, setError } = useAuth();
 
   return (
-    <nav className="absolute top-0 left-0 p-6 flex justify-between w-full">
+    <nav className="absolute top-0 left-0 p-6 flex justify-between w-full z-10">
       <div className="flex items-center gap-10">
         <Logo />
       </div>
