@@ -1,21 +1,21 @@
-import { useState } from 'react';
-import { useApi } from '@/hooks/useApi';
+import { useState } from "react";
+import { useApi } from "@/hooks/useApi";
 
 const PasswordEntry = ({ onPasswordVerified }) => {
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const { request, loading } = useApi();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await request('/api/verify-password', {
-        method: 'POST',
+      await request("/api/verify-password", {
+        method: "POST",
         body: JSON.stringify({ password }),
       });
       onPasswordVerified();
     } catch (error) {
-      setError('Incorrect password');
+      setError("Incorrect password");
     }
   };
 
@@ -42,7 +42,7 @@ const PasswordEntry = ({ onPasswordVerified }) => {
             type="submit"
             disabled={loading}
           >
-            {loading ? 'Verifying...' : 'Enter'}
+            {loading ? "Verifying..." : "Enter"}
           </button>
         </div>
       </form>
