@@ -2,12 +2,16 @@ import { useState } from "react";
 import Button from "../Button";
 import Keyword from "./Keyword";
 
-export default function ToolboxStep2({ keywords, handleDone, incrementStep }) {
+export default function ToolboxStep2({ keywords, setExitModalActive, incrementStep }) {
   const [showAll, setShowAll] = useState(false);
   const initialKeywordCount = 10;
 
   const handleShowAll = () => {
     setShowAll(!showAll);
+  };
+
+  const openExitModal = () => {
+    setExitModalActive(true);
   };
 
   return (
@@ -31,7 +35,7 @@ export default function ToolboxStep2({ keywords, handleDone, incrementStep }) {
       </div>
 
       <div className="flex justify-between">
-        <Button text={"I'm done"} onClick={handleDone} />
+        <Button text={"I'm done"} onClick={openExitModal} />
         <Button text={"Continue to bullet points..."} onClick={incrementStep} />
       </div>
     </div>
