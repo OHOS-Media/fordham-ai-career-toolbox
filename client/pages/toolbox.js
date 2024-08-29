@@ -5,7 +5,7 @@ import Layout from "@/components/Layout";
 import ToolboxStep1 from "@/components/ToolboxPage/ToolboxStep1";
 import ToolboxStep2 from "@/components/ToolboxPage/ToolboxStep2";
 import ToolboxStep3 from "@/components/ToolboxPage/ToolboxStep3";
-import ToolboxStep4 from "@/components/ToolboxPage/ToolboxStep4";
+import ToolboxStep4 from "@/components/ToolboxPage/ToolboxStep4/ToolboxStep4";
 import ToolboxEnd from "@/components/ToolboxPage/ToolboxEnd";
 import ProgressBar from "@/components/ToolboxPage/ProgressBar/ProgressBar";
 import BackButton from "@/components/ToolboxPage/BackButton";
@@ -76,7 +76,7 @@ export default function Toolbox() {
           />
         );
       case 4:
-        return <ToolboxStep4 bulletPoints={bulletPoints} />;
+        return <ToolboxStep4 bulletPoints={bulletPoints} incrementStep={incrementStep} />;
     }
   };
 
