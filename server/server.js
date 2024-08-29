@@ -53,17 +53,17 @@ app.use(express.json());
 app.use(cookieParser());
 
 // Apply password protection to all routes except the password verification route
-app.use((req, res, next) => {
-  if (req.path === "/api/verify-password") {
-    return next();
-  }
-  passwordProtection(req, res, next);
-});
+// app.use((req, res, next) => {
+//   if (req.path === "/api/verify-password") {
+//     return next();
+//   }
+//   passwordProtection(req, res, next);
+// });
 
 // Password verification route
-app.post("/api/verify-password", passwordProtection, (req, res) => {
-  res.json({ success: true });
-});
+// app.post("/api/verify-password", passwordProtection, (req, res) => {
+//   res.json({ success: true });
+// });
 
 // Passport middleware
 app.use(passport.initialize());
