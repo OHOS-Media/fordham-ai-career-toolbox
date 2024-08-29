@@ -5,37 +5,21 @@ import Layout from "@/components/Layout";
 import ToolboxStep1 from "@/components/ToolboxPage/ToolboxStep1";
 import ToolboxStep2 from "@/components/ToolboxPage/ToolboxStep2";
 import ToolboxStep3 from "@/components/ToolboxPage/ToolboxStep3";
-import ToolboxStep4 from "@/components/ToolboxPage/ToolboxStep4";
+import ToolboxStep4 from "@/components/ToolboxPage/ToolboxStep4/ToolboxStep4";
 import ToolboxEnd from "@/components/ToolboxPage/ToolboxEnd";
 import ProgressBar from "@/components/ToolboxPage/ProgressBar/ProgressBar";
 import BackButton from "@/components/ToolboxPage/BackButton";
 import ExitConfirmationModal from "@/components/ToolboxPage/ExitConfirmationModal";
 
 export default function Toolbox() {
-  const [jobDescription, setJobDescription] = useState("");
-  const [keywords, setKeywords] = useState([]);
-  const { request, loading, error } = useApi();
+  const { error } = useApi();
   const [toolboxActive, setToolboxActive] = useState(true);
   const [activeStep, setActiveStep] = useState(1);
   const [exitModalActive, setExitModalActive] = useState(false);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    try {
-      const data = await request("/api/extract-keywords", {
-        method: "POST",
-        body: JSON.stringify({ jobDescription }),
-      });
-
-      setKeywords(data.keywords);
-      console.log("Keywords:", data.keywords);
-
-      incrementStep();
-    } catch (error) {
-      console.error("Failed to extract keywords", error);
-    }
-  };
+  const [jobDescription, setJobDescription] = useState("");
+  const [keywords, setKeywords] = useState([]);
+  const [resume, setResume] = useState("");
+  const [bulletPoints, setBulletPoints] = useState([]);
 
   const handleDone = () => {
     setExitModalActive(false);
@@ -67,10 +51,10 @@ export default function Toolbox() {
       case 1:
         return (
           <ToolboxStep1
-            handleSubmit={handleSubmit}
             jobDescription={jobDescription}
             setJobDescription={setJobDescription}
-            loading={loading}
+            setKeywords={setKeywords}
+            incrementStep={incrementStep}
           />
         );
       case 2:
@@ -82,9 +66,17 @@ export default function Toolbox() {
           />
         );
       case 3:
-        return <ToolboxStep3 />;
+        return (
+          <ToolboxStep3
+            resume={resume}
+            setResume={setResume}
+            jobDescription={jobDescription}
+            incrementStep={incrementStep}
+            setBulletPoints={setBulletPoints}
+          />
+        );
       case 4:
-        return <ToolboxStep4 />;
+        return <ToolboxStep4 bulletPoints={bulletPoints} incrementStep={incrementStep} />;
     }
   };
 
@@ -107,7 +99,9 @@ export default function Toolbox() {
           <div className="flex flex-col items-center gap-10 w-3/5 h-[40rem] max-h-[40rem] mt-10">
             <ProgressBar activeStep={activeStep} />
 
-            <div className="flex flex-col items-center justify-between relative bg-grey p-8 rounded-md h-full w-5/6">
+            <div
+              className={`${activeStep === 4 ? "bg-neutral" : "bg-grey"} flex flex-col items-center justify-between relative p-8 rounded-md h-full w-5/6`}
+            >
               {activeStep > 1 && (
                 <div className="absolute -left-16" onClick={decrementStep}>
                   <BackButton />
