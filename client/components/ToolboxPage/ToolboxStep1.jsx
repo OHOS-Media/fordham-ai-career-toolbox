@@ -7,7 +7,12 @@ const toolboxStep1FormData = {
     "Please paste the full job description here so we can analyze its required skills. To ensure accuracy, include sections detailing roles, responsibilities, and qualifications. Exclude sections like 'About Us/Company,' salary/benefits, and diversity statements, as they typically don't mention hard skills. Only English job descriptions, please.",
 };
 
-export default function ToolboxStep1({ jobDescription, setJobDescription, setKeywords, incrementStep }) {
+export default function ToolboxStep1({
+  jobDescription,
+  setJobDescription,
+  setKeywords,
+  incrementStep,
+}) {
   const { request, loading } = useApi();
 
   const handleSubmit = async (e) => {

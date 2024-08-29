@@ -9,8 +9,13 @@ export default function ToolboxStep4({ bulletPoints, incrementStep }) {
 
         <div className="flex flex-col gap-4 w-fit mt-4 h-full relative">
           {bulletPoints.map((job, jobIndex) =>
-            Object.entries(job).map(([jobTitle, bulletPoint]) => (
-              <BulletItem jobTitle={jobTitle} bulletPoint={bulletPoint} jobIndex={jobIndex} />
+            Object.entries(job).map(([jobTitle, bulletPoint], idx) => (
+              <BulletItem
+                jobTitle={jobTitle}
+                bulletPoint={bulletPoint}
+                jobIndex={jobIndex}
+                key={idx}
+              />
             ))
           )}
         </div>
