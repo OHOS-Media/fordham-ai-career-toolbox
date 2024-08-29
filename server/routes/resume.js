@@ -4,7 +4,7 @@ const OpenAI = require("openai");
 
 // const openai = new OpenAI(process.env.OPENAI_API_KEY);
 
-const { mockBulletPoints } = require('../mockdata');
+const { mockBulletPoints } = require("../mockdata");
 
 router.post("/resume", async (req, res) => {
   try {
@@ -40,7 +40,7 @@ router.post("/resume", async (req, res) => {
     // const jsonString = content.substring(jsonStart, jsonEnd);
 
     // const enhancedBulletPoints = JSON.parse(jsonString);
-    
+
     // Remove the line below to use the AI API
     const enhancedBulletPoints = mockBulletPoints;
     console.log("enhancedBulletPoints:", enhancedBulletPoints);
