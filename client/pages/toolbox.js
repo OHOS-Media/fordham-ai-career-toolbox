@@ -12,30 +12,13 @@ import BackButton from "@/components/ToolboxPage/BackButton";
 import ExitConfirmationModal from "@/components/ToolboxPage/ExitConfirmationModal";
 
 export default function Toolbox() {
-  const [jobDescription, setJobDescription] = useState("");
-  const [keywords, setKeywords] = useState([]);
-  const { request, loading, error } = useApi();
+  const { error } = useApi();
   const [toolboxActive, setToolboxActive] = useState(true);
   const [activeStep, setActiveStep] = useState(1);
   const [exitModalActive, setExitModalActive] = useState(false);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    try {
-      const data = await request("/api/extract-keywords", {
-        method: "POST",
-        body: JSON.stringify({ jobDescription }),
-      });
-
-      setKeywords(data.keywords);
-      console.log("Keywords:", data.keywords);
-
-      incrementStep();
-    } catch (error) {
-      console.error("Failed to extract keywords", error);
-    }
-  };
+  const [jobDescription, setJobDescription] = useState("");
+  const [keywords, setKeywords] = useState([]);
+  const [resume, setResume] = useState("");
 
   const handleDone = () => {
     setExitModalActive(false);
@@ -67,10 +50,10 @@ export default function Toolbox() {
       case 1:
         return (
           <ToolboxStep1
-            handleSubmit={handleSubmit}
             jobDescription={jobDescription}
             setJobDescription={setJobDescription}
-            loading={loading}
+            setKeywords={setKeywords}
+            incrementStep={incrementStep}
           />
         );
       case 2:
@@ -82,7 +65,14 @@ export default function Toolbox() {
           />
         );
       case 3:
-        return <ToolboxStep3 />;
+        return (
+          <ToolboxStep3
+            resume={resume}
+            setResume={setResume}
+            jobDescription={jobDescription}
+            incrementStep={incrementStep}
+          />
+        );
       case 4:
         return <ToolboxStep4 />;
     }
