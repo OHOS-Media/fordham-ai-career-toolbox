@@ -7,7 +7,7 @@ const toolboxStep3FormData = {
     "Please paste the full resume here so we can analyze the skills and experience listed. To ensure accuracy, include sections detailing your work history, job titles, responsibilities, and education. Exclude sections like personal statements, hobbies, or references, as they typically don't highlight specific skills. Only resumes in English, please.",
 };
 
-export default function ToolboxStep3({ resume, setResume, jobDescription, incrementStep }) {
+export default function ToolboxStep3({ resume, setResume, jobDescription, incrementStep, setBulletPoints }) {
   const { request, loading } = useApi();
 
   const handleSubmit = async (e) => {
@@ -23,6 +23,7 @@ export default function ToolboxStep3({ resume, setResume, jobDescription, increm
       });
 
       console.log("Bullet points", data);
+      setBulletPoints(data);
 
       incrementStep();
     } catch (error) {

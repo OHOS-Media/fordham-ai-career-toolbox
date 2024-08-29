@@ -19,6 +19,7 @@ export default function Toolbox() {
   const [jobDescription, setJobDescription] = useState("");
   const [keywords, setKeywords] = useState([]);
   const [resume, setResume] = useState("");
+  const [bulletPoints, setBulletPoints] = useState([]);
 
   const handleDone = () => {
     setExitModalActive(false);
@@ -71,10 +72,11 @@ export default function Toolbox() {
             setResume={setResume}
             jobDescription={jobDescription}
             incrementStep={incrementStep}
+            setBulletPoints={setBulletPoints}
           />
         );
       case 4:
-        return <ToolboxStep4 />;
+        return <ToolboxStep4 bulletPoints={bulletPoints} />;
     }
   };
 
@@ -97,7 +99,9 @@ export default function Toolbox() {
           <div className="flex flex-col items-center gap-10 w-3/5 h-[40rem] max-h-[40rem] mt-10">
             <ProgressBar activeStep={activeStep} />
 
-            <div className="flex flex-col items-center justify-between relative bg-grey p-8 rounded-md h-full w-5/6">
+            <div
+              className={`${activeStep === 4 ? "bg-neutral" : "bg-grey"} flex flex-col items-center justify-between relative p-8 rounded-md h-full w-5/6`}
+            >
               {activeStep > 1 && (
                 <div className="absolute -left-16" onClick={decrementStep}>
                   <BackButton />
