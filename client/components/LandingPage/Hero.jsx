@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const Hero = () => {
   return (
-    <div className="flex flex-col items-center justify-center bg-neutral text-center px-4 mt-32">
+    <div className="flex flex-col items-center justify-center text-center px-4 mt-32">
       <h1 className="h1 mb-6">Welcome to AI Career Toolbox</h1>
       <p className="body-txt-md opacity-70 mb-8 max-w-2xl">
         Empower your job search with AI-driven tools. Extract keywords from job descriptions,
