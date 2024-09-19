@@ -15,11 +15,11 @@ export default function ToolboxStep2({ keywords, setExitModalActive, incrementSt
   };
 
   return (
-    <div className="flex flex-col gap-4 justify-between h-full">
-      <div className="flex flex-col gap-4">
-        <h4 className="h4">Get Keywords</h4>
+    <div className="flex flex-col gap-2 justify-between h-full">
+      <div className="flex flex-col">
+        <h4 className="body-txt-lg-bold text-secondary">Get Keywords</h4>
 
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap gap-2 mt-4">
           {keywords.slice(0, showAll ? keywords.length : initialKeywordCount).map((word, idx) => (
             <Keyword word={word} key={idx}>
               {word}

@@ -8,7 +8,7 @@ export default function ExitConfirmationModal({ setExitModalActive, handleDone }
   };
 
   return (
-    <div className="flex flex-col bg-grey p-8 rounded-md w-fit absolute top-50 gap-10 border-t-4 border-error-state z-30">
+    <div className="flex flex-col bg-white p-8 rounded-md w-fit absolute top-50 gap-10 border-t-4 border-error-state z-30">
       <div className="flex flex-col items-center gap-4">
         <Image src={ProgressAlert} alt="Progress Alert" width={50} height={50} />
         <p className="body-txt-md-bold text-center">
@@ -20,7 +20,7 @@ export default function ExitConfirmationModal({ setExitModalActive, handleDone }
       <div className="flex justify-between">
         <Button
           text={"Cancel"}
-          className="bg-grey border text-secondary hover:bg-dark-grey/20"
+          className="bg-dark-grey/60 border text-white hover:bg-dark-grey/70"
           onClick={handleCancel}
         />
         <Button text={"I'm done"} onClick={handleDone} />
