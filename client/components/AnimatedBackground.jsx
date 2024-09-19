@@ -1,13 +1,13 @@
 export default function AnimatedBackground() {
   return (
     <div id="background">
-      <div class="orb-cont">
-        <div class="orange orange-1 orb"></div>
-        <div class="orange orange-2 orb"></div>
-        <div class="blue blue-1 orb"></div>
-        <div class="blue blue-2 orb"></div>
-        <div class="red red-1 orb"></div>
-        <div class="red red-2 orb"></div>
+      <div className="orb-cont">
+        <div className="orange orange-1 orb"></div>
+        <div className="orange orange-2 orb"></div>
+        <div className="blue blue-1 orb"></div>
+        <div className="blue blue-2 orb"></div>
+        <div className="red red-1 orb"></div>
+        <div className="red red-2 orb"></div>
       </div>
 
       <svg>

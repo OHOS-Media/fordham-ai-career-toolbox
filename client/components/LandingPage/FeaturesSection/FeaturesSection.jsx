@@ -3,11 +3,31 @@ import FeatureElement from "./FeatureElement";
 const featureSectionData = {
   title: "Our Features Get You Ahead",
   features: [
-    {title: 'Job Description Analyzer', description: 'Get AI-recommended keywords to tailor your resume to any job description.', iconPath: '/assets/Briefcase.svg', iconAlt: 'Briefcase Icon'},
-    {title: 'Keyword Generator', description: 'Discover key terms that boost your visibility in job applications.', iconPath: '/assets/Robot.svg', iconAlt: 'Robot Icon'},
-    {title: 'AI Resume Enhancer', description: 'Receive AI-generated bullet points that elevate your resume content.', iconPath: '/assets/Profile.svg', iconAlt: 'Profile Icon'},
-    {title: 'Resume Refinement Tool', description: 'Refine and enhance your resume bullet points with AI for maximum impact.', iconPath: '/assets/Document.svg', iconAlt: 'Document Icon'},
-  ]
+    {
+      title: "Job Description Analyzer",
+      description: "Get AI-recommended keywords to tailor your resume to any job description.",
+      iconPath: "/assets/Briefcase.svg",
+      iconAlt: "Briefcase Icon",
+    },
+    {
+      title: "Keyword Generator",
+      description: "Discover key terms that boost your visibility in job applications.",
+      iconPath: "/assets/Robot.svg",
+      iconAlt: "Robot Icon",
+    },
+    {
+      title: "AI Resume Enhancer",
+      description: "Receive AI-generated bullet points that elevate your resume content.",
+      iconPath: "/assets/Profile.svg",
+      iconAlt: "Profile Icon",
+    },
+    {
+      title: "Resume Refinement Tool",
+      description: "Refine and enhance your resume bullet points with AI for maximum impact.",
+      iconPath: "/assets/Document.svg",
+      iconAlt: "Document Icon",
+    },
+  ],
 };
 
 const FeatureSection = () => {
@@ -17,7 +37,7 @@ const FeatureSection = () => {
 
       <div className="flex justify-between items-start mt-10 gap-6">
         {featureSectionData.features.map((feature, idx) => (
-          <FeatureElement feature={feature} />
+          <FeatureElement feature={feature} key={idx} />
         ))}
       </div>
     </div>
