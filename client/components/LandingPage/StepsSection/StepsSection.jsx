@@ -23,7 +23,7 @@ const stepSectionData = {
 
 const StepsSection = () => {
   return (
-    <div className="flex flex-col items-center justify-center w-4/5 bg-grey py-16 px-10 rounded-lg">
+    <div className="flex flex-col items-center justify-center w-4/5 py-16 px-10 rounded-lg">
       <h2 className="h2">{stepSectionData.title}</h2>
 
       <div className="flex justify-center items-center mt-10">

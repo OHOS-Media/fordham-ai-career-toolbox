@@ -1,3 +1,4 @@
+import AnimatedBackground from "@/components/AnimatedBackground";
 import AIPoweredSection from "@/components/LandingPage/AIPoweredSection/AIPoweredSection";
 import DemoSection from "@/components/LandingPage/DemoSection/DemoSection";
 import FAQSection from "@/components/LandingPage/FAQSection/FAQSection";
@@ -11,6 +12,7 @@ export default function Home({pageData}) {
   return (
     <Layout>
       <div className="flex flex-col items-center justify-center gap-24">
+        <AnimatedBackground />
         <Hero {...pageData.hero} />
         <StepsSection />
         <AIPoweredSection />
