@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const Hero = () => {
   return (
-    <div className="flex flex-col items-center justify-center text-center px-4 mt-32">
+    <div className="flex flex-col items-center justify-center text-center px-4 mt-48">
       <h1 className="h1 mb-6">
         Introducing{" "}
         <span className="bg-text-gradient text-transparent bg-clip-text">RAMresume</span>
