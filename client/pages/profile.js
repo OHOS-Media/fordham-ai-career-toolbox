@@ -31,27 +31,25 @@ export default function Profile() {
   }
 
   return (
-    <Layout>
-      <div className="min-h-screen flex flex-col items-center justify-center bg-neutral">
-        <div className="flex flex-col items-center gap-2">
-          <div className="mr-4 rounded-full overflow-hidden">
-            <Image
-              src={user.profilePicture}
-              alt={user.displayName}
-              width={150}
-              height={150}
-              className="object-cover"
-            />
-          </div>
-
-          <div className="flex flex-col items-center">
-            <h1 className="h1">{user.displayName}</h1>
-            <p className="body-txt-md text-secondary">{user.email}</p>
-          </div>
+    <div className="min-h-screen flex flex-col items-center justify-center bg-neutral">
+      <div className="flex flex-col items-center gap-2">
+        <div className="mr-4 rounded-full overflow-hidden">
+          <Image
+            src={user.profilePicture}
+            alt={user.displayName}
+            width={150}
+            height={150}
+            className="object-cover"
+          />
         </div>
 
-        <Button onClick={logout} text="Log out" className="mt-10" />
+        <div className="flex flex-col items-center">
+          <h1 className="h1">{user.displayName}</h1>
+          <p className="body-txt-md text-secondary">{user.email}</p>
+        </div>
       </div>
-    </Layout>
+
+      <Button onClick={logout} text="Log out" className="mt-10" />
+    </div>
   );
 }

@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useApi } from "@/hooks/useApi";
 import ErrorAlert from "@/components/ErrorAlert";
-import Layout from "@/components/Layout";
 import ToolboxStep1 from "@/components/ToolboxPage/ToolboxStep1";
 import ToolboxStep2 from "@/components/ToolboxPage/ToolboxStep2";
 import ToolboxStep3 from "@/components/ToolboxPage/ToolboxStep3";
@@ -81,40 +80,35 @@ export default function Toolbox() {
   };
 
   return (
-    <Layout>
-      <div className="min-h-screen flex flex-col gap-10 items-center justify-center bg-neutral relative">
-        {error && <ErrorAlert errorMessage={error} />}
+    <div className="min-h-screen flex flex-col gap-10 items-center justify-center bg-neutral relative w-full border-primary">
+      {error && <ErrorAlert errorMessage={error} />}
 
-        {exitModalActive && (
-          <>
-            <ExitConfirmationModal
-              setExitModalActive={setExitModalActive}
-              handleDone={handleDone}
-            />{" "}
-            <div className="min-h-screen h-[200vh] min-w-full bg-secondary/30 absolute z-20 backdrop-filter backdrop-blur-[0.8px]"></div>
-          </>
-        )}
+      {exitModalActive && (
+        <>
+          <ExitConfirmationModal setExitModalActive={setExitModalActive} handleDone={handleDone} />{" "}
+          <div className="min-h-screen h-[200vh] min-w-full bg-secondary/30 absolute z-20 backdrop-filter backdrop-blur-[0.8px]"></div>
+        </>
+      )}
 
-        {toolboxActive ? (
-          <div className="flex flex-col items-center gap-10 w-3/5 h-[40rem] max-h-[40rem] mt-10">
-            <ProgressBar activeStep={activeStep} />
+      {toolboxActive ? (
+        <div className="flex flex-col items-center gap-10 w-3/5 h-[40rem] max-h-[40rem] mt-10">
+          <ProgressBar activeStep={activeStep} />
 
-            <div
-              className={`${activeStep === 4 ? "bg-neutral" : "bg-grey"} flex flex-col items-center justify-between relative p-8 rounded-md h-full w-5/6`}
-            >
-              {activeStep > 1 && (
-                <div className="absolute -left-16" onClick={decrementStep}>
-                  <BackButton />
-                </div>
-              )}
+          <div
+            className={`${activeStep === 4 ? "bg-neutral" : "bg-grey"} flex flex-col items-center justify-between relative p-8 rounded-md h-full w-5/6`}
+          >
+            {activeStep > 1 && (
+              <div className="absolute -left-16" onClick={decrementStep}>
+                <BackButton />
+              </div>
+            )}
 
-              <div className="w-full h-full">{renderStep()}</div>
-            </div>
+            <div className="w-full h-full">{renderStep()}</div>
           </div>
-        ) : (
-          <ToolboxEnd />
-        )}
-      </div>
-    </Layout>
+        </div>
+      ) : (
+        <ToolboxEnd />
+      )}
+    </div>
   );
 }

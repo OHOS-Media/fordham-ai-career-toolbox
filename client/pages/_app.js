@@ -5,6 +5,8 @@ import PasswordEntry from "../components/PasswordEntry.jsx";
 import "@/styles/globals.css";
 import { useApi } from "@/hooks/useApi.js";
 
+import Layout from "@/components/Layout.jsx";
+
 const inter_init = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
@@ -49,7 +51,9 @@ export default function App({ Component, pageProps }) {
   return (
     <AuthProvider>
       <main className={inter_init.className}>
-        <Component {...pageProps} />
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
       </main>
     </AuthProvider>
   );
