@@ -12,6 +12,8 @@ module.exports = {
         secondary: "#1B2950",
         tertiary: "#F8F1F1",
         neutral: "#F7E5D2",
+        grey: "#F2F4F5",
+        "error-state": "#EC473C",
         "dark-grey": "#5C5C5C",
       },
       backgroundImage: {
