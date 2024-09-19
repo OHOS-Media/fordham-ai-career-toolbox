@@ -5,7 +5,7 @@ export default function ToolboxStep4({ bulletPoints, incrementStep }) {
   return (
     <div className="flex flex-col gap-4 justify-between h-full">
       <div className="h-full">
-        <h4 className="h4 px-4">Get Bullet Points</h4>
+        <h4 className="body-txt-lg-bold text-secondary px-4">Get Bullet Points</h4>
 
         <div className="flex flex-col gap-4 w-fit mt-4 h-full relative">
           {bulletPoints.map((job, jobIndex) =>
