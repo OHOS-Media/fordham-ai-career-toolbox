@@ -5,12 +5,13 @@ import Hero from "@/components/LandingPage/Hero";
 import StatisticsSection from "@/components/LandingPage/StatisticsSection/StatisticsSection";
 import StepsSection from "@/components/LandingPage/StepsSection/StepsSection";
 import Layout from "@/components/Layout";
+import { client } from "@/src/sanity/lib/client";
 
-export default function Home() {
+export default function Home({pageData}) {
   return (
     <Layout>
       <div className="flex flex-col items-center justify-center gap-24">
-        <Hero />
+        <Hero {...pageData.hero} />
         <StepsSection />
         <AIPoweredSection />
         <DemoSection />
@@ -19,4 +20,15 @@ export default function Home() {
       </div>
     </Layout>
   );
+}
+
+export async function getStaticProps() {
+  const pageData = await client.fetch(`*[_type == "homepage"][0]`);
+
+  return {
+    props: {
+      pageData,
+    },
+    revalidate: 30, // Revalidate every 30 seconds
+  };
 }
