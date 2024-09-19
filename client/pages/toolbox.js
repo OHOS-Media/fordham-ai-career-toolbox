@@ -91,11 +91,11 @@ export default function Toolbox() {
       )}
 
       {toolboxActive ? (
-        <div className="flex flex-col items-center gap-10 w-3/5 h-[40rem] max-h-[40rem] mt-10">
+        <div className="flex flex-col items-center gap-12 w-3/5 mt-40 mb-36 h-[38rem] max-h-[38rem]">
           <ProgressBar activeStep={activeStep} />
 
           <div
-            className={`${activeStep === 4 ? "bg-neutral" : "bg-grey"} flex flex-col items-center justify-between relative p-8 rounded-md h-full w-5/6`}
+            className={`${activeStep === 4 ? "bg-neutral" : "bg-white/50"} flex flex-col items-center justify-between relative p-5 rounded-md h-full w-5/6`}
           >
             {activeStep > 1 && (
               <div className="absolute -left-16" onClick={decrementStep}>
