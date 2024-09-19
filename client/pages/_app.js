@@ -13,40 +13,40 @@ const inter_init = Inter({
 });
 
 export default function App({ Component, pageProps }) {
-  // const [isPasswordVerified, setIsPasswordVerified] = useState(false);
-  // const [isLoading, setIsLoading] = useState(true);
-  // const { request } = useApi();
+  const [isPasswordVerified, setIsPasswordVerified] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const { request } = useApi();
 
-  // useEffect(() => {
-  //   const checkPasswordVerification = async () => {
-  //     try {
-  //       await request("/api/verify-password", {
-  //         method: "POST",
-  //         body: JSON.stringify({ password: "" }),
-  //       });
-  //       setIsPasswordVerified(true);
-  //     } catch (error) {
-  //       console.error("Error checking password verification:", error);
-  //       setIsPasswordVerified(false);
-  //     } finally {
-  //       setIsLoading(false);
-  //     }
-  //   };
+  useEffect(() => {
+    const checkPasswordVerification = async () => {
+      try {
+        await request("/api/verify-password", {
+          method: "POST",
+          body: JSON.stringify({ password: "" }),
+        });
+        setIsPasswordVerified(true);
+      } catch (error) {
+        console.error("Error checking password verification:", error);
+        setIsPasswordVerified(false);
+      } finally {
+        setIsLoading(false);
+      }
+    };
 
-  //   checkPasswordVerification();
-  // }, [request]);
+    checkPasswordVerification();
+  }, [request]);
 
-  // if (isLoading) {
-  //   return <div className={inter_init.className}>Loading...</div>;
-  // }
+  if (isLoading) {
+    return <div className={inter_init.className}>Loading...</div>;
+  }
 
-  // if (!isPasswordVerified) {
-  //   return (
-  //     <div className={inter_init.className}>
-  //       <PasswordEntry onPasswordVerified={() => setIsPasswordVerified(true)} />
-  //     </div>
-  //   );
-  // }
+  if (!isPasswordVerified) {
+    return (
+      <div className={inter_init.className}>
+        <PasswordEntry onPasswordVerified={() => setIsPasswordVerified(true)} />
+      </div>
+    );
+  }
 
   return (
     <AuthProvider>
