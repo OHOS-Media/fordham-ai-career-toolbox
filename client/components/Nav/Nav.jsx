@@ -19,7 +19,7 @@ export default function Nav() {
   const { isAuthenticated, login, user, error, setError } = useAuth();
 
   return (
-    <nav className="absolute top-0 left-0 p-6 flex justify-between w-full z-10">
+    <nav className="mt-4 px-4 py-2 flex absolute top-5 justify-between w-2/3 border-[1px] border-white rounded-full bg-white/50 z-10">
       <div className="flex items-center gap-10">
         <Logo />
       </div>
@@ -30,7 +30,7 @@ export default function Nav() {
         ))}
         {isAuthenticated ? (
           <Link href="/profile">
-            <div className="w-12 h-12 mr-4 rounded-full overflow-hidden">
+            <div className="w-12 h-12 rounded-full overflow-hidden">
               <Image
                 src={user.profilePicture}
                 alt={user.displayName}

@@ -3,14 +3,14 @@ import Arrow from "./Arrow";
 export default function ProgressNumber({ step, activeStep }) {
   const applyStyles = () => {
     if (activeStep === step.number) {
-      return "border-2 border-primary bg-tertiary text-primary";
+      return "border-2 border-primary bg-white/50 text-primary";
     }
 
     if (activeStep > step.number) {
       return "border-2 border-primary bg-primary text-neutral";
     }
 
-    return "bg-tertiary text-primary";
+    return "bg-white/50 text-primary";
   };
 
   return (

@@ -23,7 +23,7 @@ const footerData = {
 
 const Footer = () => {
   return (
-    <footer className="flex justify-center py-12">
+    <footer className="flex justify-center py-16 bg-primary w-full text-white">
       <div className="flex flex-col w-1/5 gap-8">
         <div className="w-fit">
           <Logo />
