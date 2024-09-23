@@ -1,9 +1,9 @@
-import Image from "next/image";
+import { urlFor } from "@/src/sanity/lib/image";
 
-const FeatureIcon = ({ path, iconAlt }) => {
+const FeatureIcon = ({ iconAlt, icon }) => {
   return (
     <div className="bg-neutral w-fit p-2 rounded-full">
-      <Image src={path} height={35} width={35} alt={iconAlt} />
+      {icon && <img src={urlFor(icon).url()} alt={iconAlt} />}
     </div>
   );
 };

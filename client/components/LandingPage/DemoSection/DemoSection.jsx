@@ -2,26 +2,15 @@ import Image from "next/image";
 import DemoScreenshotPlaceholder from "@/public/assets/DemoScreenshotPlaceholder.svg";
 import CheckboxLabel from "./CheckboxLabel";
 
-const demoSectionData = {
-  title: "Generate Powerful Bullet Points for your Resume",
-  description:
-    "Our bullet point generator tool takes the hassle out of crafting impactful resume bullet points. Simply input your job description and let our tool do the work for you.",
-  checkBoxTitles: [
-    "Save time and Effort",
-    "Stand out from the competition",
-    "Highlight your achievements",
-  ],
-};
-
-const DemoSection = () => {
+const DemoSection = ({ title, description, checkboxItems, demoImage }) => {
   return (
     <div className="flex justify-evenly w-full bg-primary text-white py-20">
       <div className="flex flex-col w-2/5 gap-6">
-        <h2 className="h2 leading-tight">{demoSectionData.title}</h2>
-        <p className="body-txt mt-4">{demoSectionData.description}</p>
+        <h2 className="h2 leading-tight">{title}</h2>
+        <p className="body-txt mt-4">{description}</p>
 
         <div className="flex flex-col gap-4">
-          {demoSectionData.checkBoxTitles.map((boxTitle, idx) => (
+          {checkboxItems.map((boxTitle, idx) => (
             <CheckboxLabel text={boxTitle} key={idx} />
           ))}
         </div>

@@ -2,18 +2,18 @@ import React from "react";
 import Button from "@/components/Button";
 import Link from "next/link";
 
-const Hero = ({ title, description, ctaText, ctaLink }) => {
+const Hero = ({ title, gradientTitle, description, ctaText }) => {
   return (
     <div className="flex flex-col items-center justify-center text-center px-4 mt-48">
       <h1 className="h1 mb-6">
-        Introducing{" "}
-        <span className="bg-text-gradient text-transparent bg-clip-text">RAMresume</span>
+        {title}{" "}
+        <span className="bg-text-gradient text-transparent bg-clip-text">{gradientTitle}</span>
       </h1>
       <p className="body-txt-md opacity-70 mb-8 max-w-2xl">
-        An AI-enabled toolbox for Gabelli students to level up their career search
+        {description}
       </p>
       <Link href="/toolbox">
-        <Button text="Try our Tool" />
+        <Button text={ctaText} />
       </Link>
     </div>
   );

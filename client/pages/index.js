@@ -10,8 +10,8 @@ export default function Home({ HomePageData }) {
     <div className="flex flex-col items-center justify-center gap-24">
       <AnimatedBackground />
       <Hero {...HomePageData.hero} />
-      <FeaturesSection />
-      <DemoSection />
+      <FeaturesSection {...HomePageData.features} />
+      <DemoSection {...HomePageData.demo} />
       <FAQSection />
     </div>
   );
