@@ -9,9 +9,7 @@ const Hero = ({ title, gradientTitle, description, ctaText }) => {
         {title}{" "}
         <span className="bg-text-gradient text-transparent bg-clip-text">{gradientTitle}</span>
       </h1>
-      <p className="body-txt-md opacity-70 mb-8 max-w-2xl">
-        {description}
-      </p>
+      <p className="body-txt-md opacity-70 mb-8 max-w-2xl">{description}</p>
       <Link href="/toolbox">
         <Button text={ctaText} />
       </Link>

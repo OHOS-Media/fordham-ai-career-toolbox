@@ -18,7 +18,7 @@ export default function Home({ HomePageData }) {
 }
 
 export async function getStaticProps() {
-  const HomePageData = await client.fetch(`*[_type == "homepage"][0]`);
+  const HomePageData = await client.fetch("*[_type == 'homepage'][0]");
 
   return {
     props: {

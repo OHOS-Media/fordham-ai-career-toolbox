@@ -6,7 +6,7 @@ const FeatureSection = ({ title, featureItems }) => {
       <h2 className="h2">{title}</h2>
 
       <div className="flex justify-between items-start mt-10 gap-6">
-      {featureItems.map((feature, idx) => (
+        {featureItems.map((feature, idx) => (
           <FeatureElement feature={feature} key={idx} />
         ))}
       </div>
