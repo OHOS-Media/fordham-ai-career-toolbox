@@ -4,9 +4,9 @@ import CheckboxLabel from "./CheckboxLabel";
 
 const DemoSection = ({ title, description, checkboxItems, demoImage }) => {
   return (
-    <div className="flex justify-evenly w-full bg-primary text-white py-20">
-      <div className="flex flex-col w-2/5 gap-6">
-        <h2 className="h2 leading-tight">{title}</h2>
+    <div className="flex flex-col px-4 md:flex-row gap-14 md:gap-0 md:justify-evenly 2xl:justify-center 2xl:gap-20 w-full bg-primary text-white py-20 border border-gray-300 sm:border-blue-300 md:border-green-300 lg:border-red-300 xl:border-purple-300 2xl:border-yellow-300">
+      <div className="flex flex-col md:w-2/5 gap-6">
+        <h2 className="h2 text-center md:text-left leading-tight">{title}</h2>
         <p className="body-txt mt-4">{description}</p>
 
         <div className="flex flex-col gap-4">
