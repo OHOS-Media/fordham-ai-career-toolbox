@@ -1,5 +1,5 @@
 import Image from "next/image";
-import CheckBox from "@/public/assets/Checkbox.svg";
+import CheckBox from "/public/assets/Checkbox.svg";
 
 const CheckboxLabel = ({ text }) => {
   return (
