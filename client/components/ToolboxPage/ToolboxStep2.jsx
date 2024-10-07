@@ -34,8 +34,8 @@ export default function ToolboxStep2({ keywords, setExitModalActive, incrementSt
         </div>
       </div>
 
-      <div className="flex justify-between">
-        <Button text={"I'm done"} onClick={openExitModal} />
+      <div className="flex flex-col sm:flex-row gap-2 w-fit sm:w-full justify-between">
+        <Button text={"I'm done"} onClick={openExitModal} className="w-fit" />
         <Button text={"Continue to bullet points..."} onClick={incrementStep} />
       </div>
     </div>
