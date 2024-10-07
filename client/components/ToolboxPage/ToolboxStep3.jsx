@@ -5,6 +5,7 @@ const toolboxStep3FormData = {
   title: "Paste your resume",
   placeholderText:
     "Please paste the full resume here so we can analyze the skills and experience listed. To ensure accuracy, include sections detailing your work history, job titles, responsibilities, and education. Exclude sections like personal statements, hobbies, or references, as they typically don't highlight specific skills. Only resumes in English, please.",
+  loadingTxt: "Extracting bullet points...",
 };
 
 export default function ToolboxStep3({
