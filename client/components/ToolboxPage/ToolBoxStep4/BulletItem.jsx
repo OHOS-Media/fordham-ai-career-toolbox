@@ -22,7 +22,7 @@ const BulletItem = ({ jobTitle, bulletPoint, jobIndex }) => {
     <div
       key={jobIndex}
       ref={groupRef}
-      className={`flex flex-col ${isOpen ? "z-30 bg-neutral h-full" : "z-10"}`}
+      className={`flex flex-col w-full ${isOpen ? "z-30 bg-neutral" : "z-10"}`}
     >
       <h3
         onClick={() => setIsOpen(!isOpen)}
@@ -32,7 +32,7 @@ const BulletItem = ({ jobTitle, bulletPoint, jobIndex }) => {
       </h3>
 
       <ul
-        className={`flex flex-col list-disc list-inside gap-1 px-4 z-10 ${isOpen ? "pt-4 bg-white/50" : ""}`}
+        className={`flex flex-col list-disc list-inside gap-1 px-4 z-10 ${isOpen ? "py-4 bg-white/50" : ""}`}
         ref={bulletRef}
       >
         {bulletPoint.map((point, pointIndex) => (
