@@ -26,7 +26,7 @@ const BulletItem = ({ jobTitle, bulletPoint, jobIndex }) => {
     >
       <h3
         onClick={() => setIsOpen(!isOpen)}
-        className={`z-20 body-txt-md-bold py-2 px-4 ${isOpen ? "text-primary bg-white/50" : ""} hover:text-primary hover:bg-white/50 hover:cursor-pointer border-b border-dark-grey/30`}
+        className={`z-20 body-txt-md-bold py-2 px-4 ${isOpen ? "text-secondary bg-white/50" : ""} hover:text-primary hover:bg-white/50 hover:cursor-pointer border-b border-dark-grey/30`}
       >
         {jobTitle}
       </h3>
