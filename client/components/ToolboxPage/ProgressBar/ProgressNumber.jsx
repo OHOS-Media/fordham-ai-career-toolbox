@@ -15,7 +15,9 @@ export default function ProgressNumber({ step, activeStep }) {
 
   return (
     <div className="flex flex-col gap-2 relative items-center w-full">
-      <div className={`${applyStyles()} flex justify-center items-center w-10 h-10 sm:w-14 sm:h-14 rounded-full`}>
+      <div
+        className={`${applyStyles()} flex justify-center items-center w-10 h-10 sm:w-14 sm:h-14 rounded-full`}
+      >
         <p className="body-txt-md-bold">{step.number}</p>
       </div>
 

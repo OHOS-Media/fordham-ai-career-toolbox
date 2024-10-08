@@ -9,8 +9,12 @@ export default function Custom404() {
       <AnimatedBackground />
       <div className="flex flex-col items-center gap-4">
         <h1 className="h1 text-secondary">Sorry...</h1>
-        <p className="body-txt-lg text-secondary text-center">The page you are looking for does not exist</p>
-        <Link href="/" className="body-txt-md text-secondary hover:text-primary">Return Home</Link>
+        <p className="body-txt-lg text-secondary text-center">
+          The page you are looking for does not exist
+        </p>
+        <Link href="/" className="body-txt-md text-secondary hover:text-primary">
+          Return Home
+        </Link>
       </div>
     </div>
   );
