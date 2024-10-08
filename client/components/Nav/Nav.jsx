@@ -1,57 +1,55 @@
-import Logo from "../Logo";
-import NavLink from "./NavLink";
-import Button from "../Button";
-
-import Link from "next/link";
-import Image from "next/image";
+import { useState, useEffect } from "react";
 import { useAuth } from "@/context/AuthContext";
-import ErrorAlert from "../ErrorAlert";
+
+import WideNav from "./WideNav";
+import MobileNav from "./MobileNav/MobileNav";
 
 const navData = {
   links: [
     { title: "Toolbox", href: "/toolbox" },
     { title: "About Us", href: "/about-us" },
-    { title: "Wordpress Link", href: "/" },
+    { title: "Blog", href: "/blog" },
+    { title: "F.A.Q", href: "/faq" },
   ],
 };
 
 export default function Nav() {
   const { isAuthenticated, login, user, error, setError } = useAuth();
+  const [isMobileScreen, setIsMobileScreen] = useState(false);
 
-  return (
-    <nav className="mt-4 px-4 py-2 flex absolute top-5 justify-between w-2/3 border-[1px] border-white rounded-full bg-white/50 z-10">
-      <div className="flex items-center gap-10">
-        <Logo />
-      </div>
+  // This determines wether to display the Full Nav or the Mobile Nav by
+  // tracking the width of the screen
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobileScreen(window.innerWidth < 768);
+    };
 
-      <div className="flex items-center gap-10">
-        {navData.links.map((link, idx) => (
-          <NavLink title={link.title} target={link.href} key={idx} />
-        ))}
-        {isAuthenticated ? (
-          <Link href="/profile">
-            <div className="w-12 h-12 rounded-full overflow-hidden">
-              <Image
-                src={user.profilePicture}
-                alt={user.displayName}
-                width={64}
-                height={64}
-                className="object-cover"
-              />
-            </div>
-          </Link>
-        ) : (
-          <Button text="Log In" onClick={login} />
-        )}
-      </div>
-      {error && (
-        <ErrorAlert
-          errorMessage={error}
-          setErrorMessage={setError}
-          errorAlertActive={!!error}
-          setErrorAlertActive={() => setError(null)}
-        />
-      )}
-    </nav>
+    setIsMobileScreen(window.innerWidth < 768);
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  return isMobileScreen ? (
+    <MobileNav
+      navData={navData}
+      isAuthenticated={isAuthenticated}
+      login={login}
+      user={user}
+      error={error}
+      setError={setError}
+    />
+  ) : (
+    <WideNav
+      navData={navData}
+      isAuthenticated={isAuthenticated}
+      login={login}
+      user={user}
+      error={error}
+      setError={setError}
+    />
   );
 }
