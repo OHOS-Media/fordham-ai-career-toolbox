@@ -92,7 +92,7 @@ export default function Toolbox() {
       )}
 
       {toolboxActive ? (
-        <div className="flex flex-col items-center gap-12 w-11/12 lg:mx-0 md:w-[45rem] lg:w-[50rem] mt-10 md:mt-40 mb-36 h-[50rem] sm:h-[40rem] md:h-[38rem] md:max-h-[38rem]">
+        <div className="flex flex-col items-center gap-12 w-11/12 lg:mx-0 md:w-[45rem] lg:w-[50rem] mt-20 md:mt-40 mb-36 h-[50rem] sm:h-[40rem] md:h-[38rem] md:max-h-[38rem]">
           <ProgressBar activeStep={activeStep} />
 
           <div
