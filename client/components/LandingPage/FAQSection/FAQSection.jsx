@@ -20,8 +20,8 @@ const faqSectionData = [
 
 const FAQSection = () => {
   return (
-    <div className="flex flex-col gap-6 items-center w-1/2 mt-10 mb-60">
-      <h2 className="h2 text-secondary">Frequently Asked Questions</h2>
+    <div className="flex flex-col gap-6 items-center md:w-2/3 lg:w-1/2 2xl:w-1/3 mt-10 mb-60">
+      <h2 className="h2 text-secondary text-center">Frequently Asked Questions</h2>
       <div className="flex flex-col w-full">
         {faqSectionData.map((faq, idx) => (
           <AccordionItem question={faq.question} answer={faq.answer} key={idx} />
