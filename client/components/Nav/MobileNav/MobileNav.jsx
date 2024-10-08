@@ -65,7 +65,7 @@ function MobileNavMenu({ navData, isAuthenticated, login, user, error, setError,
         {navData.links.map((link, idx) => (
           <Link
             href={link.href}
-            className="h4"
+            className="h4 text-secondary hover:text-primary"
             onClick={() =>
               setTimeout(() => {
                 setIsOpen((prevState) => !prevState);

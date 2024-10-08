@@ -15,7 +15,7 @@ export default function WideNav({ navData, isAuthenticated, login, user, error, 
 
       <div className="flex items-center gap-10">
         {navData.links.map((link, idx) => (
-          <NavLink title={link.title} target={link.href} className="body-txt-bold" key={idx} />
+          <NavLink title={link.title} target={link.href} className="body-txt-bold text-secondary hover:text-primary" key={idx} />
         ))}
         {isAuthenticated ? (
           <Link href="/profile">

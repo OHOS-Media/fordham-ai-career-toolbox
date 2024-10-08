@@ -33,5 +33,5 @@ export default function ToolboxEnd() {
     return () => clearTimeout(timer);
   }, [router]);
 
-  return <h1 className="h1 text-primary">{message}</h1>;
+  return <h1 className="h1 text-primary text-center">{message}</h1>;
 }
