@@ -22,17 +22,17 @@ const BulletItem = ({ jobTitle, bulletPoint, jobIndex }) => {
     <div
       key={jobIndex}
       ref={groupRef}
-      className={`flex flex-col ${isOpen ? "z-30 bg-neutral h-full" : "z-10"}`}
+      className={`flex flex-col w-full ${isOpen ? "z-30 bg-neutral" : "z-10"}`}
     >
       <h3
         onClick={() => setIsOpen(!isOpen)}
-        className={`z-20 body-txt-md-bold py-2 px-4 ${isOpen ? "text-primary bg-white/50" : ""} hover:text-primary hover:bg-white/50 hover:cursor-pointer border-b border-dark-grey/30`}
+        className={`z-20 body-txt-md-bold py-2 px-4 ${isOpen ? "text-secondary bg-white/50" : ""} hover:text-primary hover:bg-white/50 hover:cursor-pointer border-b border-dark-grey/30`}
       >
         {jobTitle}
       </h3>
 
       <ul
-        className={`flex flex-col list-disc list-inside gap-1 px-4 z-10 ${isOpen ? "pt-4 bg-white/50" : ""}`}
+        className={`flex flex-col list-disc list-inside gap-1 px-4 z-10 ${isOpen ? "py-4 bg-white/50" : ""}`}
         ref={bulletRef}
       >
         {bulletPoint.map((point, pointIndex) => (

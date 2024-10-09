@@ -7,7 +7,7 @@ import { client } from "@/src/sanity/lib/client";
 
 export default function Home({ HomePageData }) {
   return (
-    <div className="flex flex-col items-center justify-center gap-24">
+    <div className="flex flex-col items-center justify-center gap-24 overflow-x-hidden">
       <AnimatedBackground />
       <Hero {...HomePageData.hero} />
       <FeaturesSection {...HomePageData.features} />

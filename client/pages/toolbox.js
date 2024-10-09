@@ -92,14 +92,14 @@ export default function Toolbox() {
       )}
 
       {toolboxActive ? (
-        <div className="flex flex-col items-center gap-12 w-3/5 mt-40 mb-36 h-[38rem] max-h-[38rem]">
+        <div className="flex flex-col items-center gap-12 w-11/12 lg:mx-0 md:w-[45rem] lg:w-[50rem] mt-20 md:mt-40 mb-36 h-[50rem] sm:h-[40rem] md:h-[38rem] md:max-h-[38rem]">
           <ProgressBar activeStep={activeStep} />
 
           <div
-            className={`${activeStep === 4 ? "bg-neutral" : "bg-white/50"} flex flex-col items-center justify-between relative p-5 rounded-md h-full w-5/6`}
+            className={`${activeStep === 4 ? "bg-neutral" : "bg-white/50"} flex flex-col items-center justify-between relative p-5 rounded-md h-full mx-5 lg:mx-0 w-full`}
           >
             {activeStep > 1 && (
-              <div className="absolute -left-16" onClick={decrementStep}>
+              <div className="absolute -left-14" onClick={decrementStep}>
                 <BackButton />
               </div>
             )}

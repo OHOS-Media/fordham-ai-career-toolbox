@@ -1,8 +1,8 @@
 import Link from "next/link";
 
-export default function NavLink({ title, target }) {
+export default function NavLink({ title, target, className = "" }) {
   return (
-    <Link href={target} className="body-txt-bold">
+    <Link href={target} className={className}>
       {title}
     </Link>
   );

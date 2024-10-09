@@ -4,8 +4,8 @@ import Link from "next/link";
 
 const Hero = ({ title, gradientTitle, description, ctaText }) => {
   return (
-    <div className="flex flex-col items-center justify-center text-center px-4 mt-48">
-      <h1 className="h1 mb-6">
+    <div className="flex flex-col items-center justify-center text-center px-4 mt-32 md:mt-48">
+      <h1 className="h1 mb-6 text-secondary">
         {title}{" "}
         <span className="bg-text-gradient text-transparent bg-clip-text">{gradientTitle}</span>
       </h1>
