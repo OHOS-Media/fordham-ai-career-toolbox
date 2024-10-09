@@ -23,7 +23,12 @@ export default function ToolboxStep4({ bulletPoints, incrementStep }) {
 
       <div className="flex flex-col sm:flex-row gap-2 sm:gap-0 w-fit sm:w-full justify-between z-30">
         <Button text={"I'm done"} onClick={incrementStep} className="w-fit" />
-        <Button text={"Save Keywords & Bullet Points"} />
+        <Button
+          text={"Save Keywords & Bullet Points"}
+          onClick={() => {
+            alert("This feature is not yet implemented.");
+          }}
+        />
       </div>
     </div>
   );

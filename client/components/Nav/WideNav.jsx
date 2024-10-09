@@ -1,6 +1,5 @@
 import Link from "next/link";
 import Image from "next/image";
-
 import Logo from "../Logo";
 import NavLink from "./NavLink";
 import Button from "../Button";
@@ -15,7 +14,12 @@ export default function WideNav({ navData, isAuthenticated, login, user, error, 
 
       <div className="flex items-center gap-10">
         {navData.links.map((link, idx) => (
-          <NavLink title={link.title} target={link.href} className="body-txt-bold text-secondary hover:text-primary" key={idx} />
+          <NavLink
+            title={link.title}
+            target={link.href}
+            className="body-txt-bold text-secondary hover:text-primary"
+            key={idx}
+          />
         ))}
         {isAuthenticated ? (
           <Link href="/profile">
