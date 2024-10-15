@@ -17,7 +17,7 @@ const AccordionItem = ({ question, answer }) => {
   return (
     <div
       onClick={() => setIsOpen(!isOpen)}
-      className="m-4 p-4 hover:cursor-pointer border-[1px] border-tertiary rounded bg-neutral/30"
+      className="m-4 p-4 hover:cursor-pointer border-[1px] border-tertiary rounded bg-white/30"
     >
       <div className="flex justify-between">
         <p className="body-txt-md-bold text-primary">{question}</p>

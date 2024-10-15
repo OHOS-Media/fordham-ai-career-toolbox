@@ -12,7 +12,6 @@ export default function Home({ HomePageData }) {
       <Hero {...HomePageData.hero} />
       <FeaturesSection {...HomePageData.features} />
       <DemoSection {...HomePageData.demo} />
-      <FAQSection />
     </div>
   );
 }
