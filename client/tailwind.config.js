@@ -38,7 +38,7 @@ module.exports = {
         full: "9999px",
       },
       screens: {
-        '3xl': '1760px'
+        '3xl': '1600px'
       }
     },
   },
