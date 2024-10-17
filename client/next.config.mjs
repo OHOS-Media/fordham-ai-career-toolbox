@@ -9,6 +9,9 @@ const nextConfig = {
         port: "",
         pathname: "/a/**",
       },
+      {
+        hostname: "cdn.sanity.io",
+      },
     ],
   },
 };

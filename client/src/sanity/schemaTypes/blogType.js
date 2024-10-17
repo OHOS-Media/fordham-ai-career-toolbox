@@ -12,6 +12,11 @@ export const blogType = defineType({
       type: "string",
     }),
     defineField({
+      name: "featured",
+      type: "boolean",
+      description: "Check this box if you want this blog to be featured on the homepage",
+    }),
+    defineField({
       name: "slug",
       type: "slug",
       options: {
