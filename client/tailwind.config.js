@@ -37,6 +37,9 @@ module.exports = {
         lg: "1.875rem",
         full: "9999px",
       },
+      screens: {
+        '3xl': '1600px'
+      }
     },
   },
   plugins: [],

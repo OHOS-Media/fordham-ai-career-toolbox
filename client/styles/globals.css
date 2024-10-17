@@ -4,7 +4,7 @@
 
 /* CSS Variables for Animated Background */
 :root {
-  --background-blue: #e7d5ba;
+  --background-cream: #e7d5ba;
   --background-orange: #d47742;
   --background-dark-blue: #2a4b69;
   --background-red: #a24235;
@@ -155,7 +155,7 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: var(--background-blue);
+  background: var(--background-cream);
   z-index: -1;
   border: 1px solid black;
 }

@@ -1,9 +1,9 @@
 import { DocumentTextIcon } from "@sanity/icons";
 import { defineArrayMember, defineField, defineType } from "sanity";
 
-export const postType = defineType({
-  name: "post",
-  title: "Post",
+export const blogType = defineType({
+  name: "blog",
+  title: "Blog",
   type: "document",
   icon: DocumentTextIcon,
   fields: [
@@ -16,7 +16,10 @@ export const postType = defineType({
       type: "slug",
       options: {
         source: "title",
+        slugify: (input) => `/blog/${input.toLowerCase().replace(/\s+/g, "-").slice(0, 200)}`,
       },
+      description: "Please ensure the slugs always start with /blog/...",
+      validation: (Rule) => Rule.required().error("Slug is required."),
     }),
     defineField({
       name: "author",
@@ -36,11 +39,6 @@ export const postType = defineType({
           title: "Alternative text",
         },
       ],
-    }),
-    defineField({
-      name: "categories",
-      type: "array",
-      of: [defineArrayMember({ type: "reference", to: { type: "category" } })],
     }),
     defineField({
       name: "publishedAt",

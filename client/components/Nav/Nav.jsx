@@ -9,7 +9,7 @@ const navData = {
     { title: "Toolbox", href: "/toolbox" },
     { title: "About Us", href: "/about-us" },
     { title: "Blog", href: "/blog" },
-    { title: "F.A.Q", href: "/faq" },
+    { title: "F.A.Q", href: "/frequently-asked-questions" },
   ],
 };
 
