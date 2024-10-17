@@ -9,16 +9,16 @@ export const faqType = defineType({
   fields: [
     defineField({
       name: "question",
-      type: "string"
+      type: "string",
     }),
     defineField({
       name: "answer",
-      type: "text"
+      type: "text",
     }),
   ],
   preview: {
     select: {
-      title: "question"
-    }
-  }
-})
+      title: "question",
+    },
+  },
+});
