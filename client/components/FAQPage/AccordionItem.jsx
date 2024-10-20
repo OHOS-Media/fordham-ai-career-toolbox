@@ -17,7 +17,7 @@ const AccordionItem = ({ question, answer }) => {
   return (
     <div
       onClick={() => setIsOpen(!isOpen)}
-      className="m-4 p-4 hover:cursor-pointer border-[1px] border-tertiary rounded bg-white/30"
+      className="m-4 p-4 hover:cursor-pointer border-[1px] border-tertiary rounded bg-white/30 shadow-md"
     >
       <div className="flex justify-between">
         <p className="body-txt-md-bold text-primary">{question}</p>
@@ -31,7 +31,7 @@ const AccordionItem = ({ question, answer }) => {
       </div>
 
       <div className={`accordion-answer ${isOpen ? "mt-4" : ""}`} ref={answerRef}>
-        <p className="body-txt">{answer}</p>
+        <p className="body-txt text-secondary">{answer}</p>
       </div>
     </div>
   );
