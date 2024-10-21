@@ -21,7 +21,7 @@ export default function WideNav({ navData, isAuthenticated, login, user, error, 
             key={idx}
           />
         ))}
-        {isAuthenticated ? (
+        {/* {isAuthenticated ? (
           <Link href="/profile">
             <div className="w-12 h-12 rounded-full overflow-hidden">
               <Image
@@ -35,7 +35,7 @@ export default function WideNav({ navData, isAuthenticated, login, user, error, 
           </Link>
         ) : (
           <Button text="Log In" className={"rounded-full"} onClick={login} />
-        )}
+        )} */}
       </div>
       {error && (
         <ErrorAlert

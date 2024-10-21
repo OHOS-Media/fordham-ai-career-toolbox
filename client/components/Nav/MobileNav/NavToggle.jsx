@@ -1,6 +1,6 @@
 export default function NavToggle({ isOpen, setIsOpen }) {
   return (
-    <button className="absolute top-2 right-2" onClick={() => setIsOpen((prevState) => !prevState)}>
+    <button className="absolute top-6 right-6" onClick={() => setIsOpen((prevState) => !prevState)}>
       <input
         id="checkbox2"
         className="hidden"
@@ -9,7 +9,7 @@ export default function NavToggle({ isOpen, setIsOpen }) {
         onChange={() => setIsOpen((prevState) => !prevState)}
       />
       <label
-        className="toggle toggle2 flex flex-col items-center justify-center w-[45px] h-[45px] gap-[9px] cursor-pointer"
+        className="toggle toggle2 flex flex-col items-center justify-center w-[32px] h-[32px] gap-[6px] cursor-pointer"
         for="checkbox2"
       >
         <div id="bar1" className="bars bg-primary"></div>

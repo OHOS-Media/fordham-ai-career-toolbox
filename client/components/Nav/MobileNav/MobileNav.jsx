@@ -15,7 +15,7 @@ export default function MobileNav({ navData, isAuthenticated, login, user, error
 
   return (
     <nav
-      className={`flex flex-col absolute w-full h-fit top-0 z-10 items-center justify-end ${isOpen && "sticky min-h-screen bg-neutral"}`}
+      className={`flex flex-col absolute w-full h-fit top-0 z-10items-center justify-end ${isOpen && "sticky min-h-screen bg-neutral"}`}
     >
       <NavToggle isOpen={isOpen} setIsOpen={setIsOpen} />
       {isOpen && (
@@ -37,7 +37,7 @@ function MobileNavMenu({ navData, isAuthenticated, login, user, error, setError,
   return (
     <>
       <div className="absolute top-2 left-2">
-        {isAuthenticated ? (
+        {/* {isAuthenticated ? (
           <Link
             href="/profile"
             onClick={() =>
@@ -58,7 +58,7 @@ function MobileNavMenu({ navData, isAuthenticated, login, user, error, setError,
           </Link>
         ) : (
           <Button text="Log In" onClick={login} />
-        )}
+        )} */}
       </div>
 
       <div className="flex flex-col h-screen justify-center items-center gap-4">
@@ -78,7 +78,7 @@ function MobileNavMenu({ navData, isAuthenticated, login, user, error, setError,
         ))}
       </div>
 
-      <div className="relative bottom-8">
+      <div className="relative bottom-32">
         <Link
           href="/"
           onClick={() =>
@@ -87,7 +87,8 @@ function MobileNavMenu({ navData, isAuthenticated, login, user, error, setError,
             }, 550)
           }
         >
-          <Image src={FordhamLogo} alt="Fordham Logo" width={300} height={200} />
+          {/* <Image src={FordhamLogo} alt="Fordham Logo" width={300} height={200} /> */}
+          <Logo />
         </Link>
       </div>
     </>
