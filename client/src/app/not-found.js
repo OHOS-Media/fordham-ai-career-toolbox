@@ -12,7 +12,10 @@ export default function Custom404() {
         <p className="body-txt-lg text-secondary text-center">
           The page you are looking for does not exist
         </p>
-        <Link href="/" className="text-primary hover:underline inline-block px-6 py-2 border border-primary rounded-full transition-colors duration-300 hover:bg-primary hover:text-white">
+        <Link
+          href="/"
+          className="text-primary hover:underline inline-block px-6 py-2 border border-primary rounded-full transition-colors duration-300 hover:bg-primary hover:text-white"
+        >
           Return Home
         </Link>
       </div>

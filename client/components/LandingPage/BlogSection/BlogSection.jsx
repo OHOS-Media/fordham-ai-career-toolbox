@@ -8,7 +8,7 @@ export default function BlogSection({ blogs }) {
         <h2 className="text-3xl sm:text-4xl font-bold text-center text-secondary mb-8 sm:mb-12">
           Featured Blogs
         </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
           {blogs.map((blog, index) => (
             <BlogCard key={index} {...blog} />
           ))}

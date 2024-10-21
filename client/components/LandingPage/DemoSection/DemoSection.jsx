@@ -1,8 +1,11 @@
 import Image from "next/image";
 import DemoScreenshotPlaceholder from "@/public/assets/DemoScreenshotPlaceholder.svg";
 import CheckboxLabel from "./CheckboxLabel";
+import { urlFor } from "@/src/sanity/lib/image";
 
 const DemoSection = ({ title, description, checkboxItems, demoImage }) => {
+  console.log(urlFor(demoImage).url);
+
   return (
     <div className="flex flex-col px-4 md:flex-row gap-14 items-center md:gap-0 md:justify-evenly 2xl:justify-center 2xl:gap-20 w-full bg-primary text-white py-20">
       <div className="flex flex-col md:w-2/5 gap-6">
@@ -17,7 +20,7 @@ const DemoSection = ({ title, description, checkboxItems, demoImage }) => {
       </div>
 
       <div className="w-fit">
-        <Image src={DemoScreenshotPlaceholder} alt="Demo Screenshot" width={400} height={400} />
+        <Image src={urlFor(demoImage).url()} alt="Demo Screenshot" width={400} height={400} />
       </div>
     </div>
   );
