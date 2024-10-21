@@ -7,7 +7,7 @@
   ],
   "plugins": ["prettier"],
   "rules": {
-    "quotes": ["error", "double"],
+    "quotes": ["warn", "double"],
     "prettier/prettier": [
       "error",
       {

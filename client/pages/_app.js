@@ -4,7 +4,6 @@ import { Inter } from "next/font/google";
 import PasswordEntry from "../components/PasswordEntry.jsx";
 import "@/styles/globals.css";
 import { useApi } from "@/hooks/useApi.js";
-
 import Layout from "@/components/Layout.jsx";
 import { client } from "@/src/sanity/lib/client.js";
 
