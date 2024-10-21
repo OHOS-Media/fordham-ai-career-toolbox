@@ -5,7 +5,7 @@ export default function Button({ text, onClick, type = "button", className = "" 
     <button
       type={type}
       onClick={onClick}
-      className={`body-txt-bold text-white button-primary min-w-[10rem] ${className}`}
+      className={`body-txt-bold text-white button-primary min-w-[10rem] shadow-md ${className}`}
     >
       {text}
     </button>

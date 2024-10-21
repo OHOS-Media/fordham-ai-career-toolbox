@@ -26,6 +26,7 @@ export default function ToolboxStep4({ bulletPoints, incrementStep }) {
         <Button
           text={"Save Keywords & Bullet Points"}
           onClick={() => {
+            incrementStep();
             alert("This feature is not yet implemented.");
           }}
         />

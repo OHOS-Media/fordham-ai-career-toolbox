@@ -96,7 +96,7 @@ export default function Toolbox() {
           <ProgressBar activeStep={activeStep} />
 
           <div
-            className={`${activeStep === 4 ? "bg-neutral" : "bg-white/50"} flex flex-col items-center justify-between relative p-5 rounded-md h-full mx-5 lg:mx-0 w-full`}
+            className={`${activeStep === 4 ? "bg-neutral" : "bg-white/50 shadow-md"} flex flex-col items-center justify-between relative p-5 rounded-md h-full mx-5 lg:mx-0 w-full`}
           >
             {activeStep > 1 && (
               <div className="absolute -left-14" onClick={decrementStep}>

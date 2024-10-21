@@ -21,7 +21,7 @@ const BlogCard = ({ title, body, slug, mainImage }) => (
     <div className="p-4 sm:p-6 flex flex-col flex-grow">
       <h3 className="text-lg sm:text-xl font-semibold text-primary mb-2">{title}</h3>
       <p className="text-gray-700 mb-4 text-sm sm:text-base flex-grow line-clamp-3">{body}</p>
-      <Link href={slug.current} className="text-primary hover:underline text-sm mt-auto">
+      <Link href={slug.current} className="text-primary hover:underline text-sm mt-auto w-fit">
         Read more
       </Link>
     </div>

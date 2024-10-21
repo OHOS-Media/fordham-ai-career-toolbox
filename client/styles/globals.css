@@ -157,7 +157,6 @@
   height: 100vh;
   background: var(--background-cream);
   z-index: -1;
-  border: 1px solid black;
 }
 
 #background::before,

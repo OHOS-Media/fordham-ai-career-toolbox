@@ -7,7 +7,7 @@ export default function ProgressNumber({ step, activeStep }) {
     }
 
     if (activeStep > step.number) {
-      return "border-2 border-primary bg-primary text-neutral";
+      return "border-2 border-primary bg-primary text-white";
     }
 
     return "bg-white/50 text-primary";
@@ -16,7 +16,7 @@ export default function ProgressNumber({ step, activeStep }) {
   return (
     <div className="flex flex-col gap-2 relative items-center w-full">
       <div
-        className={`${applyStyles()} flex justify-center items-center w-10 h-10 sm:w-14 sm:h-14 rounded-full`}
+        className={`${applyStyles()} flex justify-center items-center w-10 h-10 sm:w-14 sm:h-14 rounded-full shadow-md`}
       >
         <p className="body-txt-md-bold">{step.number}</p>
       </div>
