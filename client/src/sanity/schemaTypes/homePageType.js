@@ -63,6 +63,25 @@ export const homePageType = defineType({
         collapsed: true,
       },
     }),
+    defineField({
+      name: "testimonials",
+      title: "Testimonials",
+      type: "array",
+      of: [
+        {
+          type: "object",
+          fields: [
+            { name: "quote", title: "Quote", type: "string" },
+            { name: "text", title: "Text", type: "text" },
+            { name: "name", title: "Name", type: "string" },
+            { name: "title", title: "Title", type: "string" },
+          ],
+        },
+      ],
+      options: {
+        collapsed: true,
+      },
+    }),
   ],
   preview: {
     select: {

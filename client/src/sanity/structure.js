@@ -8,4 +8,7 @@ export const structure = (S) =>
       S.documentTypeListItem("faq").title("Frequently Asked Questions"),
       S.divider(),
       S.documentTypeListItem("homepage").title("Home Page"),
+      // S.documentTypeListItem("about").title("About Page"),
+      S.divider(),
+      S.documentTypeListItem("footer").title("Footer"),
     ]);

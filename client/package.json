@@ -13,6 +13,7 @@
     "@sanity/icons": "^3.4.0",
     "@sanity/image-url": "^1.0.2",
     "@sanity/vision": "^3.57.0",
+    "dotenv": "^16.4.5",
     "mongodb": "^6.8.0",
     "moongoose": "^0.0.5",
     "next": "14.2.4",

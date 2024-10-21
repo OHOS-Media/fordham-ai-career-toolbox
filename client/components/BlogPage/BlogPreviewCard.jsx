@@ -4,7 +4,7 @@ export default function BlogPreview({ title, slug, mainImage }) {
   return (
     <div className="w-96">
       <a href={slug.current}>
-        <div className="flex flex-col gap-4 items-center p-4 border rounded border-neutral hover:border-[1px] hover:border-tertiary hover:bg-white/30  hover:text-primary">
+        <div className="flex flex-col gap-4 items-center p-4 rounded hover:bg-white/30  hover:text-primary">
           <div className="w-full h-48 overflow-hidden">
             {mainImage && (
               <img

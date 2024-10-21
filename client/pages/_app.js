@@ -6,6 +6,7 @@ import "@/styles/globals.css";
 import { useApi } from "@/hooks/useApi.js";
 
 import Layout from "@/components/Layout.jsx";
+import { client } from "@/src/sanity/lib/client.js";
 
 const inter_init = Inter({
   subsets: ["latin"],
@@ -48,10 +49,25 @@ export default function App({ Component, pageProps }) {
   //   );
   // }
 
+  const [footerData, setFooterData] = useState(null);
+
+  useEffect(() => {
+    const fetchFooterData = async () => {
+      try {
+        const data = await client.fetch(`*[_type == "footer"][0]`);
+        setFooterData(data);
+      } catch (error) {
+        console.error("Error fetching footer data:", error);
+      }
+    };
+
+    fetchFooterData();
+  }, []);
+
   return (
     <AuthProvider>
       <main className={inter_init.className}>
-        <Layout>
+        <Layout footerData={footerData}>
           <Component {...pageProps} />
         </Layout>
       </main>
