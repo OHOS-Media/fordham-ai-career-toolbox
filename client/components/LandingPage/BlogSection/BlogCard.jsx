@@ -3,12 +3,15 @@ import Link from "next/link";
 import { urlFor } from "@/src/sanity/lib/image";
 
 const getPreviewText = (body) => {
-  if (typeof body === 'string') return body;
+  if (typeof body === "string") return body;
   if (Array.isArray(body)) {
-    return body.find(block => block._type === 'block')?.children
-      .find(child => child._type === 'span')?.text || 'No preview available';
+    return (
+      body
+        .find((block) => block._type === "block")
+        ?.children.find((child) => child._type === "span")?.text || "No preview available"
+    );
   }
-  return 'No preview available';
+  return "No preview available";
 };
 
 const BlogCard = ({ title, body, slug, mainImage }) => (
