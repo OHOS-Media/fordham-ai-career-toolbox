@@ -1,13 +1,16 @@
 import BlogsPreview from "@/components/BlogPage/BlogsPreview";
+import PageContainer from "@/components/PageContainer";
 import { client } from "@/src/sanity/lib/client";
 
 export default function Blog({ BlogPageData }) {
   return (
-    <div className="min-h-screen flex flex-col gap-10 bg-neutral items-center w-full py-36">
-      <h1 className="h1 text-secondary">Blogs</h1>
+    <PageContainer>
+      <div className="min-h-screen flex flex-col gap-10 bg-neutral items-center w-full py-36">
+        <h1 className="h1 text-secondary">Blogs</h1>
 
-      <BlogsPreview BlogPageData={BlogPageData} />
-    </div>
+        <BlogsPreview BlogPageData={BlogPageData} />
+      </div>
+    </PageContainer>
   );
 }
 
