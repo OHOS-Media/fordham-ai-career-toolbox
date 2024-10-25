@@ -92,7 +92,7 @@ export default function Toolbox() {
     <PageContainer>
       {/* If the Exit Modal is active, darken and blur the background */}
       {exitModalActive && (
-        <div className="min-h-screen min-w-full top-0 left-0 bg-secondary/30 absolute z-20 backdrop-filter backdrop-blur-[0.8px]"></div>
+        <div className="min-w-full top-0 left-0 bg-secondary/30 absolute z-20 backdrop-filter backdrop-blur-[0.8px]"></div>
       )}
 
       <div className="min-h-screen mx-auto gap-10">
