@@ -2,9 +2,10 @@ import { useState } from "react";
 import Button from "../Button";
 import Keyword from "./Keyword";
 
+// This renders Step 2 of the Toolbox which displays the AI reccomended resume keywords
 export default function ToolboxStep2({ keywords, setExitModalActive, incrementStep }) {
   const [showAll, setShowAll] = useState(false);
-  const initialKeywordCount = 10;
+  const initialKeywordCount = 10; 
 
   const handleShowAll = () => {
     setShowAll(!showAll);
@@ -20,11 +21,11 @@ export default function ToolboxStep2({ keywords, setExitModalActive, incrementSt
         <h4 className="body-txt-lg-bold text-secondary">Get Keywords</h4>
 
         <div className="flex flex-wrap gap-2 mt-4">
+          {/* If showAll is true, render all of the keywords, otherwise only display the initial count */}
           {keywords.slice(0, showAll ? keywords.length : initialKeywordCount).map((word, idx) => (
-            <Keyword word={word} key={idx}>
-              {word}
-            </Keyword>
+            <Keyword word={word} key={idx} />
           ))}
+
           <button
             className="bg-neutral p-[.5em] rounded body-txt hover:text-primary"
             onClick={handleShowAll}

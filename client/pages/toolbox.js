@@ -22,11 +22,14 @@ export default function Toolbox() {
   const [resume, setResume] = useState("");
   const [bulletPoints, setBulletPoints] = useState([]);
 
+  // If the user is done with the Toolbox, make sure the Exit Modal is close, and
+  // progress to the Toolbox End component
   const handleDone = () => {
     setExitModalActive(false);
     setActiveStep(5);
   };
 
+  // If the rendered step isn't the first one, go to the previous step
   const decrementStep = () => {
     if (activeStep > 1) {
       setActiveStep(activeStep - 1);
@@ -34,6 +37,7 @@ export default function Toolbox() {
     return;
   };
 
+  // If the rendered step isn't the last one, go to the next step
   const incrementStep = () => {
     if (activeStep < 5) {
       setActiveStep(activeStep + 1);
@@ -41,12 +45,15 @@ export default function Toolbox() {
     return;
   };
 
+  // If the active step is the last one, set the Toolbox to inactive to render
+  // the Toolbox End component
   useEffect(() => {
     if (activeStep > 4) {
       setToolboxActive(false);
     }
   }, [activeStep]);
 
+  // Render the Toolbox step, based on the activeStep state
   const renderStep = () => {
     switch (activeStep) {
       case 1:
@@ -84,18 +91,21 @@ export default function Toolbox() {
   return (
     <PageContainer>
       <div className="min-h-screen flex flex-col gap-10 items-center justify-center bg-neutral relative border-primary">
+        {/* If theres an error, display the error message */}
         {error && <ErrorAlert errorMessage={error} />}
 
+        {/* If the Exit Modal is active, render it */}
         {exitModalActive && (
           <>
             <ExitConfirmationModal
               setExitModalActive={setExitModalActive}
               handleDone={handleDone}
-            />{" "}
+            />
             <div className="min-h-screen h-[200vh] min-w-full bg-secondary/30 absolute z-20 backdrop-filter backdrop-blur-[0.8px]"></div>
           </>
         )}
 
+        {/* If the Toolbox is active, render it */}
         {toolboxActive ? (
           <div className="flex flex-col items-center gap-12 w-full mt-36 md:mt-12 mb-36 h-[50rem] sm:h-[40rem] md:h-[38rem] md:max-h-[38rem]">
             <h1 className="h1 text-secondary">Toolbox</h1>
@@ -105,6 +115,7 @@ export default function Toolbox() {
             <div
               className={`${activeStep === 4 ? "bg-neutral" : "bg-white/50 shadow-md"} flex flex-col items-center justify-between relative p-5 rounded-md h-full mx-5 lg:mx-0 w-full`}
             >
+              {/* If the current Toolbox Step isn't the first one, display a button for the user to return to the previous step */}
               {activeStep > 1 && (
                 <div className="absolute -left-14" onClick={decrementStep}>
                   <BackButton />

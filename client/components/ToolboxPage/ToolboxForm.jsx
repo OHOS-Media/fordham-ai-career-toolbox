@@ -1,5 +1,6 @@
 import Button from "../Button";
 
+// This renders a modular form for the Toolbox
 export default function ToolboxForm({ formData, handleSubmit, value, onChange, loading }) {
   return (
     <div className="flex flex-col justify-between gap-4 h-full">
@@ -14,7 +15,7 @@ export default function ToolboxForm({ formData, handleSubmit, value, onChange, l
           placeholder={formData.placeholderText}
           value={value}
           onChange={onChange}
-        ></textarea>
+        />
 
         <Button
           type="submit"
