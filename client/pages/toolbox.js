@@ -90,24 +90,18 @@ export default function Toolbox() {
 
   return (
     <PageContainer>
-      <div className="min-h-screen flex flex-col gap-10 items-center justify-center bg-neutral relative border-primary">
+      {/* If the Exit Modal is active, darken and blur the background */}
+      {exitModalActive && (
+        <div className="min-h-screen min-w-full top-0 left-0 bg-secondary/30 absolute z-20 backdrop-filter backdrop-blur-[0.8px]"></div>
+      )}
+
+      <div className="min-h-screen mx-auto gap-10">
         {/* If theres an error, display the error message */}
         {error && <ErrorAlert errorMessage={error} />}
 
-        {/* If the Exit Modal is active, render it */}
-        {exitModalActive && (
-          <>
-            <ExitConfirmationModal
-              setExitModalActive={setExitModalActive}
-              handleDone={handleDone}
-            />
-            <div className="min-h-screen h-[200vh] min-w-full bg-secondary/30 absolute z-20 backdrop-filter backdrop-blur-[0.8px]"></div>
-          </>
-        )}
-
         {/* If the Toolbox is active, render it */}
         {toolboxActive ? (
-          <div className="flex flex-col items-center gap-12 w-full mt-36 md:mt-12 mb-36 h-[50rem] sm:h-[40rem] md:h-[38rem] md:max-h-[38rem]">
+          <div className="flex flex-col items-center gap-12">
             <h1 className="h1 text-secondary">Toolbox</h1>
 
             <ProgressBar activeStep={activeStep} />
@@ -119,6 +113,15 @@ export default function Toolbox() {
               {activeStep > 1 && (
                 <div className="absolute -left-14" onClick={decrementStep}>
                   <BackButton />
+                </div>
+              )}
+
+              {exitModalActive && (
+                <div className="flex justify-center">
+                  <ExitConfirmationModal
+                    setExitModalActive={setExitModalActive}
+                    handleDone={handleDone}
+                  />
                 </div>
               )}
 
