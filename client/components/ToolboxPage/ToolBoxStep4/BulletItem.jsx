@@ -11,12 +11,10 @@ const BulletItem = ({ jobTitle, bulletPoint, jobIndex }) => {
     if (isOpen) {
       bulletRef.current.style.maxHeight = "100%"; // Expand the bullet list fully
       bulletRef.current.style.opacity = "100%"; // Set opacity to visible
-      groupRef.current.style.position = "absolute"; // Position absolutely when open
       groupRef.current.style.top = "0"; // Align to the top
     } else {
       bulletRef.current.style.maxHeight = "0px"; // Collapse the bullet list
       bulletRef.current.style.opacity = "0"; // Set opacity to invisible
-      groupRef.current.style.position = "relative"; // Return to normal positioning
     }
   }, [isOpen]);
 
