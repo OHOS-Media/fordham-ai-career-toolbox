@@ -7,7 +7,7 @@ import ErrorAlert from "../ErrorAlert";
 
 export default function WideNav({ navData, isAuthenticated, login, user, error, setError }) {
   return (
-    <nav className="mt-4 pl-8 pr-5 py-2 flex absolute top-5 justify-between shadow-md w-11/12 lg:w-2/3 border-[1px] border-white rounded-full bg-white/50 z-10">
+    <nav className="mt-4 pl-8 pr-5 py-2 flex sticky top-5 justify-between shadow-md w-11/12 lg:w-2/3 border-[1px] border-white rounded-full bg-white/50 z-20">
       <div className="flex items-center gap-10">
         <Logo />
       </div>
