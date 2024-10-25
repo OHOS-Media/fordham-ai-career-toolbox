@@ -7,7 +7,7 @@ export default function Custom404() {
   return (
     <div className="flex flex-col h-screen items-center justify-center overflow-x-hidden">
       <AnimatedBackground />
-      <div className="flex flex-col items-center gap-4">
+      <div className="flex flex-col items-center gap-4 z-10">
         <h1 className="h1 text-secondary">Sorry...</h1>
         <p className="body-txt-lg text-secondary text-center">
           The page you are looking for does not exist
