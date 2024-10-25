@@ -10,6 +10,7 @@ const Testimonial = ({ quote, text, name, title }) => (
 );
 
 const TestimonialsSection = ({ testimonials }) => {
+  // If there are no testimonials, do not render the component
   if (!testimonials || testimonials.length === 0) {
     return null;
   }
