@@ -10,7 +10,7 @@ import TestimonialsSection from "@/components/LandingPage/TestimonialsSection/Te
 
 export default function Home({ HomePageData }) {
   return (
-    <PageContainer limitedWidth={false}>
+    <PageContainer limitedWidth={false} marginBottom={false}>
       <div className="flex flex-col items-center justify-center gap-24 overflow-x-hidden">
         <AnimatedBackground />
         <Hero {...HomePageData.hero} />
