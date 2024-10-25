@@ -5,17 +5,20 @@ import FeaturesSection from "@/components/LandingPage/FeaturesSection/FeaturesSe
 import { client } from "@/src/sanity/lib/client";
 import BlogSection from "@/components/LandingPage/BlogSection/BlogSection";
 import TestimonialsSection from "@/components/LandingPage/TestimonialsSection/TestimonialsSection";
+import PageContainer from "@/components/PageContainer";
 
 export default function Home({ HomePageData }) {
   return (
-    <div className="flex flex-col items-center justify-center gap-24 overflow-x-hidden">
-      <AnimatedBackground />
-      <Hero {...HomePageData.hero} />
-      <FeaturesSection {...HomePageData.features} />
-      <DemoSection {...HomePageData.demo} />
-      <BlogSection blogs={HomePageData.blogs} />
-      <TestimonialsSection testimonials={HomePageData.testimonials} />
-    </div>
+    <PageContainer limitedWidth={false}>
+      <div className="flex flex-col items-center justify-center gap-24 overflow-x-hidden">
+        <AnimatedBackground />
+        <Hero {...HomePageData.hero} />
+        <FeaturesSection {...HomePageData.features} />
+        <DemoSection {...HomePageData.demo} />
+        <BlogSection blogs={HomePageData.blogs} />
+        <TestimonialsSection testimonials={HomePageData.testimonials} />
+      </div>
+    </PageContainer>
   );
 }
 
