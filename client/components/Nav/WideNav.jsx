@@ -21,7 +21,7 @@ export default function WideNav({ navData, isAuthenticated, login, user, error, 
             key={idx}
           />
         ))}
-        
+
         {/* Uncomment the lines below to enable authentication */}
         {/* {isAuthenticated ? (
           <Link href="/profile">

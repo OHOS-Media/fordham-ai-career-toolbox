@@ -8,7 +8,7 @@ const toolboxStep1FormData = {
   loadingTxt: "Extracting keywords...",
 };
 
-// This renders Step 1 of the Toolbox which takes in a job description from the user, 
+// This renders Step 1 of the Toolbox which takes in a job description from the user,
 // and queries the server for the suggested resume keywords
 export default function ToolboxStep1({
   jobDescription,
@@ -19,7 +19,7 @@ export default function ToolboxStep1({
   const { request, loading } = useApi();
 
   // Query the server using the given job description,
-  // and set the keyword state with the response, 
+  // and set the keyword state with the response,
   // or console.log if theres a error
   const handleSubmit = async (e) => {
     e.preventDefault();
