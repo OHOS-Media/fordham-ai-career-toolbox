@@ -1,6 +1,9 @@
 import { useState, useCallback } from "react";
 
-const BASE_URL = process.env.NEXT_PUBLIC_SERVER_URL;
+const BASE_URL =
+  process.env.NODE_ENV === "development"
+    ? process.env.NEXT_PUBLIC_SERVER_URL?.replace("https://", "http://")
+    : process.env.NEXT_PUBLIC_SERVER_URL;
 
 export const useApi = () => {
   const [loading, setLoading] = useState(false);
@@ -18,6 +21,9 @@ export const useApi = () => {
           "Content-Type": "application/json",
           ...options.headers,
         },
+        ...(process.env.NODE_ENV === "development" && {
+          rejectUnauthorized: false,
+        }),
       });
 
       if (!response.ok) {
