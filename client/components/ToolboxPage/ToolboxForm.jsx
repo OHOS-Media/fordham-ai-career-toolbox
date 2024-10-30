@@ -11,7 +11,7 @@ export default function ToolboxForm({ formData, handleSubmit, value, onChange, l
         className="flex flex-col gap-4 items-center md:items-end w-full h-full justify-between"
       >
         <textarea
-          className="w-full p-4 rounded overflow-scroll outline-primary/20"
+          className="w-full h-56 md:h-96 p-4 rounded overflow-scroll outline-primary/20"
           placeholder={formData.placeholderText}
           value={value}
           onChange={onChange}

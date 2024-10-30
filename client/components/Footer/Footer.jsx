@@ -77,7 +77,7 @@ const Footer = ({ data }) => {
             rel="noopener noreferrer"
             className="underline hover:text-white"
           >
-            Fordham University
+            Gabelli School of Business
           </a>
           . All rights reserved.
         </p>

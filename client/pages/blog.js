@@ -5,7 +5,7 @@ import { client } from "@/src/sanity/lib/client";
 export default function Blog({ BlogPageData }) {
   return (
     <PageContainer>
-      <div className="min-h-screen flex flex-col gap-10 bg-neutral items-center w-full">
+      <div className="min-h-screen flex flex-col gap-4 bg-neutral items-center w-full">
         <h1 className="h1 text-secondary">Blogs</h1>
 
         <BlogsPreview BlogPageData={BlogPageData} />
