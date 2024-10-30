@@ -1,12 +1,15 @@
 import FAQSection from "@/components/FAQPage/FAQSection";
+import PageContainer from "@/components/PageContainer";
 import { client } from "@/src/sanity/lib/client";
 
 export default function FAQ({ FAQPageData }) {
   return (
-    <div className="min-h-screen flex flex-col gap-10 items-center bg-neutral w-full pt-36">
-      <h1 className="h2 text-secondary">Frequently Asked Questions</h1>
-      <FAQSection FAQPageData={FAQPageData} />
-    </div>
+    <PageContainer>
+      <div className=" w-full flex flex-col items-center gap-10 g-neutral">
+        <h1 className="h2 text-secondary">Frequently Asked Questions</h1>
+        <FAQSection FAQPageData={FAQPageData} />
+      </div>
+    </PageContainer>
   );
 }
 

@@ -1,20 +1,20 @@
 import { useState, useRef, useEffect } from "react";
 
+// Component to display bullet points for each job, which can be expanded/collapsed
 const BulletItem = ({ jobTitle, bulletPoint, jobIndex }) => {
   const [isOpen, setIsOpen] = useState(false);
   const groupRef = useRef(null);
   const bulletRef = useRef(null);
 
+  // Side effect to adjust styles based on the `isOpen` state
   useEffect(() => {
     if (isOpen) {
-      bulletRef.current.style.maxHeight = "100%";
-      bulletRef.current.style.opacity = "100%";
-      groupRef.current.style.position = "absolute";
-      groupRef.current.style.top = "0";
+      bulletRef.current.style.maxHeight = "100%"; // Expand the bullet list fully
+      bulletRef.current.style.opacity = "100%"; // Set opacity to visible
+      groupRef.current.style.top = "0"; // Align to the top
     } else {
-      bulletRef.current.style.maxHeight = "0px";
-      bulletRef.current.style.opacity = "0";
-      groupRef.current.style.position = "relative";
+      bulletRef.current.style.maxHeight = "0px"; // Collapse the bullet list
+      bulletRef.current.style.opacity = "0"; // Set opacity to invisible
     }
   }, [isOpen]);
 

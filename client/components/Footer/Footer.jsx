@@ -9,7 +9,7 @@ const Footer = ({ data }) => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-gradient-to-b from-primary to-secondary text-white py-16 w-full relative overflow-hidden">
+    <footer className="bg-gradient-to-b from-primary to-secondary text-white py-16 w-full relative overflow-hidden z-10">
       <div className="absolute top-0 left-0 w-full bg-gradient-to-r from-tertiary via-neutral to-tertiary opacity-30"></div>
       <div className="container mx-auto px-4 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-16">
@@ -77,7 +77,7 @@ const Footer = ({ data }) => {
             rel="noopener noreferrer"
             className="underline hover:text-white"
           >
-            Fordham University
+            Gabelli School of Business
           </a>
           . All rights reserved.
         </p>

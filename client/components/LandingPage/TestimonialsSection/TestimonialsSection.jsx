@@ -10,12 +10,13 @@ const Testimonial = ({ quote, text, name, title }) => (
 );
 
 const TestimonialsSection = ({ testimonials }) => {
+  // If there are no testimonials, do not render the component
   if (!testimonials || testimonials.length === 0) {
     return null;
   }
 
   return (
-    <section className="bg-primary w-full text-white py-40">
+    <section className="bg-primary w-full text-white py-40 z-10">
       <div className="container mx-auto px-4">
         <div className="flex flex-wrap justify-center gap-20">
           {testimonials.map((testimonial, index) => (

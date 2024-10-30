@@ -10,6 +10,7 @@ import ToolboxEnd from "@/components/ToolboxPage/ToolboxEnd";
 import ProgressBar from "@/components/ToolboxPage/ProgressBar/ProgressBar";
 import BackButton from "@/components/ToolboxPage/BackButton";
 import ExitConfirmationModal from "@/components/ToolboxPage/ExitConfirmationModal";
+import PageContainer from "@/components/PageContainer";
 
 export default function Toolbox() {
   const { error } = useApi();
@@ -21,11 +22,14 @@ export default function Toolbox() {
   const [resume, setResume] = useState("");
   const [bulletPoints, setBulletPoints] = useState([]);
 
+  // If the user is done with the Toolbox, make sure the Exit Modal is close, and
+  // progress to the Toolbox End component
   const handleDone = () => {
     setExitModalActive(false);
     setActiveStep(5);
   };
 
+  // If the rendered step isn't the first one, go to the previous step
   const decrementStep = () => {
     if (activeStep > 1) {
       setActiveStep(activeStep - 1);
@@ -33,6 +37,7 @@ export default function Toolbox() {
     return;
   };
 
+  // If the rendered step isn't the last one, go to the next step
   const incrementStep = () => {
     if (activeStep < 5) {
       setActiveStep(activeStep + 1);
@@ -40,12 +45,15 @@ export default function Toolbox() {
     return;
   };
 
+  // If the active step is the last one, set the Toolbox to inactive to render
+  // the Toolbox End component
   useEffect(() => {
     if (activeStep > 4) {
       setToolboxActive(false);
     }
   }, [activeStep]);
 
+  // Render the Toolbox step, based on the activeStep state
   const renderStep = () => {
     switch (activeStep) {
       case 1:
@@ -81,37 +89,49 @@ export default function Toolbox() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col gap-10 items-center justify-center bg-neutral relative w-full border-primary">
-      {error && <ErrorAlert errorMessage={error} />}
-
+    <PageContainer>
+      {/* If the Exit Modal is active, darken and blur the background */}
       {exitModalActive && (
-        <>
-          <ExitConfirmationModal setExitModalActive={setExitModalActive} handleDone={handleDone} />{" "}
-          <div className="min-h-screen h-[200vh] min-w-full bg-secondary/30 absolute z-20 backdrop-filter backdrop-blur-[0.8px]"></div>
-        </>
+        <div className="min-w-full top-0 left-0 bg-secondary/30 absolute z-20 backdrop-filter backdrop-blur-[0.8px]"></div>
       )}
 
-      {toolboxActive ? (
-        <div className="flex flex-col items-center gap-12 w-11/12 lg:mx-0 md:w-[45rem] lg:w-[50rem] mt-36 md:mt-12 mb-36 h-[50rem] sm:h-[40rem] md:h-[38rem] md:max-h-[38rem]">
-          <h1 className="h1 text-secondary">Toolbox</h1>
+      <div className="min-h-screen mx-auto gap-10">
+        {/* If theres an error, display the error message */}
+        {error && <ErrorAlert errorMessage={error} />}
 
-          <ProgressBar activeStep={activeStep} />
+        {/* If the Toolbox is active, render it */}
+        {toolboxActive ? (
+          <div className="flex flex-col items-center gap-12">
+            <h1 className="h1 text-secondary">Toolbox</h1>
 
-          <div
-            className={`${activeStep === 4 ? "bg-neutral" : "bg-white/50 shadow-md"} flex flex-col items-center justify-between relative p-5 rounded-md h-full mx-5 lg:mx-0 w-full`}
-          >
-            {activeStep > 1 && (
-              <div className="absolute -left-14" onClick={decrementStep}>
-                <BackButton />
-              </div>
-            )}
+            <ProgressBar activeStep={activeStep} />
 
-            <div className="w-full h-full">{renderStep()}</div>
+            <div
+              className={`${activeStep === 4 ? "bg-neutral" : "bg-white/50 shadow-md"} flex flex-col items-center justify-between relative p-5 rounded-md h-full mx-5 lg:mx-0 w-full`}
+            >
+              {/* If the current Toolbox Step isn't the first one, display a button for the user to return to the previous step */}
+              {activeStep > 1 && (
+                <div className="absolute -left-14" onClick={decrementStep}>
+                  <BackButton />
+                </div>
+              )}
+
+              {exitModalActive && (
+                <div className="flex justify-center">
+                  <ExitConfirmationModal
+                    setExitModalActive={setExitModalActive}
+                    handleDone={handleDone}
+                  />
+                </div>
+              )}
+
+              <div className="w-full h-full">{renderStep()}</div>
+            </div>
           </div>
-        </div>
-      ) : (
-        <ToolboxEnd />
-      )}
-    </div>
+        ) : (
+          <ToolboxEnd />
+        )}
+      </div>
+    </PageContainer>
   );
 }

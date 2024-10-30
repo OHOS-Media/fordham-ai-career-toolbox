@@ -1,21 +1,25 @@
+import { client } from "@/src/sanity/lib/client";
+
+import PageContainer from "@/components/PageContainer";
 import AnimatedBackground from "@/components/AnimatedBackground";
-import DemoSection from "@/components/LandingPage/DemoSection/DemoSection";
 import Hero from "@/components/LandingPage/Hero";
 import FeaturesSection from "@/components/LandingPage/FeaturesSection/FeaturesSection";
-import { client } from "@/src/sanity/lib/client";
+import DemoSection from "@/components/LandingPage/DemoSection/DemoSection";
 import BlogSection from "@/components/LandingPage/BlogSection/BlogSection";
 import TestimonialsSection from "@/components/LandingPage/TestimonialsSection/TestimonialsSection";
 
 export default function Home({ HomePageData }) {
   return (
-    <div className="flex flex-col items-center justify-center gap-24 overflow-x-hidden">
-      <AnimatedBackground />
-      <Hero {...HomePageData.hero} />
-      <FeaturesSection {...HomePageData.features} />
-      <DemoSection {...HomePageData.demo} />
-      <BlogSection blogs={HomePageData.blogs} />
-      <TestimonialsSection testimonials={HomePageData.testimonials} />
-    </div>
+    <PageContainer limitedWidth={false} marginBottom={false}>
+      <div className="flex flex-col items-center justify-center gap-24 overflow-x-hidden">
+        <AnimatedBackground />
+        <Hero {...HomePageData.hero} />
+        <FeaturesSection {...HomePageData.features} />
+        <DemoSection {...HomePageData.demo} />
+        <BlogSection blogs={HomePageData.blogs} />
+        <TestimonialsSection testimonials={HomePageData.testimonials} />
+      </div>
+    </PageContainer>
   );
 }
 

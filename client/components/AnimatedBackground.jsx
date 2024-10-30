@@ -1,5 +1,6 @@
 export default function AnimatedBackground() {
   return (
+    // Please see global.css file for styling
     <div id="background">
       <div className="orb-cont">
         <div className="orange orange-1 orb"></div>

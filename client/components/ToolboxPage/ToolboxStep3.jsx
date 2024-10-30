@@ -8,6 +8,8 @@ const toolboxStep3FormData = {
   loadingTxt: "Extracting bullet points...",
 };
 
+// This renders Step 1 of the Toolbox which takes in a resume from the user,
+// and queries the server for the suggested resume bullet points
 export default function ToolboxStep3({
   resume,
   setResume,
@@ -17,11 +19,11 @@ export default function ToolboxStep3({
 }) {
   const { request, loading } = useApi();
 
+  // Query the server using the given resume,
+  // and set the bullet points state with the response,
+  // or console.log if theres a error
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    console.log("Resume: ", resume);
-    console.log("Job Description: ", jobDescription);
 
     try {
       const data = await request("/api/resume", {
@@ -29,7 +31,6 @@ export default function ToolboxStep3({
         body: JSON.stringify({ jobDescription, resume }),
       });
 
-      console.log("Bullet points", data);
       setBulletPoints(data);
 
       incrementStep();
