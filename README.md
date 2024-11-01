@@ -1,6 +1,6 @@
-# AI Career Toolbox
+# RamResume
 
-AI Career Toolbox is a comprehensive application designed to assist job seekers in optimizing their job search process using AI-powered tools.
+RamResume is a comprehensive application designed to assist job seekers in optimizing their job search process using AI-powered tools.
 
 ## Project Structure
 
