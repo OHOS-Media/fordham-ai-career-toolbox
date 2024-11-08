@@ -1,12 +1,14 @@
 const express = require("express");
 const router = express.Router();
 const OpenAI = require("openai");
+const checkUsageLimit = require("../middleware/UserUsage.js");
+const { decrementUsage } = require("../controllers/UserUsage.controller.js");
 
 const openai = new OpenAI(process.env.OPENAI_API_KEY);
 
 const { mockKeywords } = require("../mockdata");
 
-router.post("/extract-keywords", async (req, res) => {
+router.post("/extract-keywords", checkUsageLimit, async (req, res) => {
   try {
     const { jobDescription } = req.body;
     // console.log("Received job description:", jobDescription);
@@ -22,6 +24,8 @@ router.post("/extract-keywords", async (req, res) => {
       ],
       model: "gpt-4o",
     });
+
+    await decrementUsage(req.userUsage);
 
     let content = completion.choices[0].message.content;
     // console.log("Raw OpenAI response:", content);
