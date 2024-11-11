@@ -15,9 +15,11 @@ module.exports = {
         grey: "#F2F4F5",
         "error-state": "#EC473C",
         "dark-grey": "#5C5C5C",
+        "fordham-black": "#282220",
+        "fordham-brown": "#332D2B",
       },
       backgroundImage: {
-        "text-gradient": "linear-gradient(to right, #7E1515 54%, #F34848 93%)",
+        "text-gradient": "linear-gradient(to right, #7E1515 0%, #BE2929 61%, #F34848 100%)",
       },
       fontSize: {
         sm: "0.875rem",
