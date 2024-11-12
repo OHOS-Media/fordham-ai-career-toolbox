@@ -10,7 +10,7 @@ export default function BlogPost({ blog, relatedPosts }) {
   }
 
   return (
-    <div className="min-h-screen flex flex-col gap-10 bg-neutral items-center w-full py-36">
+    <div className="min-h-screen flex flex-col gap-10 items-center w-full py-36">
       <h1 className="h1 text-secondary">Blogs</h1>
       <BlogDetailPage blog={blog} relatedPosts={relatedPosts} />
     </div>
