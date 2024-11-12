@@ -15,7 +15,7 @@ export default function MobileNav({ navData, isAuthenticated, login, user, error
 
   return (
     <nav
-      className={`flex flex-col absolute w-full h-fit top-0 z-10items-center justify-end ${isOpen && "sticky min-h-screen bg-neutral"}`}
+      className={`flex flex-col absolute w-full h-fit top-0 z-10 items-center justify-end ${isOpen && "sticky min-h-screen bg-black"}`}
     >
       <NavToggle isOpen={isOpen} setIsOpen={setIsOpen} />
       {isOpen && (

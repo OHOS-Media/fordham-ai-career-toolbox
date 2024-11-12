@@ -107,7 +107,7 @@ export default function Toolbox() {
             <ProgressBar activeStep={activeStep} />
 
             <div
-              className={`${activeStep === 4 ? "bg-neutral" : "bg-white/50 shadow-md"} flex flex-col items-center justify-between relative p-5 rounded-md h-full mx-5 lg:mx-0 w-full`}
+              className={`${activeStep === 4 ? "bg-fordham-black" : "bg-white/50 shadow-md"} flex flex-col items-center justify-between relative p-5 rounded-md h-full mx-5 lg:mx-0 w-full`}
             >
               {/* If the current Toolbox Step isn't the first one, display a button for the user to return to the previous step */}
               {activeStep > 1 && (

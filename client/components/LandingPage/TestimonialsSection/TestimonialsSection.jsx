@@ -16,7 +16,7 @@ const TestimonialsSection = ({ testimonials }) => {
   }
 
   return (
-    <section className="bg-primary w-full text-white py-40 z-10">
+    <section className="w-full text-white py-40 z-10">
       <div className="container mx-auto px-4">
         <div className="flex flex-wrap justify-center gap-20">
           {testimonials.map((testimonial, index) => (
