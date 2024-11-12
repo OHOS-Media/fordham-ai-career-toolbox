@@ -13,7 +13,7 @@ const Button = ({
   const [isPressed, setIsPressed] = useState(false);
 
   const baseStyles =
-    "rounded-[8px] transition-[background,transform,outline] duration-200 ease-in-out flex items-center justify-center gap-2 px-5 py-3";
+    "rounded-[8px] transition-[background,transform,outline] duration-50 ease-in-out flex items-center justify-center gap-2 px-5 py-3";
 
   const variants = {
     primary: {

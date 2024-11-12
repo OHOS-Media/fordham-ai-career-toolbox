@@ -16,7 +16,7 @@ export default function BlogSection({ blogs }) {
           ))}
         </div>
 
-        <div className="text-center mt-8 sm:mt-12">
+        <div className="flex items-center justify-center mt-8 sm:mt-12">
           <Link href="/blog">
             <Button text="View All Blogs" />
           </Link>
