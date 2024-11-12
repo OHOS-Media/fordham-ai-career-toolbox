@@ -1,5 +1,6 @@
 import Link from "next/link";
 import BlogCard from "./BlogCard";
+import Button from "@/components/Button";
 
 export default function BlogSection({ blogs }) {
   return (
@@ -16,11 +17,8 @@ export default function BlogSection({ blogs }) {
         </div>
 
         <div className="text-center mt-8 sm:mt-12">
-          <Link
-            href="/blog"
-            className="text-primary inline-block px-6 py-2 border border-primary rounded-full transition-colors duration-300 hover:bg-primary hover:text-white"
-          >
-            See more blogs
+          <Link href="/blog">
+            <Button text="View All Blogs" />
           </Link>
         </div>
       </div>
