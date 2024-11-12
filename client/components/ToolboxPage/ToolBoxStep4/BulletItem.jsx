@@ -22,7 +22,7 @@ const BulletItem = ({ jobTitle, bulletPoint, jobIndex }) => {
     <div
       key={jobIndex}
       ref={groupRef}
-      className={`flex flex-col w-full ${isOpen ? "z-30 bg-neutral shadow-md" : "z-10"}`}
+      className={`flex flex-col w-full ${isOpen ? "z-30 bg-fordham-brown shadow-md" : "z-10"}`}
     >
       <h3
         onClick={() => setIsOpen(!isOpen)}
