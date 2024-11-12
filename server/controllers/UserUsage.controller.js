@@ -12,10 +12,9 @@ exports.checkUsage = async (userId) => {
 exports.resetIfNeeded = async (usage) => {
   const now = new Date();
   if (now >= usage.resetDate) {
-    usage.remainingUses = 30;
-    const nextMonth = new Date();
-    nextMonth.setMonth(now.getMonth() + 1);
-    usage.resetDate = nextMonth;
+    usage.remainingUses = 20; // Change from 30 to 20
+    const nextWeek = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000);
+    usage.resetDate = nextWeek;
     await usage.save();
   }
   return usage;

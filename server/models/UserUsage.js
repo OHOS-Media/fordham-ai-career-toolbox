@@ -8,13 +8,16 @@ const UserUsageSchema = new mongoose.Schema({
     required: true,
     unique: true,
   },
-  remainingUses: {
-    type: Number,
-    default: 30,
-  },
   resetDate: {
     type: Date,
-    default: () => new Date(new Date().setMonth(new Date().getMonth() + 1)),
+    default: () => {
+      const now = new Date();
+      return new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000); // One week from now
+    },
+  },
+  remainingUses: {
+    type: Number,
+    default: 20, // Change from 30 to 20 uses per week
   },
 });
 

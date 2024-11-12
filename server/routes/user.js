@@ -1,6 +1,7 @@
 // routes/user.js
 const express = require("express");
 const router = express.Router();
+const { checkUsage } = require("../controllers/UserUsage.controller.js");
 
 // Middleware to check if user is authenticated
 const isAuthenticated = (req, res, next) => {
@@ -22,6 +23,19 @@ router.get("/user", isAuthenticated, (req, res) => {
     email: req.user.email,
     profilePicture: req.user.profilePicture,
   });
+});
+
+// Add usage endpoint
+router.get("/usage", isAuthenticated, async (req, res) => {
+  try {
+    const usage = await checkUsage(req.user._id);
+    res.json({
+      remainingUses: usage.remainingUses,
+      resetDate: usage.resetDate,
+    });
+  } catch (error) {
+    res.status(500).json({ error: "Error fetching usage data" });
+  }
 });
 
 module.exports = router;

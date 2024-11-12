@@ -12,7 +12,7 @@ const checkUsageLimit = async (req, res, next) => {
 
     if (usage.remainingUses <= 0) {
       return res.status(403).json({
-        error: "Monthly usage limit reached",
+        error: "Weekly usage limit reached",
         resetDate: usage.resetDate,
         remainingUses: 0,
       });
