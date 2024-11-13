@@ -1,7 +1,6 @@
 import { client } from "@/src/sanity/lib/client";
 
 import PageContainer from "@/components/PageContainer";
-import AnimatedBackground from "@/components/AnimatedBackground";
 import Hero from "@/components/LandingPage/Hero";
 import FeaturesSection from "@/components/LandingPage/FeaturesSection/FeaturesSection";
 import DemoSection from "@/components/LandingPage/DemoSection/DemoSection";
@@ -10,11 +9,11 @@ import TestimonialsSection from "@/components/LandingPage/TestimonialsSection/Te
 
 export default function Home({ HomePageData }) {
   return (
-    <PageContainer limitedWidth={false} marginBottom={false}>
+    <PageContainer limitedWidth={true} marginBottom={false}>
       <div className="flex flex-col items-center justify-center gap-24 overflow-x-hidden">
         <Hero {...HomePageData.hero} />
         <FeaturesSection {...HomePageData.features} />
-        <DemoSection {...HomePageData.demo} />
+        <DemoSection {...HomePageData.demo} demoOverview={HomePageData.demoOverview} />
         <BlogSection blogs={HomePageData.blogs} />
         <TestimonialsSection testimonials={HomePageData.testimonials} />
       </div>
@@ -27,7 +26,7 @@ export async function getStaticProps() {
     *[_type == 'homepage'][0]{
       hero,
       features,
-      demo,
+      demoOverview,
       testimonials,
       "blogs": *[_type == 'blog' && featured == true] | order(publishedAt desc)[0...3]{
         title,
