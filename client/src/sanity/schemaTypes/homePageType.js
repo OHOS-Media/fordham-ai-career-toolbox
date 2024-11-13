@@ -64,6 +64,42 @@ export const homePageType = defineType({
       },
     }),
     defineField({
+      name: "demoOverview",
+      title: "Demo Overview",
+      type: "array",
+      of: [
+        {
+          type: "object",
+          name: "demo",
+          fields: [
+            { name: "title", title: "Title", type: "string" },
+            { name: "description", title: "Description", type: "text" },
+            {
+              name: "highlights",
+              title: "Highlights",
+              type: "array",
+              of: [
+                {
+                  type: "object",
+                  fields: [
+                    { name: "text", type: "string" },
+                    {
+                      name: "icon",
+                      type: "image",
+                      options: { hotspot: true },
+                    },
+                    { name: "iconAlt", title: "Highlight Icon Alt Text", type: "string" },
+                  ],
+                },
+              ],
+            },
+            { name: "demoImage", title: "Demo Image", type: "image", options: { hotspot: true } },
+            { name: "imageLeft", title: "Align the image to the left?", type: "boolean" },
+          ],
+        },
+      ],
+    }),
+    defineField({
       name: "testimonials",
       title: "Testimonials",
       type: "array",
