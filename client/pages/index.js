@@ -1,23 +1,29 @@
+// pages/index.js
 import { client } from "@/src/sanity/lib/client";
-
 import PageContainer from "@/components/PageContainer";
 import Hero from "@/components/LandingPage/Hero";
 import FeaturesSection from "@/components/LandingPage/FeaturesSection/FeaturesSection";
 import DemoSection from "@/components/LandingPage/DemoSection/DemoSection";
 import BlogSection from "@/components/LandingPage/BlogSection/BlogSection";
 import TestimonialsSection from "@/components/LandingPage/TestimonialsSection/TestimonialsSection";
+import GradientContainer from "@/components/ui/GradientContainer";
 
 export default function Home({ HomePageData }) {
   return (
-    <PageContainer limitedWidth={true} marginBottom={false}>
-      <div className="flex flex-col items-center justify-center gap-24 overflow-x-hidden">
-        <Hero {...HomePageData.hero} />
-        <FeaturesSection {...HomePageData.features} />
+    <div className="flex flex-col items-center justify-center gap-[160px] mt-20">
+      <GradientContainer>
+        <div className="flex flex-col items-center justify-center gap-[160px]">
+          <Hero {...HomePageData.hero} />
+          <FeaturesSection {...HomePageData.features} />
+        </div>
+      </GradientContainer>
+
+      <PageContainer limitedWidth={true} marginBottom={false}>
         <DemoSection {...HomePageData.demo} demoOverview={HomePageData.demoOverview} />
         <BlogSection blogs={HomePageData.blogs} />
         <TestimonialsSection testimonials={HomePageData.testimonials} />
-      </div>
-    </PageContainer>
+      </PageContainer>
+    </div>
   );
 }
 

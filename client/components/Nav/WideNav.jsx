@@ -64,7 +64,7 @@ export default function WideNav({ navData, isAuthenticated, login, user, error, 
               title={link.title}
               target={link.href}
               className={`
-                transition-colors duration-200
+                font-extralight transition-colors duration-200
                 ${
                   atTop
                     ? "text-fordham-white hover:text-fordham-gray"
