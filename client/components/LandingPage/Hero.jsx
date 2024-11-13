@@ -2,16 +2,30 @@ import Link from "next/link";
 import React from "react";
 import Button from "@/components/Button";
 import { IconArrowRight } from "@tabler/icons-react";
+import { TextGenerateEffect } from "../ui/text-generate-effect";
 
 const Hero = ({ title, gradientTitle, description, ctaText }) => {
   return (
-    <div className="flex flex-col items-center justify-center text-center px-4 z-10">
-      <h1 className="h1 mb-6 text-secondary">
-        {title}{" "}
-        <span className="bg-text-gradient text-transparent bg-clip-text">{gradientTitle}</span>
-      </h1>
+    <div className="relative flex flex-col items-center justify-center text-center px-4 z-10">
+      {/* SVG Background */}
+      {/* <div
+        className="absolute inset-0"
+        aria-hidden="true"
+        style={{
+          background: 'url("/assets/Gradient.svg") no-repeat center center',
+          backgroundSize: "cover",
+        }}
+      ></div> */}
 
-      <p className="body-txt-md opacity-70 mb-8 max-w-2xl">{description}</p>
+      {/* Content */}
+      <div className="h1 mb-6">
+        <TextGenerateEffect
+          words={`An AI-enabled career enablement experience`}
+          className="font-extrabold text-4xl md:text-5xl lg:text-6xl"
+          duration={0.4}
+        />
+      </div>
+      <p className="text-fordham-white body-txt-md opacity-70 mb-8 max-w-2xl z-10">{description}</p>
 
       <Link href="/toolbox">
         <Button variant="primary" text={ctaText} icon={<IconArrowRight className="w-5 h-5" />} />
