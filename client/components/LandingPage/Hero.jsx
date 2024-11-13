@@ -6,7 +6,7 @@ import { TextGenerateEffect } from "../ui/text-generate-effect";
 
 const Hero = ({ title, gradientTitle, description, ctaText }) => {
   return (
-    <div className="relative flex flex-col items-center justify-center text-center px-4 z-10">
+    <div className="relative flex flex-col items-center justify-center text-center px-4 z-10 space-y-6">
       {/* SVG Background */}
       {/* <div
         className="absolute inset-0"
@@ -18,17 +18,15 @@ const Hero = ({ title, gradientTitle, description, ctaText }) => {
       ></div> */}
 
       {/* Content */}
-      <div className="h1 mb-6">
-        <TextGenerateEffect
-          words={`An AI-enabled career enablement experience`}
-          className="font-extrabold text-4xl md:text-5xl lg:text-6xl"
-          duration={0.4}
-        />
-      </div>
+      <TextGenerateEffect
+        words={`An AI-enabled career enablement experience`}
+        className="font-extrabold text-4xl md:text-5xl lg:text-6xl"
+        duration={0.4}
+      />
       <p className="text-fordham-white body-txt-md opacity-70 mb-8 max-w-2xl z-10">{description}</p>
 
       <Link href="/toolbox">
-        <Button variant="primary" text={ctaText} icon={<IconArrowRight className="w-5 h-5" />} />
+        <Button variant="primary" text={ctaText} icon={<IconArrowRight className="w-6 h-6" />} />
       </Link>
     </div>
   );
