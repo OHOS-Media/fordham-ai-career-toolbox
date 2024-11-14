@@ -1,15 +1,23 @@
 import BlogsPreview from "@/components/BlogPage/BlogsPreview";
 import PageContainer from "@/components/PageContainer";
+import GradientContainer from "@/components/ui/GradientContainer";
 import { client } from "@/src/sanity/lib/client";
 
 export default function Blog({ BlogPageData }) {
   return (
     <PageContainer>
-      <div className="min-h-screen flex flex-col gap-4 items-center w-full">
-        <h1 className="h1 text-secondary">Blogs</h1>
+      <GradientContainer>
+        <div className="flex flex-col gap-20">
+          <div className=" w-full flex flex-col items-center gap-2">
+            <h1 className="h2 text-fordham-white">RamResume blog</h1>
+            <p className="body-txt-md text-center font-light text-fordham-light-gray/60 max-w-2xl">
+              Your hub for all things job search and professional growth.
+            </p>
+          </div>
 
-        <BlogsPreview BlogPageData={BlogPageData} />
-      </div>
+          <BlogsPreview BlogPageData={BlogPageData} />
+        </div>
+      </GradientContainer>
     </PageContainer>
   );
 }

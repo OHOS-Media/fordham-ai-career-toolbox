@@ -1,26 +1,12 @@
-import Image from "next/image";
-import { urlFor } from "@/src/sanity/lib/image";
+import DemoBlock from "./DemoBlock/DemoBlock";
 
-import CheckboxLabel from "./CheckboxLabel";
-
-const DemoSection = ({ title, description, checkboxItems, demoImage }) => {
+const DemoSection = ({ demoOverview }) => {
   return (
-    <div className="flex flex-col px-4 md:flex-row gap-14 items-center md:gap-0 md:justify-evenly 2xl:justify-center 2xl:gap-20 w-full text-white py-20 z-10">
-      <div className="flex flex-col md:w-2/5 gap-6">
-        <h2 className="h2 text-center md:text-left leading-tight">{title}</h2>
-        <p className="body-txt mt-4">{description}</p>
-
-        <div className="flex flex-col gap-4">
-          {checkboxItems.map((boxTitle, idx) => (
-            <CheckboxLabel text={boxTitle} key={idx} />
-          ))}
-        </div>
-      </div>
-
-      <div className="w-fit">
-        <Image src={urlFor(demoImage).url()} alt="Demo Screenshot" width={400} height={400} />
-      </div>
-    </div>
+    <section className="flex flex-col sm:w-3/4 lg:w-full gap-24 lg:gap-36">
+      {demoOverview.map((demo, idx) => (
+        <DemoBlock {...demo} key={idx} />
+      ))}
+    </section>
   );
 };
 

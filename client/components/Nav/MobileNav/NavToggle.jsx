@@ -1,21 +1,26 @@
 export default function NavToggle({ isOpen, setIsOpen }) {
   return (
-    <button className="absolute top-6 right-6" onClick={() => setIsOpen((prevState) => !prevState)}>
-      <input
-        id="checkbox2"
-        className="hidden"
-        type="checkbox"
-        checked={isOpen}
-        onChange={() => setIsOpen((prevState) => !prevState)}
-      />
-      <label
-        className="toggle toggle2 flex flex-col items-center justify-center w-[32px] h-[32px] gap-[6px] cursor-pointer"
-        for="checkbox2"
-      >
-        <div id="bar1" className="bars bg-primary"></div>
-        <div id="bar2" className="bars bg-primary"></div>
-        <div id="bar3" className="bars bg-primary"></div>
-      </label>
+    <button className="p-2 focus:outline-none" onClick={() => setIsOpen(!isOpen)}>
+      <div className="w-6 h-6 flex flex-col justify-between">
+        <span
+          className={`
+          block h-0.5 w-full bg-fordham-white transition-all duration-300
+          ${isOpen ? "rotate-45 translate-y-2.5" : ""}
+        `}
+        />
+        <span
+          className={`
+          block h-0.5 w-full bg-fordham-white transition-all duration-300
+          ${isOpen ? "opacity-0" : ""}
+        `}
+        />
+        <span
+          className={`
+          block h-0.5 w-full bg-fordham-white transition-all duration-300
+          ${isOpen ? "-rotate-45 -translate-y-2.5" : ""}
+        `}
+        />
+      </div>
     </button>
   );
 }

@@ -12,7 +12,7 @@ export default function Logo() {
         width={200} // Adjust this value as needed
         height={100} // Adjust this value as needed
       /> */}
-      <h3 className="h4 text-primary">RAMResume</h3>
+      <h1 className="text-base tracking-wide font-bold text-fordham-white">RAMResume</h1>
     </Link>
   );
 }

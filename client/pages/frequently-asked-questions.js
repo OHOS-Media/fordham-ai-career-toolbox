@@ -1,14 +1,22 @@
 import FAQSection from "@/components/FAQPage/FAQSection";
 import PageContainer from "@/components/PageContainer";
+import GradientContainer from "@/components/ui/GradientContainer";
 import { client } from "@/src/sanity/lib/client";
 
 export default function FAQ({ FAQPageData }) {
   return (
     <PageContainer>
-      <div className=" w-full flex flex-col items-center gap-10">
-        <h1 className="h2 text-fordham-white">Frequently Asked Questions</h1>
-        <FAQSection FAQPageData={FAQPageData} />
-      </div>
+      <GradientContainer>
+        <div className="flex flex-col gap-20">
+          <div className=" w-full flex flex-col items-center gap-2">
+            <h1 className="h2 text-fordham-white">Here to help</h1>
+            <p className="body-txt-md text-center font-light text-fordham-light-gray/60 max-w-2xl">
+              Frequently asked questions and resources to assist you.
+            </p>
+          </div>
+          <FAQSection FAQPageData={FAQPageData} />
+        </div>
+      </GradientContainer>
     </PageContainer>
   );
 }

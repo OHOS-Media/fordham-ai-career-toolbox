@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "@/context/AuthContext";
-
 import WideNav from "./WideNav";
 import MobileNav from "./MobileNav/MobileNav";
 
@@ -16,21 +15,17 @@ const navData = {
 export default function Nav() {
   const { isAuthenticated, login, user, error, setError } = useAuth();
   const [isMobileScreen, setIsMobileScreen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
-  // This determines wether to display the Full Nav or the Mobile Nav by
-  // tracking the width of the screen
+  // Handle screen resize for mobile/desktop switch
   useEffect(() => {
     const handleResize = () => {
       setIsMobileScreen(window.innerWidth < 768);
     };
 
-    setIsMobileScreen(window.innerWidth < 768);
-
+    handleResize();
     window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   return isMobileScreen ? (
@@ -41,6 +36,7 @@ export default function Nav() {
       user={user}
       error={error}
       setError={setError}
+      scrolled={scrolled}
     />
   ) : (
     <WideNav
@@ -50,6 +46,7 @@ export default function Nav() {
       user={user}
       error={error}
       setError={setError}
+      scrolled={scrolled}
     />
   );
 }
