@@ -86,8 +86,3 @@ next-env.d.ts
 # Temporary files
 *.swp
 *.swo
-
-# Elastic Beanstalk Files
-.elasticbeanstalk/*
-!.elasticbeanstalk/*.cfg.yml
-!.elasticbeanstalk/*.global.yml
