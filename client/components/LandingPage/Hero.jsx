@@ -11,7 +11,7 @@ const Hero = ({ title, gradientTitle, description, ctaText }) => {
         <div className="max-w-2xl flex flex-col items-center space-y-6 mb-6">
           <TextGenerateEffect
             words={`${title}`}
-            className="font-bold text-3xl md:text-4xl lg:text-5xl text-fordham-white"
+            className="font-bold h1 text-fordham-white"
             duration={0.4}
           />
           <p className="text-fordham-white body-txt-md font-light text-center mb-8 max-w-2xl z-10">

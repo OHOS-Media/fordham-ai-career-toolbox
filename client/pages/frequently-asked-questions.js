@@ -5,7 +5,7 @@ import { client } from "@/src/sanity/lib/client";
 
 export default function FAQ({ FAQPageData }) {
   return (
-    <PageContainer>
+    <PageContainer marginBottom={true} marginTop={true}>
       <GradientContainer>
         <div className="flex flex-col gap-20">
           <div className=" w-full flex flex-col items-center gap-2">

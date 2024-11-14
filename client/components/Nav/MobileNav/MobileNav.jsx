@@ -43,15 +43,6 @@ export default function MobileNav({
           setIsOpen={setIsOpen}
         />
       )}
-
-      {error && (
-        <ErrorAlert
-          errorMessage={error}
-          setErrorMessage={setError}
-          errorAlertActive={!!error}
-          setErrorAlertActive={() => setError(null)}
-        />
-      )}
     </nav>
   );
 }
