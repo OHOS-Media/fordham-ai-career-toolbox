@@ -1,6 +1,4 @@
 import Link from "next/link";
-
-import AnimatedBackground from "@/components/ui/AnimatedBackground";
 import "@/styles/globals.css";
 
 export default function Custom404() {

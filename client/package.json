@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "sanity build && next build",
     "start": "next start",
     "lint": "next lint",
     "lambda": "cd AI-toolbox-lambda-api && sam build && sam deploy"
@@ -12,7 +12,7 @@
   "dependencies": {
     "@sanity/icons": "^3.4.0",
     "@sanity/image-url": "^1.0.2",
-    "@sanity/vision": "^3.57.0",
+    "@sanity/vision": "^3.64.1",
     "@tabler/icons": "^3.22.0",
     "@tabler/icons-react": "^3.21.0",
     "clsx": "^2.1.1",
@@ -22,12 +22,12 @@
     "moongoose": "^0.0.5",
     "next": "14.2.4",
     "next-auth": "^4.24.7",
-    "next-sanity": "^9.4.7",
+    "next-sanity": "^9.8.13",
     "openai": "^4.56.0",
     "react": "^18",
     "react-dom": "^18",
     "react-hot-toast": "^2.4.1",
-    "sanity": "^3.57.0",
+    "sanity": "^3.64.1",
     "styled-components": "^6.1.13",
     "tailwind-merge": "^2.5.4"
   },
