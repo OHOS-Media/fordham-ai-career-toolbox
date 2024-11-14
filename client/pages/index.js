@@ -12,13 +12,15 @@ export default function Home({ HomePageData }) {
   return (
     <div className="flex flex-col items-center justify-center gap-[160px] mt-20">
       <GradientContainer>
-        <div className="flex flex-col items-center justify-center gap-[160px]">
-          <Hero {...HomePageData.hero} />
-          <FeaturesSection {...HomePageData.features} />
-        </div>
+        <PageContainer limitedWidth={true}>
+          <div className="flex flex-col items-center justify-center gap-[160px]">
+            <Hero {...HomePageData.hero} />
+            <FeaturesSection {...HomePageData.features} />
+          </div>
+        </PageContainer>
       </GradientContainer>
 
-      <PageContainer limitedWidth={true} marginBottom={false}>
+      <PageContainer limitedWidth={true}>
         <DemoSection {...HomePageData.demo} demoOverview={HomePageData.demoOverview} />
         <BlogSection blogs={HomePageData.blogs} />
         <TestimonialsSection testimonials={HomePageData.testimonials} />
