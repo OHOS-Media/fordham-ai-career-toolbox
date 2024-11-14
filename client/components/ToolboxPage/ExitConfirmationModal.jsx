@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Button from "../Button";
+import Button from "../ui/Button";
 import ProgressAlert from "@/public/assets/ProgressAlert.svg";
 
 export default function ExitConfirmationModal({ setExitModalActive, handleDone }) {

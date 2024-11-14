@@ -71,7 +71,6 @@ const Footer = ({ data }) => {
                       The Personal and Professional Development Center The Gabelli School of
                       Business
                     </span>
-                    
 
                     <span>441 E Fordham Road The Bronx, NY 10458</span>
                   </div>

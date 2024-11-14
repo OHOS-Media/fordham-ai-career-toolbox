@@ -1,13 +1,5 @@
 import React from "react";
-
-const Testimonial = ({ quote, text, name, title }) => (
-  <div className="flex flex-col items-center text-center max-w-md mx-auto">
-    <h3 className="text-2xl font-bold mb-6">&quot;{quote}&quot;</h3>
-    <p className="text-sm mb-6 opacity-80">{text}</p>
-    <p className="font-semibold">{name}</p>
-    <p className="text-sm opacity-80">{title}</p>
-  </div>
-);
+import TestimonialCard from "./TestimonialCard";
 
 const TestimonialsSection = ({ testimonials }) => {
   // If there are no testimonials, do not render the component
@@ -16,15 +8,12 @@ const TestimonialsSection = ({ testimonials }) => {
   }
 
   return (
-    <section className="w-full text-white py-40 z-10">
-      <div className="container mx-auto px-4">
-        <div className="flex flex-wrap justify-center gap-20">
-          {testimonials.map((testimonial, index) => (
-            <div key={index} className="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4">
-              <Testimonial {...testimonial} />
-            </div>
-          ))}
-        </div>
+    <section className="w-full text-fordham-white flex flex-col gap-[60px]">
+      <h2 className="h3 text-center">User stories</h2>
+      <div className="flex flex-row justify-center items-center gap-4">
+        {testimonials.map((testimonial, index) => (
+          <TestimonialCard {...testimonial} key={index} />
+        ))}
       </div>
     </section>
   );

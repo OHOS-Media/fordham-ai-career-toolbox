@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Button from "../Button";
+import Button from "../ui/Button";
 import Keyword from "./Keyword";
 
 // This renders Step 2 of the Toolbox which displays the AI reccomended resume keywords

@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
 import { useApi } from "@/hooks/useApi";
-
-import ErrorAlert from "@/components/ErrorAlert";
 import ToolboxStep1 from "@/components/ToolboxPage/ToolboxStep1";
 import ToolboxStep2 from "@/components/ToolboxPage/ToolboxStep2";
 import ToolboxStep3 from "@/components/ToolboxPage/ToolboxStep3";
@@ -97,8 +95,7 @@ export default function Toolbox() {
 
       <div className="min-h-screen mx-auto gap-10">
         {/* If theres an error, display the error message */}
-        {error && <ErrorAlert errorMessage={error} />}
-
+        // TODO: Add error handling
         {/* If the Toolbox is active, render it */}
         {toolboxActive ? (
           <div className="flex flex-col items-center gap-12">

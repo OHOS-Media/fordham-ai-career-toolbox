@@ -6,10 +6,10 @@ import HighlightItem from "./HighlightItem";
 const DemoBlock = ({ title, description, highlights, demoImage, imageLeft }) => {
   return (
     <article
-      className={`flex flex-col w-full ${imageLeft ? "lg:flex-row-reverse" : "lg:flex-row "} items-center lg:justify-between gap-14 px-4 text-white z-10`}
+      className={`flex flex-col w-full ${imageLeft ? "lg:flex-row-reverse" : "lg:flex-row "} items-center lg:justify-between gap-14 px-4 md:px-0 text-white z-10`}
     >
       <div className="flex flex-col w-full lg:w-1/2 gap-8">
-        <h2 className="h2 text-center md:text-left leading-tight">{title}</h2>
+        <h2 className="h3 text-center md:text-left leading-tight">{title}</h2>
 
         <p className="body-txt">{description}</p>
 

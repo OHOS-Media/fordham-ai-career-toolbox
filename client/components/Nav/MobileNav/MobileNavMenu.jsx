@@ -1,7 +1,7 @@
 // components/Nav/MobileNav/MobileNavMenu.jsx
 import Link from "next/link";
 import Image from "next/image";
-import Button from "@/components/Button";
+import Button from "@/components/ui/Button";
 
 export default function MobileNavMenu({ navData, isAuthenticated, login, user, setIsOpen }) {
   const handleClick = () => {

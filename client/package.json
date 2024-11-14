@@ -13,6 +13,7 @@
     "@sanity/icons": "^3.4.0",
     "@sanity/image-url": "^1.0.2",
     "@sanity/vision": "^3.57.0",
+    "@tabler/icons": "^3.22.0",
     "@tabler/icons-react": "^3.21.0",
     "clsx": "^2.1.1",
     "dotenv": "^16.4.5",

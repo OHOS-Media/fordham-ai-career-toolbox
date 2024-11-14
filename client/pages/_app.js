@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import { AuthProvider } from "@/context/AuthContext";
 import { Inter } from "next/font/google";
-import PasswordEntry from "../components/PasswordEntry.jsx";
+import PasswordEntry from "../components/ui/PasswordEntry.jsx";
 import "@/styles/globals.css";
 import { useApi } from "@/hooks/useApi.js";
 import Layout from "@/components/Layout.jsx";
 import { client } from "@/src/sanity/lib/client.js";
+import { Toaster } from "react-hot-toast";
 
 const inter_init = Inter({
   subsets: ["latin"],
@@ -70,6 +71,19 @@ export default function App({ Component, pageProps }) {
           <Component {...pageProps} />
         </Layout>
       </main>
+
+      <Toaster
+        position="bottom-right"
+        toastOptions={{
+          className: "",
+          duration: 3000,
+          style: {
+            background: "#282220",
+            color: "#fff",
+            borderRadius: "8px",
+          },
+        }}
+      />
     </AuthProvider>
   );
 }
