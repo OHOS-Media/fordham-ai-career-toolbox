@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { AuthProvider } from "@/context/AuthContext";
 import { Inter } from "next/font/google";
-import PasswordEntry from "../components/PasswordEntry.jsx";
+import PasswordEntry from "../components/ui/PasswordEntry.jsx";
 import "@/styles/globals.css";
 import { useApi } from "@/hooks/useApi.js";
 import Layout from "@/components/Layout.jsx";

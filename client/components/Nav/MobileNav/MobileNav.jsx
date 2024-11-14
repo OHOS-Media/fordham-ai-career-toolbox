@@ -1,7 +1,7 @@
 import { useState } from "react";
 import NavToggle from "./NavToggle";
 import Link from "next/link";
-import Logo from "@/components/Logo";
+import Logo from "@/components/ui/Logo";
 import MobileNavMenu from "./MobileNavMenu";
 
 export default function MobileNav({

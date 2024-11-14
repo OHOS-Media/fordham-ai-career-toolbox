@@ -1,5 +1,5 @@
 import BulletItem from "./BulletItem";
-import Button from "../../Button";
+import Button from "../../ui/Button";
 
 // This renders Step 4 of the Toolbox which displays the AI reccomended resume bullet points
 export default function ToolboxStep4({ bulletPoints, incrementStep }) {

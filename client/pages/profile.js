@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useAuth } from "@/context/AuthContext";
 import Image from "next/image";
-import Button from "@/components/Button";
+import Button from "@/components/ui/Button";
 import { useRouter } from "next/router";
 import { IconLoader2 } from "@tabler/icons-react";
 import PageContainer from "@/components/PageContainer";

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import Logo from "../Logo";
+import Logo from "../ui/Logo";
 import NavLink from "./NavLink";
 import AuthNavButton from "./AuthNavButton";
 

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { urlFor } from "@/src/sanity/lib/image";
-import StyledPortableText from "../StyledPortableText";
+import StyledPortableText from "../ui/StyledPortableText";
 import BlogCard from "../LandingPage/BlogSection/BlogCard";
 
 const BlogDetailPage = ({ blog, relatedPosts }) => {

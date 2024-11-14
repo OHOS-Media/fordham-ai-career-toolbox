@@ -1,13 +1,11 @@
 import Link from "next/link";
 import BlogCard from "./BlogCard";
-import Button from "@/components/Button";
+import Button from "@/components/ui/Button";
 
 export default function BlogSection({ blogs }) {
   return (
     <section className="w-full">
-      <h2 className="h3 font-bold text-center text-white mb-8 sm:mb-12">
-        Featured blogs
-      </h2>
+      <h2 className="h3 font-bold text-center text-white mb-8 sm:mb-12">Featured blogs</h2>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
         {blogs.map((blog, index) => (
