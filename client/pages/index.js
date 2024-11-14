@@ -20,10 +20,12 @@ export default function Home({ HomePageData }) {
         </PageContainer>
       </GradientContainer>
 
-      <PageContainer limitedWidth={true}>
-        <DemoSection {...HomePageData.demo} demoOverview={HomePageData.demoOverview} />
-        <BlogSection blogs={HomePageData.blogs} />
-        <TestimonialsSection testimonials={HomePageData.testimonials} />
+      <PageContainer limitedWidth={true} marginBottom={true}>
+        <div className="flex flex-col items-center justify-center gap-[160px]">
+          <DemoSection {...HomePageData.demo} demoOverview={HomePageData.demoOverview} />
+          <BlogSection blogs={HomePageData.blogs} />
+          <TestimonialsSection testimonials={HomePageData.testimonials} />
+        </div>
       </PageContainer>
     </div>
   );

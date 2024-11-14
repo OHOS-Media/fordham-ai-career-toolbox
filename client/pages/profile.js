@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 import { useAuth } from "@/context/AuthContext";
 import Image from "next/image";
-import Link from "next/link";
 import Button from "@/components/Button";
-import Layout from "@/components/Layout";
 import { useRouter } from "next/router";
+import { IconLoader2 } from "@tabler/icons-react";
+import PageContainer from "@/components/PageContainer";
 
 export default function Profile() {
   const { user, loading, logout } = useAuth();
@@ -16,40 +16,35 @@ export default function Profile() {
     }
   }, [user, loading, router]);
 
-  if (loading) {
+  if (loading || !user) {
     return (
-      <Layout>
-        <div className="min-h-screen flex items-center justify-center">
-          <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-primary"></div>
-        </div>
-      </Layout>
+      <div className="min-h-screen flex items-center justify-center">
+        <IconLoader2 className="w-8 h-8 animate-spin text-fordham-white" />
+      </div>
     );
   }
 
-  if (!user) {
-    return null;
-  }
-
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center">
-      <div className="flex flex-col items-center gap-2">
-        <div className="mr-4 rounded-full overflow-hidden">
+    <PageContainer marginBottom={true} marginTop={true}>
+      <div className="flex flex-col items-center gap-6 bg-fordham-white/5 p-8 rounded-lg backdrop-blur-sm">
+        <div className="rounded-full overflow-hidden">
           <Image
             src={user.profilePicture}
             alt={user.displayName}
             width={150}
             height={150}
             className="object-cover"
+            priority
           />
         </div>
 
-        <div className="flex flex-col items-center">
-          <h1 className="h1">{user.displayName}</h1>
-          <p className="body-txt-md text-secondary">{user.email}</p>
+        <div className="flex flex-col items-center gap-2">
+          <h1 className="text-fordham-white text-2xl font-medium">{user.displayName}</h1>
+          <p className="text-fordham-white/80">{user.email}</p>
         </div>
-      </div>
 
-      <Button onClick={logout} text="Log out" className="mt-10" />
-    </div>
+        <Button onClick={logout} text="Log out" variant="primary" />
+      </div>
+    </PageContainer>
   );
 }

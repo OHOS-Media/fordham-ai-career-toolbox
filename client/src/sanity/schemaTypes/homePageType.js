@@ -111,6 +111,7 @@ export const homePageType = defineType({
             { name: "text", title: "Text", type: "text" },
             { name: "name", title: "Name", type: "string" },
             { name: "title", title: "Title", type: "string" },
+            { name: "year", title: "Year", type: "number" },
           ],
         },
       ],
