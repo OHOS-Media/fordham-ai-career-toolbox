@@ -4,6 +4,8 @@ const OpenAI = require("openai");
 const checkUsageLimit = require("../middleware/UserUsage.js");
 const { decrementUsage } = require("../controllers/UserUsage.controller.js");
 const { validateText } = require("../middleware/validateText.js");
+const requireTerms = require("../middleware/requireTerms.js");
+const { ensureAuthenticated } = require("../middleware/auth.js");
 
 const openai = new OpenAI(process.env.OPENAI_API_KEY);
 
@@ -11,6 +13,8 @@ const { mockKeywords } = require("../mockdata");
 
 router.post(
   "/extract-keywords",
+  ensureAuthenticated,
+  requireTerms,
   validateText("KEYWORD_EXTRACTOR"),
   checkUsageLimit,
   async (req, res) => {
