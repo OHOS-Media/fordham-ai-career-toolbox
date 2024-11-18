@@ -22,6 +22,8 @@ router.get("/user", isAuthenticated, (req, res) => {
     displayName: req.user.displayName,
     email: req.user.email,
     profilePicture: req.user.profilePicture,
+    hasAcceptedTerms: req.user.hasAcceptedTerms,
+    acceptedTermsAt: req.user.acceptedTermsAt,
   });
 });
 

@@ -1,3 +1,4 @@
+// client/context/AuthContext.js
 import React, { createContext, useState, useContext, useEffect, useCallback } from "react";
 import { useRouter } from "next/router";
 import { useApi } from "../hooks/useApi";
@@ -17,33 +18,59 @@ export const AuthProvider = ({ children }) => {
     try {
       const userData = await request("/api/user");
       setUser(userData);
+
+      // Check terms status after login
       if (userData && isNewLogin) {
-        toast.success(`Welcome back, ${userData.displayName}!`, {
-          duration: 3000,
-          style: {
-            background: "#282220",
-            color: "#fff",
-            borderRadius: "8px",
-          },
-          iconTheme: {
-            primary: "#fff",
-            secondary: "#282220",
-          },
-        });
+        if (!userData.hasAcceptedTerms) {
+          router.push("/terms");
+          toast.error("Please accept the terms to continue", {
+            duration: 5000,
+            style: { background: "#282220", color: "#fff" },
+          });
+        } else {
+          toast.success(`Welcome back, ${userData.displayName}!`);
+        }
         setIsNewLogin(false);
       }
     } catch (error) {
       console.error("Failed to fetch user", error);
       setUser(null);
+
+      // Handle terms-specific errors
+      if (error.response?.status === 403 && error.response?.data?.requiresTerms) {
+        router.push("/terms");
+      }
     } finally {
       setLoading(false);
     }
-  }, [request, isNewLogin]);
+  }, [request, router, isNewLogin]);
 
-  // Initial load
-  useEffect(() => {
-    loadUser();
-  }, [loadUser]);
+  const acceptTerms = useCallback(async () => {
+    try {
+      await request("/auth/accept-terms", {
+        method: "POST",
+      });
+      await loadUser();
+      router.push("/");
+      toast.success("Terms accepted successfully!", {
+        duration: 3000,
+        style: {
+          background: "#282220",
+          color: "#fff",
+          borderRadius: "8px",
+        },
+      });
+    } catch (error) {
+      toast.error("Failed to accept terms. Please try again.", {
+        duration: 3000,
+        style: {
+          background: "#282220",
+          color: "#fff",
+          borderRadius: "8px",
+        },
+      });
+    }
+  }, [request, router, loadUser]);
 
   const login = useCallback(() => {
     const width = 500;
@@ -67,10 +94,6 @@ export const AuthProvider = ({ children }) => {
           color: "#fff",
           borderRadius: "8px",
         },
-        iconTheme: {
-          primary: "#fff",
-          secondary: "#282220",
-        },
       });
     } catch (error) {
       console.error("Logout failed", error);
@@ -89,16 +112,22 @@ export const AuthProvider = ({ children }) => {
   }, [request, router]);
 
   useEffect(() => {
+    loadUser();
+  }, [loadUser]);
+
+  useEffect(() => {
     const handleMessage = (event) => {
       if (event.origin !== process.env.NEXT_PUBLIC_SERVER_URL) return;
 
       if (event.data.type === "LOGIN_SUCCESS") {
         setIsNewLogin(true);
         loadUser();
+        if (event.data.requiresTerms) {
+          router.push("/terms");
+        }
       } else if (event.data.type === "LOGIN_ERROR") {
         setError(event.data.message);
-        setLoading(false);
-        toast.error(event.data.message || "Failed to login. Please try again.", {
+        toast.error(event.data.message || "Failed to login", {
           duration: 3000,
           style: {
             background: "#282220",
@@ -111,13 +140,20 @@ export const AuthProvider = ({ children }) => {
 
     window.addEventListener("message", handleMessage);
     return () => window.removeEventListener("message", handleMessage);
-  }, [loadUser]);
+  }, [loadUser, router]);
 
-  return (
-    <AuthContext.Provider value={{ isAuthenticated: !!user, user, login, logout, loading }}>
-      {children}
-    </AuthContext.Provider>
-  );
+  const value = {
+    user,
+    loading,
+    error,
+    login,
+    logout,
+    acceptTerms,
+  };
+
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
 
 export const useAuth = () => useContext(AuthContext);
+
+export default AuthContext;

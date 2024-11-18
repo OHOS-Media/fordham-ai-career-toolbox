@@ -1,3 +1,4 @@
+// client/hooks/useApi.js
 import { useState, useCallback } from "react";
 
 const BASE_URL =
@@ -26,14 +27,53 @@ export const useApi = () => {
         }),
       });
 
+      const data = await response.json();
+
       if (!response.ok) {
-        throw new Error("API request failed");
+        // Handle specific error cases
+        if (response.status === 403) {
+          if (data.requiresTerms) {
+            throw {
+              response: {
+                status: 403,
+                data: {
+                  requiresTerms: true,
+                  error: "Terms acceptance required",
+                },
+              },
+            };
+          }
+          if (data.error === "Weekly usage limit reached") {
+            throw {
+              response: {
+                status: 403,
+                data: {
+                  error: "Weekly usage limit reached",
+                  resetDate: data.resetDate,
+                  remainingUses: data.remainingUses,
+                },
+              },
+            };
+          }
+        }
+
+        if (response.status === 401) {
+          throw {
+            response: {
+              status: 401,
+              data: {
+                error: "Please log in to access this resource",
+              },
+            },
+          };
+        }
+
+        throw new Error(data.error || "API request failed");
       }
 
-      const data = await response.json();
       return data;
     } catch (err) {
-      setError(err.message);
+      setError(err.response?.data?.error || err.message);
       throw err;
     } finally {
       setLoading(false);

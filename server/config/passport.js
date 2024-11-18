@@ -11,10 +11,8 @@ module.exports = function (passport) {
       },
       async (accessToken, refreshToken, profile, done) => {
         try {
-          // Check if the email domain is fordham.edu
           const email = profile.emails[0].value;
 
-          // Comment out the following {if} check to check Authorization/Profile Feature
           // if (!email.endsWith("@fordham.edu")) {
           //   return done(null, false, {
           //     message: "Only Fordham University personnel are allowed.",
@@ -22,15 +20,18 @@ module.exports = function (passport) {
           // }
 
           let user = await User.findOne({ googleId: profile.id });
+
           if (!user) {
+            // New user - they'll need to accept terms later
             user = await User.create({
               googleId: profile.id,
               displayName: profile.displayName,
               email: email,
               profilePicture: profile.photos[0].value,
+              hasAcceptedTerms: false,
             });
           } else {
-            // Update the profile picture in case it has changed
+            // Update existing user's profile picture
             user.profilePicture = profile.photos[0].value;
             await user.save();
           }
