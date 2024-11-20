@@ -10,40 +10,29 @@ const toolboxStep1FormData = {
 
 // This renders Step 1 of the Toolbox which takes in a job description from the user,
 // and queries the server for the suggested resume keywords
-export default function ToolboxStep1({
-  jobDescription,
-  setJobDescription,
-  setKeywords,
-  incrementStep,
-}) {
-  const { request, loading } = useApi();
+export default function ToolboxStep1({ jobDescription, setJobDescription }) {
+  const placeholder = `Please paste the full job description here so we can analyze its required skills.
 
-  // Query the server using the given job description,
-  // and set the keyword state with the response,
-  // or console.log if theres a error
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+To ensure accuracy, include sections detailing:
+• Roles
+• Responsibilities
+• Qualifications
 
-    try {
-      const data = await request("/api/extract-keywords", {
-        method: "POST",
-        body: JSON.stringify({ jobDescription }),
-      });
+Exclude sections like:
+• About Us/Company
+• Salary/benefits
+• Diversity statements
 
-      setKeywords(data.keywords);
-      incrementStep();
-    } catch (error) {
-      console.error("Failed to extract keywords", error);
-    }
-  };
+as they typically don't mention hard skills. Only English job descriptions, please.`;
 
   return (
-    <ToolboxForm
-      formData={toolboxStep1FormData}
-      handleSubmit={handleSubmit}
-      value={jobDescription}
-      onChange={(e) => setJobDescription(e.target.value)}
-      loading={loading}
-    />
+    <div className="flex flex-col gap-4 h-full">
+      <textarea
+        value={jobDescription}
+        onChange={(e) => setJobDescription(e.target.value)}
+        placeholder={placeholder}
+        className="w-full flex-1 bg-fordham-brown text-fordham-white rounded-[8px] placeholder:text-fordham-gray/60 focus:outline-none resize-none"
+      />
+    </div>
   );
 }

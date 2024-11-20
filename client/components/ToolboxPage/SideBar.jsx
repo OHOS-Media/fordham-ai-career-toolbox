@@ -8,12 +8,12 @@ import {
 import Button from "../ui/Button";
 
 export const Sidebar = ({ activeStep, progress }) => (
-  <div className="w-[300px] flex flex-shrink-0 flex-col justify-between min-h-full bg-fordham-brown rounded-[16px]">
+  <div className="w-[300px] flex flex-shrink-0 flex-col justify-between min-h-full bg-fordham-brown rounded-[16px] border-[1px] border-[#3B3533]">
     {/* Top Section */}
     <div>
-      <h1 className="font-medium body-text-md text-fordham-white p-6 border-b-[1px] border-[#3B3533]">
+      <h2 className="font-medium body-text-md text-fordham-white p-6 border-b-[1px] border-[#3B3533]">
         Progress
-      </h1>
+      </h2>
       <div className="p-6">
         {/* Tool Selection */}
         <div className="space-y-4">
