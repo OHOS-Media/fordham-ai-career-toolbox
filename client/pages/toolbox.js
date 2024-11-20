@@ -3,18 +3,19 @@ import { useApi } from "@/hooks/useApi";
 import ToolboxStep1 from "@/components/ToolboxPage/ToolboxStep1";
 import ToolboxStep2 from "@/components/ToolboxPage/ToolboxStep2";
 import ToolboxStep3 from "@/components/ToolboxPage/ToolboxStep3";
-import ToolboxStep4 from "@/components/ToolboxPage/ToolBoxStep4/ToolboxStep4";
+import ToolboxStep4 from "@/components/ToolboxPage/ToolboxStep4";
 import ToolboxEnd from "@/components/ToolboxPage/ToolboxEnd";
 import ExitConfirmationModal from "@/components/ToolboxPage/ExitConfirmationModal";
 import PageContainer from "@/components/PageContainer";
 import { IconChevronLeft, IconFileText } from "@tabler/icons-react";
 import { Sidebar } from "@/components/ToolboxPage/SideBar";
 import Button from "@/components/ui/Button";
+import MainToolbox from "@/components/ToolboxPage/MainToolbox";
 
 export default function Toolbox() {
-  const { error } = useApi();
+  const { request, loading } = useApi();
   const [toolboxActive, setToolboxActive] = useState(true);
-  const [activeStep, setActiveStep] = useState(1);
+  const [activeStep, setActiveStep] = useState(4);
   const [exitModalActive, setExitModalActive] = useState(false);
   const [jobDescription, setJobDescription] = useState("");
   const [keywords, setKeywords] = useState([]);
@@ -78,6 +79,34 @@ export default function Toolbox() {
     }
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (activeStep === 1) {
+      try {
+        const data = await request("/api/extract-keywords", {
+          method: "POST",
+          body: JSON.stringify({ jobDescription }),
+        });
+        setKeywords(data.keywords);
+        incrementStep();
+      } catch (error) {
+        console.error("Failed to extract keywords", error);
+      }
+    } else if (activeStep === 3) {
+      try {
+        const data = await request("/api/resume", {
+          method: "POST",
+          body: JSON.stringify({ jobDescription, resume }),
+        });
+        setBulletPoints(data);
+        incrementStep();
+      } catch (error) {
+        console.error("Failed to extract bullet points", error);
+      }
+    }
+  };
+
   return (
     <PageContainer
       marginBottom={true}
@@ -96,37 +125,21 @@ export default function Toolbox() {
       )}
 
       {toolboxActive ? (
-        <div className="min-h-[830px] w-full flex flex-row gap-6">
+        <div className="max-h-[830px] w-full flex flex-row gap-6">
           {/* Sidebar */}
           <Sidebar activeStep={activeStep} />
 
           {/* Main Toolbox */}
-          <div className="bg-fordham-brown rounded-lg p-6 w-full">
-            <div className="space-y-6">
-              <div>
-                <h2 className="h4 text-fordham-white">TOOLBOX</h2>
-                <p className="body-txt text-fordham-gray/60">
-                  Follow the steps to tailor your resume for the specific job application.
-                </p>
-              </div>
-
-              {exitModalActive && (
-                <ExitConfirmationModal
-                  setExitModalActive={setExitModalActive}
-                  handleDone={handleDone}
-                />
-              )}
-
-              <div className="relative">
-                {activeStep > 1 && (
-                  <Button variant="secondary" onClick={decrementStep}>
-                    <IconChevronLeft className="h-8 w-8" />
-                  </Button>
-                )}
-                {renderStep()}
-              </div>
-            </div>
-          </div>
+          <MainToolbox
+            activeStep={activeStep}
+            decrementStep={decrementStep}
+            incrementStep={incrementStep}
+            renderStep={renderStep}
+            setExitModalActive={setExitModalActive}
+            handleDone={handleDone}
+            handleSubmit={handleSubmit}
+            loading={loading}
+          />
         </div>
       ) : (
         <ToolboxEnd />
