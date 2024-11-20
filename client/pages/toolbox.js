@@ -3,12 +3,13 @@ import { useApi } from "@/hooks/useApi";
 import ToolboxStep1 from "@/components/ToolboxPage/ToolboxStep1";
 import ToolboxStep2 from "@/components/ToolboxPage/ToolboxStep2";
 import ToolboxStep3 from "@/components/ToolboxPage/ToolboxStep3";
-import ToolboxStep4 from "@/components/ToolboxPage/ToolBoxStep4/ToolboxStep4.jsx";
+import ToolboxStep4 from "@/components/ToolboxPage/ToolBoxStep4/ToolboxStep4";
 import ToolboxEnd from "@/components/ToolboxPage/ToolboxEnd";
-import ProgressBar from "@/components/ToolboxPage/ProgressBar/ProgressBar";
-import BackButton from "@/components/ToolboxPage/BackButton";
 import ExitConfirmationModal from "@/components/ToolboxPage/ExitConfirmationModal";
 import PageContainer from "@/components/PageContainer";
+import { IconChevronLeft, IconFileText } from "@tabler/icons-react";
+import { Sidebar } from "@/components/ToolboxPage/SideBar";
+import Button from "@/components/ui/Button";
 
 export default function Toolbox() {
   const { error } = useApi();
@@ -20,38 +21,29 @@ export default function Toolbox() {
   const [resume, setResume] = useState("");
   const [bulletPoints, setBulletPoints] = useState([]);
 
-  // If the user is done with the Toolbox, make sure the Exit Modal is close, and
-  // progress to the Toolbox End component
   const handleDone = () => {
     setExitModalActive(false);
     setActiveStep(5);
   };
 
-  // If the rendered step isn't the first one, go to the previous step
   const decrementStep = () => {
     if (activeStep > 1) {
       setActiveStep(activeStep - 1);
     }
-    return;
   };
 
-  // If the rendered step isn't the last one, go to the next step
   const incrementStep = () => {
     if (activeStep < 5) {
       setActiveStep(activeStep + 1);
     }
-    return;
   };
 
-  // If the active step is the last one, set the Toolbox to inactive to render
-  // the Toolbox End component
   useEffect(() => {
     if (activeStep > 4) {
       setToolboxActive(false);
     }
   }, [activeStep]);
 
-  // Render the Toolbox step, based on the activeStep state
   const renderStep = () => {
     switch (activeStep) {
       case 1:
@@ -87,48 +79,58 @@ export default function Toolbox() {
   };
 
   return (
-    <PageContainer>
-      {/* If the Exit Modal is active, darken and blur the background */}
+    <PageContainer
+      marginBottom={true}
+      marginTop={true}
+      limitedWidth={true}
+      className="max-w-7xl flex flex-col gap-20"
+    >
+      <div className=" w-full flex flex-col items-center gap-2">
+        <h1 className="h2 text-fordham-white">Toolbox</h1>
+        <p className="body-txt-md text-center font-light text-fordham-light-gray/60 max-w-2xl">
+          Follow the steps below to tailor your resume for the specific job application.
+        </p>
+      </div>
       {exitModalActive && (
-        <div className="min-w-full top-0 left-0 bg-secondary/30 absolute z-20 backdrop-filter backdrop-blur-[0.8px]"></div>
+        <div className="fixed inset-0 bg-fordham-black/30 backdrop-blur-sm z-40" />
       )}
 
-      <div className="min-h-screen mx-auto gap-10">
-        {/* If theres an error, display the error message // TODO: Add error handling */}
+      {toolboxActive ? (
+        <div className="min-h-[830px] w-full flex flex-row gap-6">
+          {/* Sidebar */}
+          <Sidebar activeStep={activeStep} />
 
-        {/* If the Toolbox is active, render it */}
-        {toolboxActive ? (
-          <div className="flex flex-col items-center gap-12">
-            <h1 className="h1 text-secondary">Toolbox</h1>
-
-            <ProgressBar activeStep={activeStep} />
-
-            <div
-              className={`${activeStep === 4 ? "bg-fordham-black" : "bg-white/50 shadow-md"} flex flex-col items-center justify-between relative p-5 rounded-md h-full mx-5 lg:mx-0 w-full`}
-            >
-              {/* If the current Toolbox Step isn't the first one, display a button for the user to return to the previous step */}
-              {activeStep > 1 && (
-                <div className="absolute -left-14" onClick={decrementStep}>
-                  <BackButton />
-                </div>
-              )}
+          {/* Main Toolbox */}
+          <div className="bg-fordham-brown rounded-lg p-6 w-full">
+            <div className="space-y-6">
+              <div>
+                <h2 className="h4 text-fordham-white">TOOLBOX</h2>
+                <p className="body-txt text-fordham-gray/60">
+                  Follow the steps to tailor your resume for the specific job application.
+                </p>
+              </div>
 
               {exitModalActive && (
-                <div className="flex justify-center">
-                  <ExitConfirmationModal
-                    setExitModalActive={setExitModalActive}
-                    handleDone={handleDone}
-                  />
-                </div>
+                <ExitConfirmationModal
+                  setExitModalActive={setExitModalActive}
+                  handleDone={handleDone}
+                />
               )}
 
-              <div className="w-full h-full">{renderStep()}</div>
+              <div className="relative">
+                {activeStep > 1 && (
+                  <Button variant="secondary" onClick={decrementStep}>
+                    <IconChevronLeft className="h-8 w-8" />
+                  </Button>
+                )}
+                {renderStep()}
+              </div>
             </div>
           </div>
-        ) : (
-          <ToolboxEnd />
-        )}
-      </div>
+        </div>
+      ) : (
+        <ToolboxEnd />
+      )}
     </PageContainer>
   );
 }
