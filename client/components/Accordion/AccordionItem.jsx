@@ -1,5 +1,4 @@
-import { IconMinus, IconPlus, IconCopy } from "@tabler/icons-react";
-import { toast } from "react-hot-toast";
+import { IconMinus, IconPlus } from "@tabler/icons-react";
 import CopyButton from "./CopyButton";
 
 const AccordionItem = ({ title, content, bulletPoints, isOpen, onClick, variant, onCopy }) => {
@@ -12,14 +11,14 @@ const AccordionItem = ({ title, content, bulletPoints, isOpen, onClick, variant,
   const renderContent = () => {
     if (bulletPoints) {
       return (
-        <ul className="list-disc pl-4 text-fordham-white font-light text-base space-y-2">
+        <ul className="list-disc pl-4 text-fordham-white font-light body-txt space-y-2">
           {bulletPoints.map((point, index) => (
             <li key={index}>{point}</li>
           ))}
         </ul>
       );
     }
-    return <p className="text-fordham-white font-light text-base">{content}</p>;
+    return <p className="text-fordham-white font-light body-txt">{content}</p>;
   };
 
   return (
@@ -28,7 +27,7 @@ const AccordionItem = ({ title, content, bulletPoints, isOpen, onClick, variant,
       className="bg-fordham-white/5 rounded-[16px] pr-4 pl-[32px] py-4 hover:cursor-pointer"
     >
       <div className="flex justify-between items-center">
-        <h3 className="text-fordham-white text-lg font-bold">{title}</h3>
+        <h3 className="text-fordham-white body-txt-bold md:body-txt-md-bold mr-4 font-bold">{title}</h3>
         <div className="flex items-center gap-2">
           {/* Copy button - only show in toolbox variant when section is open */}
           {variant === "toolbox" && isOpen && <CopyButton onCopy={handleCopy} />}

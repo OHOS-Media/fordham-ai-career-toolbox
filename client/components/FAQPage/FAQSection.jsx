@@ -8,9 +8,7 @@ const FAQSection = ({ FAQPageData }) => {
 
   return (
     <div className="flex flex-col gap-6 items-center">
-      <div className="flex flex-col w-full">
-        <Accordion data={FAQPageData} variant="faq" onCopy={handleCopy} />
-      </div>
+      <Accordion data={FAQPageData} variant="faq" onCopy={handleCopy} />
     </div>
   );
 };
