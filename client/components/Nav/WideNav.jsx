@@ -36,7 +36,6 @@ export default function WideNav({ navData, isAuthenticated, login, user, error, 
           flex justify-between items-center
           pl-6 pr-3 rounded-2xl
           bg-white/5 backdrop-blur-[15px]
-          shadow-[2px_4px_30px_0px_rgba(0,0,0,0.10)]
           transition-all duration-300
         `}
       >
