@@ -66,61 +66,55 @@ function MainToolbox({
       </div>
 
       {/* Content Section */}
-      <div className="flex-1 relative max-h-full">
-        {/* Main Content */}
-        <div className="h-full flex flex-col max-h-full">
-          {/* <div className="flex-1 p-6">{renderStep()}</div> */}
 
-          <div className={`p-6 flex-1 overflow-y-auto custom-scrollbar`}>
-            {renderStep()}
-          </div>
+      <div className="h-full flex-1 relative flex flex-col max-h-full overflow-hidden">
+        <div className={`p-6 flex-1 overflow-y-auto custom-scrollbar`}>{renderStep()}</div>
 
-          {/* Action Buttons */}
-          {buttonConfig && (
-            <div className="w-full border-t-[1px] border-[#3B3533]">
-              <div className="w-full flex justify-end items-center p-6 gap-4">
-                {/* Back Button */}
-                {activeStep > 1 && (
-                  <div className="">
-                    <Button variant="secondary" onClick={decrementStep} text="Back"></Button>
-                  </div>
-                )}
+        {/* Action Buttons */}
+        {buttonConfig && (
+          <div className="w-full border-t-[1px] border-[#3B3533]">
+            <div className="w-full flex justify-end items-center p-6 gap-4">
+              {/* Back Button */}
+              {activeStep > 1 && (
+                <div className="">
+                  <Button variant="secondary" onClick={decrementStep} text="Back"></Button>
+                </div>
+              )}
 
-                {Array.isArray(buttonConfig) ? (
-                  buttonConfig.map((btn, index) => (
-                    <Button
-                      key={index}
-                      text={btn.text}
-                      onClick={btn.onClick}
-                      variant={btn.variant}
-                      disabled={btn.disabled}
-                    />
-                  ))
-                ) : (
+              {Array.isArray(buttonConfig) ? (
+                buttonConfig.map((btn, index) => (
                   <Button
-                    text={buttonConfig.text}
-                    onClick={buttonConfig.onClick}
-                    disabled={buttonConfig.disabled}
+                    key={index}
+                    text={btn.text}
+                    onClick={btn.onClick}
+                    variant={btn.variant}
+                    disabled={btn.disabled}
                   />
-                )}
-              </div>
+                ))
+              ) : (
+                <Button
+                  text={buttonConfig.text}
+                  onClick={buttonConfig.onClick}
+                  disabled={buttonConfig.disabled}
+                />
+              )}
             </div>
-          )}
-        </div>
-
-        {/* Exit Modal */}
-        {exitModalActive && (
-          <>
-            <div className="fixed inset-0 bg-fordham-black/30 backdrop-blur-sm z-40" />
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50">
-              <ExitConfirmationModal
-                setExitModalActive={setExitModalActive}
-                handleDone={handleDone}
-              />
-            </div>
-          </>
+          </div>
         )}
       </div>
+
+      {/* Exit Modal */}
+      {exitModalActive && (
+        <>
+          <div className="fixed inset-0 bg-fordham-black/30 backdrop-blur-sm z-40" />
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50">
+            <ExitConfirmationModal
+              setExitModalActive={setExitModalActive}
+              handleDone={handleDone}
+            />
+          </div>
+        </>
+      )}
     </div>
   );
 }
