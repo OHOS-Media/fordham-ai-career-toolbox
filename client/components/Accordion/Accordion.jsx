@@ -38,7 +38,7 @@ const Accordion = ({
           },
         }}
       /> */}
-      <div className="w-full flex flex-col gap-4">
+      <div className="w-full flex flex-col gap-4 pb-10">
         {data.map((item, index) => (
           <AccordionItem
             key={index}
