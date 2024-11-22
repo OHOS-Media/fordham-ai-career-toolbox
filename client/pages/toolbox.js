@@ -1,111 +1,76 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { useApi } from "@/hooks/useApi";
-import ToolboxStep1 from "@/components/ToolboxPage/ToolboxStep1";
-import ToolboxStep2 from "@/components/ToolboxPage/ToolboxStep2";
-import ToolboxStep3 from "@/components/ToolboxPage/ToolboxStep3";
-import ToolboxStep4 from "@/components/ToolboxPage/ToolboxStep4";
-import ToolboxEnd from "@/components/ToolboxPage/ToolboxEnd";
-import ExitConfirmationModal from "@/components/ToolboxPage/ExitConfirmationModal";
 import PageContainer from "@/components/PageContainer";
-import { IconChevronLeft, IconFileText } from "@tabler/icons-react";
 import { Sidebar } from "@/components/ToolboxPage/SideBar";
-import Button from "@/components/ui/Button";
 import MainToolbox from "@/components/ToolboxPage/MainToolbox";
+import ToolboxEnd from "@/components/ToolboxPage/ToolboxSteps/ToolboxEnd";
+import { useToolboxSteps } from "@/components/ToolboxPage/ToolboxSteps/useToolboxSteps";
 
 export default function Toolbox() {
   const { request, loading } = useApi();
-  const [toolboxActive, setToolboxActive] = useState(true);
-  const [activeStep, setActiveStep] = useState(4);
-  const [exitModalActive, setExitModalActive] = useState(false);
-  const [jobDescription, setJobDescription] = useState("");
-  const [keywords, setKeywords] = useState([]);
-  const [resume, setResume] = useState("");
-  const [bulletPoints, setBulletPoints] = useState([]);
+  const [state, setState] = useState({
+    toolboxActive: true,
+    activeStep: 1,
+    exitModalActive: false,
+    jobDescription: "",
+    keywords: [],
+    resume: "",
+    bulletPoints: [],
+  });
 
-  const handleDone = () => {
-    setExitModalActive(false);
-    setActiveStep(5);
-  };
+  const {
+    toolboxActive,
+    activeStep,
+    exitModalActive,
+    jobDescription,
+    keywords,
+    resume,
+    bulletPoints,
+  } = state;
 
-  const decrementStep = () => {
-    if (activeStep > 1) {
-      setActiveStep(activeStep - 1);
-    }
-  };
+  const updateState = (updates) => setState((prev) => ({ ...prev, ...updates }));
 
-  const incrementStep = () => {
-    if (activeStep < 5) {
-      setActiveStep(activeStep + 1);
-    }
-  };
+  const handleDone = () => updateState({ exitModalActive: false, activeStep: 5 });
 
-  useEffect(() => {
-    if (activeStep > 4) {
-      setToolboxActive(false);
-    }
-  }, [activeStep]);
-
-  const renderStep = () => {
-    switch (activeStep) {
-      case 1:
-        return (
-          <ToolboxStep1
-            jobDescription={jobDescription}
-            setJobDescription={setJobDescription}
-            setKeywords={setKeywords}
-            incrementStep={incrementStep}
-          />
-        );
-      case 2:
-        return (
-          <ToolboxStep2
-            keywords={keywords}
-            setExitModalActive={setExitModalActive}
-            incrementStep={incrementStep}
-          />
-        );
-      case 3:
-        return (
-          <ToolboxStep3
-            resume={resume}
-            setResume={setResume}
-            jobDescription={jobDescription}
-            incrementStep={incrementStep}
-            setBulletPoints={setBulletPoints}
-          />
-        );
-      case 4:
-        return <ToolboxStep4 bulletPoints={bulletPoints} incrementStep={incrementStep} />;
+  const navigateStep = (direction) => {
+    if (direction === "next" && activeStep < 5) {
+      updateState({ activeStep: activeStep + 1 });
+    } else if (direction === "prev" && activeStep > 1) {
+      updateState({ activeStep: activeStep - 1 });
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if (activeStep === 1) {
-      try {
+    try {
+      if (activeStep === 1) {
         const data = await request("/api/extract-keywords", {
           method: "POST",
           body: JSON.stringify({ jobDescription }),
         });
-        setKeywords(data.keywords);
-        incrementStep();
-      } catch (error) {
-        console.error("Failed to extract keywords", error);
-      }
-    } else if (activeStep === 3) {
-      try {
+        updateState({ keywords: data.keywords });
+      } else if (activeStep === 3) {
         const data = await request("/api/resume", {
           method: "POST",
           body: JSON.stringify({ jobDescription, resume }),
         });
-        setBulletPoints(data);
-        incrementStep();
-      } catch (error) {
-        console.error("Failed to extract bullet points", error);
+        updateState({ bulletPoints: data });
       }
+      navigateStep("next");
+    } catch (error) {
+      console.error("Request failed:", error);
     }
   };
+
+  useEffect(() => {
+    if (activeStep > 4) updateState({ toolboxActive: false });
+  }, [activeStep]);
+
+  const { renderStep } = useToolboxSteps({
+    state,
+    updateState,
+    navigateStep,
+  });
 
   return (
     <PageContainer
@@ -114,28 +79,26 @@ export default function Toolbox() {
       limitedWidth={true}
       className="max-w-7xl flex flex-col gap-20"
     >
-      <div className=" w-full flex flex-col items-center gap-2">
+      <div className="w-full flex flex-col items-center gap-2">
         <h1 className="h2 text-fordham-white">Toolbox</h1>
         <p className="body-txt-md text-center font-light text-fordham-light-gray/60 max-w-2xl">
           Follow the steps below to tailor your resume for the specific job application.
         </p>
       </div>
+
       {exitModalActive && (
         <div className="fixed inset-0 bg-fordham-black/30 backdrop-blur-sm z-40" />
       )}
 
       {toolboxActive ? (
-        <div className="max-h-[830px] w-full flex flex-row gap-6">
-          {/* Sidebar */}
+        <div className="h-[830px] w-full flex flex-row gap-6">
           <Sidebar activeStep={activeStep} />
-
-          {/* Main Toolbox */}
           <MainToolbox
             activeStep={activeStep}
-            decrementStep={decrementStep}
-            incrementStep={incrementStep}
+            decrementStep={() => navigateStep("prev")}
+            incrementStep={() => navigateStep("next")}
             renderStep={renderStep}
-            setExitModalActive={setExitModalActive}
+            setExitModalActive={(value) => updateState({ exitModalActive: value })}
             handleDone={handleDone}
             handleSubmit={handleSubmit}
             loading={loading}

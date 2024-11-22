@@ -7,7 +7,7 @@ import { IconLoader2 } from "@tabler/icons-react";
 import PageContainer from "@/components/PageContainer";
 
 export default function Profile() {
-  const { user, loading, logout } = useAuth();
+  const { user, loading, logout, usage, checkUsage } = useAuth();
   const router = useRouter();
 
   useEffect(() => {
@@ -15,6 +15,12 @@ export default function Profile() {
       router.push("/");
     }
   }, [user, loading, router]);
+
+  useEffect(() => {
+    checkUsage();
+  }, [checkUsage]);
+
+  console.log("usage:", usage);
 
   if (loading || !user) {
     return (
@@ -41,6 +47,12 @@ export default function Profile() {
         <div className="flex flex-col items-center gap-2">
           <h1 className="text-fordham-white text-2xl font-medium">{user.displayName}</h1>
           <p className="text-fordham-white/80">{user.email}</p>
+          {usage && (
+            <div className="flex flex-col items-center mt-4 text-fordham-white/80">
+              <p>Remaining Uses: {usage.remainingUses}</p>
+              <p>Resets on: {new Date(usage.resetDate).toLocaleDateString()}</p>
+            </div>
+          )}
         </div>
 
         <Button onClick={logout} text="Log out" variant="primary" />

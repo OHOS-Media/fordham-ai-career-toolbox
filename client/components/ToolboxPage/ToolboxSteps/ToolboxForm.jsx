@@ -1,4 +1,4 @@
-import Button from "../ui/Button";
+import Button from "@/components/ui/Button";
 
 // This renders a modular form for the Toolbox
 export default function ToolboxForm({ formData, handleSubmit, value, onChange, loading }) {

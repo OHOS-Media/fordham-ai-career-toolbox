@@ -6,6 +6,7 @@ import {
   IconTag,
 } from "@tabler/icons-react";
 import Button from "../ui/Button";
+import Link from "next/link";
 
 export const Sidebar = ({ activeStep, progress }) => (
   <div className="w-[300px] flex flex-shrink-0 flex-col justify-between min-h-full bg-fordham-brown rounded-[16px] border-[1px] border-[#3B3533]">
@@ -150,7 +151,9 @@ export const Sidebar = ({ activeStep, progress }) => (
       {/* Back to Dashboard */}
       <div className="w-full border-t-[1px] border-[#3B3533]">
         <div className="flex justify-center items-center p-6">
-          <Button className="w-full" variant="secondary" text={"Back to dashboard"}></Button>
+          <Link href="/">
+            <Button className="w-full" variant="secondary" text={"Back to dashboard"}></Button>
+          </Link>
         </div>
       </div>
     </div>

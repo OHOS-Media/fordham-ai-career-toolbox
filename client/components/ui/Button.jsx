@@ -31,9 +31,9 @@ const Button = ({
         "font-medium outline outline-fordham-dark-gray outline-[1px] text-fordham-dark-gray cursor-not-allowed",
     },
     tertiary: {
-      default: "font-light bg-transparent text-fordham-white",
+      default: "font-light bg-[#3D3836] text-fordham-white",
       hover: "hover:text-fordham-light-gray",
-      pressed: "bg-fordham-white/5 text-fordham-light-gray",
+      pressed: "bg-fordham-white/5 text-fordham-light-gray outline outline-[6px] outline-fordham-white/20 scale-95 shadow-inner",
       disabled: "text-fordham-dark-gray cursor-not-allowed",
     },
   };
