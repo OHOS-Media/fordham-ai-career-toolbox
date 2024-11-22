@@ -1,9 +1,3 @@
-import { useApi } from "@/hooks/useApi";
-import ToolboxForm from "./ToolboxForm";
-
-// This renders Step 1 of the Toolbox which takes in a resume from the user,
-// and queries the server for the suggested resume bullet points
-// ToolboxStep3.jsx
 export default function ToolboxStep3({ resume, setResume }) {
   const placeholder = `Please paste the full resume here so we can analyze the skills and experience listed.
 

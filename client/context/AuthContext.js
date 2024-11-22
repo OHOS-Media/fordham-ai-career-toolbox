@@ -11,6 +11,8 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [isNewLogin, setIsNewLogin] = useState(false);
+  const [usage, setUsage] = useState(null);
+  const [usageError, setUsageError] = useState("");
   const router = useRouter();
   const { request } = useApi();
 
@@ -23,10 +25,7 @@ export const AuthProvider = ({ children }) => {
       if (userData && isNewLogin) {
         if (!userData.hasAcceptedTerms) {
           router.push("/terms");
-          toast.error("Please accept the terms to continue", {
-            duration: 5000,
-            style: { background: "#282220", color: "#fff" },
-          });
+          toast.error("Please accept the terms to continue");
         } else {
           toast.success(`Welcome back, ${userData.displayName}!`);
         }
@@ -52,23 +51,9 @@ export const AuthProvider = ({ children }) => {
       });
       await loadUser();
       router.push("/");
-      toast.success("Terms accepted successfully!", {
-        duration: 3000,
-        style: {
-          background: "#282220",
-          color: "#fff",
-          borderRadius: "8px",
-        },
-      });
+      toast.success("Terms accepted successfully!");
     } catch (error) {
-      toast.error("Failed to accept terms. Please try again.", {
-        duration: 3000,
-        style: {
-          background: "#282220",
-          color: "#fff",
-          borderRadius: "8px",
-        },
-      });
+      toast.error("Failed to accept terms. Please try again.");
     }
   }, [request, router, loadUser]);
 
@@ -81,31 +66,42 @@ export const AuthProvider = ({ children }) => {
     window.open(url, "googleLoginPopup", `width=${width},height=${height},left=${left},top=${top}`);
   }, []);
 
+  const checkUsage = useCallback(async () => {
+    try {
+      const usageData = await request("/api/usage", { method: "GET" });
+      setUsage(usageData);
+
+      if (usageData.remainingUses <= 0) {
+        const resetDate = new Date(usageData.resetDate);
+        const formattedDate = resetDate.toLocaleDateString("en-US", {
+          weekday: "long",
+          month: "long",
+          day: "numeric",
+        });
+        setUsageError(`Your tokens will reset on ${formattedDate}.`);
+        return false;
+      }
+
+      setUsageError("");
+      return true;
+    } catch (error) {
+      console.error("Error checking usage:", error);
+      setUsageError("Failed to check usage limits. Please try again.");
+      return false;
+    }
+  }, [request]);
+
   const logout = useCallback(async () => {
     try {
       setLoading(true);
       await request("/auth/logout", { method: "GET" });
       setUser(null);
       router.push("/");
-      toast.success("Successfully logged out", {
-        duration: 3000,
-        style: {
-          background: "#282220",
-          color: "#fff",
-          borderRadius: "8px",
-        },
-      });
+      toast.success("Successfully logged out");
     } catch (error) {
       console.error("Logout failed", error);
       setError("Logout failed. Please try again.");
-      toast.error("Logout failed. Please try again.", {
-        duration: 3000,
-        style: {
-          background: "#282220",
-          color: "#fff",
-          borderRadius: "8px",
-        },
-      });
+      toast.error("Logout failed. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -127,14 +123,7 @@ export const AuthProvider = ({ children }) => {
         }
       } else if (event.data.type === "LOGIN_ERROR") {
         setError(event.data.message);
-        toast.error(event.data.message || "Failed to login", {
-          duration: 3000,
-          style: {
-            background: "#282220",
-            color: "#fff",
-            borderRadius: "8px",
-          },
-        });
+        toast.error(event.data.message || "Failed to login");
       }
     };
 
@@ -149,6 +138,9 @@ export const AuthProvider = ({ children }) => {
     login,
     logout,
     acceptTerms,
+    usage,
+    usageError,
+    checkUsage,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
