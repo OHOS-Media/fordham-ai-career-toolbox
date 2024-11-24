@@ -1,0 +1,506 @@
+[
+  {
+    "of": [
+      {
+        "marks": {
+          "annotations": [
+            {
+              "fields": [
+                {
+                  "validation": [
+                    {
+                      "rules": [
+                        {
+                          "flag": "uri",
+                          "constraint": {
+                            "options": {
+                              "scheme": [
+                                "/^http$/",
+                                "/^https$/"
+                              ],
+                              "allowRelative": false,
+                              "relativeOnly": false,
+                              "allowCredentials": false
+                            }
+                          }
+                        }
+                      ],
+                      "level": "error"
+                    }
+                  ],
+                  "name": "href",
+                  "type": "url",
+                  "title": "URL"
+                }
+              ],
+              "name": "link",
+              "type": "object",
+              "title": "URL"
+            }
+          ],
+          "decorators": [
+            {
+              "value": "strong",
+              "title": "Strong"
+            },
+            {
+              "value": "em",
+              "title": "Emphasis"
+            }
+          ]
+        },
+        "lists": [
+          {
+            "value": "bullet",
+            "title": "Bullet"
+          }
+        ],
+        "styles": [
+          {
+            "value": "normal",
+            "title": "Normal"
+          },
+          {
+            "value": "h1",
+            "title": "H1"
+          },
+          {
+            "value": "h2",
+            "title": "H2"
+          },
+          {
+            "value": "h3",
+            "title": "H3"
+          },
+          {
+            "value": "h4",
+            "title": "H4"
+          },
+          {
+            "value": "blockquote",
+            "title": "Quote"
+          }
+        ],
+        "of": [],
+        "type": "block"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "fields": [
+          {
+            "name": "alt",
+            "type": "string",
+            "title": "Alternative Text"
+          }
+        ],
+        "type": "image"
+      }
+    ],
+    "name": "blockContent",
+    "type": "array"
+  },
+  {
+    "fields": [
+      {
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "description": "Check this box if you want this blog to be featured on the homepage",
+        "name": "featured",
+        "type": "boolean"
+      },
+      {
+        "options": {
+          "source": "title"
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error",
+            "message": "Slug is required."
+          }
+        ],
+        "description": "Please ensure the slugs always start with /blog/...",
+        "name": "slug",
+        "type": "slug"
+      },
+      {
+        "to": [
+          {
+            "type": "author"
+          }
+        ],
+        "name": "author",
+        "type": "reference"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "fields": [
+          {
+            "name": "alt",
+            "type": "string",
+            "title": "Alternative text"
+          }
+        ],
+        "name": "mainImage",
+        "type": "image"
+      },
+      {
+        "name": "publishedAt",
+        "type": "datetime"
+      },
+      {
+        "name": "body",
+        "type": "blockContent"
+      }
+    ],
+    "name": "blog",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "name": "name",
+        "type": "string"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "name": "image",
+        "type": "image"
+      }
+    ],
+    "name": "author",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "name": "question",
+        "type": "string"
+      },
+      {
+        "name": "answer",
+        "type": "text"
+      }
+    ],
+    "name": "faq",
+    "type": "document",
+    "title": "Frequently Asked Question"
+  },
+  {
+    "fields": [
+      {
+        "name": "versionName",
+        "type": "string"
+      },
+      {
+        "options": {
+          "collapsed": true
+        },
+        "fields": [
+          {
+            "name": "title",
+            "type": "string"
+          },
+          {
+            "name": "gradientTitle",
+            "type": "string"
+          },
+          {
+            "name": "description",
+            "type": "text"
+          },
+          {
+            "name": "ctaText",
+            "type": "string",
+            "title": "CTA Button Text"
+          }
+        ],
+        "name": "hero",
+        "type": "object",
+        "title": "Hero Section"
+      },
+      {
+        "options": {
+          "collapsed": true
+        },
+        "fields": [
+          {
+            "name": "title",
+            "type": "string"
+          },
+          {
+            "of": [
+              {
+                "fields": [
+                  {
+                    "name": "title",
+                    "type": "string"
+                  },
+                  {
+                    "name": "description",
+                    "type": "string"
+                  },
+                  {
+                    "options": {
+                      "hotspot": true
+                    },
+                    "name": "icon",
+                    "type": "image",
+                    "title": "Feature Icon"
+                  },
+                  {
+                    "name": "iconAlt",
+                    "type": "string",
+                    "title": "Feature Icon Alt Text"
+                  }
+                ],
+                "type": "object"
+              }
+            ],
+            "name": "featureItems",
+            "type": "array"
+          }
+        ],
+        "name": "features",
+        "type": "object",
+        "title": "Features Section"
+      },
+      {
+        "options": {
+          "collapsed": true
+        },
+        "fields": [
+          {
+            "name": "title",
+            "type": "string"
+          },
+          {
+            "name": "description",
+            "type": "text"
+          },
+          {
+            "of": [
+              {
+                "type": "string"
+              }
+            ],
+            "name": "checkboxItems",
+            "type": "array",
+            "title": "CheckboxItems"
+          },
+          {
+            "options": {
+              "hotspot": true
+            },
+            "name": "demoImage",
+            "type": "image"
+          }
+        ],
+        "name": "demo",
+        "type": "object",
+        "title": "Demo Section"
+      },
+      {
+        "of": [
+          {
+            "fields": [
+              {
+                "name": "title",
+                "type": "string"
+              },
+              {
+                "name": "description",
+                "type": "text"
+              },
+              {
+                "of": [
+                  {
+                    "fields": [
+                      {
+                        "name": "text",
+                        "type": "string"
+                      },
+                      {
+                        "options": {
+                          "hotspot": true
+                        },
+                        "name": "icon",
+                        "type": "image"
+                      },
+                      {
+                        "name": "iconAlt",
+                        "type": "string",
+                        "title": "Highlight Icon Alt Text"
+                      }
+                    ],
+                    "type": "object"
+                  }
+                ],
+                "name": "highlights",
+                "type": "array"
+              },
+              {
+                "options": {
+                  "hotspot": true
+                },
+                "name": "demoImage",
+                "type": "image"
+              },
+              {
+                "name": "imageLeft",
+                "type": "boolean",
+                "title": "Align the image to the left?"
+              }
+            ],
+            "type": "object",
+            "name": "demo"
+          }
+        ],
+        "name": "demoOverview",
+        "type": "array"
+      },
+      {
+        "options": {
+          "collapsed": true
+        },
+        "of": [
+          {
+            "fields": [
+              {
+                "name": "quote",
+                "type": "string"
+              },
+              {
+                "name": "text",
+                "type": "text"
+              },
+              {
+                "name": "name",
+                "type": "string"
+              },
+              {
+                "name": "title",
+                "type": "string"
+              },
+              {
+                "name": "year",
+                "type": "number"
+              }
+            ],
+            "type": "object"
+          }
+        ],
+        "name": "testimonials",
+        "type": "array"
+      }
+    ],
+    "name": "homepage",
+    "type": "document",
+    "title": "Home Page"
+  },
+  {
+    "fields": [
+      {
+        "name": "description",
+        "type": "text"
+      },
+      {
+        "of": [
+          {
+            "fields": [
+              {
+                "name": "title",
+                "type": "string",
+                "title": "Section Title"
+              },
+              {
+                "of": [
+                  {
+                    "fields": [
+                      {
+                        "name": "title",
+                        "type": "string",
+                        "title": "Link Title"
+                      },
+                      {
+                        "name": "path",
+                        "type": "string",
+                        "title": "Link Path"
+                      }
+                    ],
+                    "type": "object"
+                  }
+                ],
+                "name": "items",
+                "type": "array",
+                "title": "Links"
+              }
+            ],
+            "type": "object"
+          }
+        ],
+        "name": "links",
+        "type": "array",
+        "title": "Link Sections"
+      },
+      {
+        "fields": [
+          {
+            "name": "email",
+            "type": "string"
+          },
+          {
+            "name": "phone",
+            "type": "string"
+          }
+        ],
+        "name": "contact",
+        "type": "object",
+        "title": "Contact Information"
+      },
+      {
+        "of": [
+          {
+            "fields": [
+              {
+                "name": "title",
+                "type": "string",
+                "title": "Platform Name"
+              },
+              {
+                "name": "path",
+                "type": "string",
+                "title": "Profile Path"
+              },
+              {
+                "name": "icon",
+                "type": "image"
+              }
+            ],
+            "type": "object"
+          }
+        ],
+        "name": "socialLinks",
+        "type": "array"
+      }
+    ],
+    "name": "footer",
+    "type": "document"
+  }
+]

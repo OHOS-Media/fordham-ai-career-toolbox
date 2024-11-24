@@ -9,7 +9,7 @@
   "rules": {
     "quotes": ["warn", "double"],
     "prettier/prettier": [
-      "error",
+      "warn",
       {
         "singleQuote": false
       }

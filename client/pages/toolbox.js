@@ -94,8 +94,8 @@ export default function Toolbox() {
       )}
 
       <div className="min-h-screen mx-auto gap-10">
-        {/* If theres an error, display the error message */}
-        // TODO: Add error handling
+        {/* If theres an error, display the error message // TODO: Add error handling */}
+
         {/* If the Toolbox is active, render it */}
         {toolboxActive ? (
           <div className="flex flex-col items-center gap-12">

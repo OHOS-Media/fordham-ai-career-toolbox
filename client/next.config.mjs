@@ -10,9 +10,18 @@ const nextConfig = {
         pathname: "/a/**",
       },
       {
+        protocol: "https",
         hostname: "cdn.sanity.io",
+        port: "",
       },
     ],
+  },
+  webpack: (config) => {
+    config.experiments = { ...config.experiments, topLevelAwait: true };
+    return config;
+  },
+  experimental: {
+    esmExternals: "loose",
   },
 };
 

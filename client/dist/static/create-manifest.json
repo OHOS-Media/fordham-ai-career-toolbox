@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "createdAt": "2024-11-14T22:43:12.553Z",
+  "workspaces": [
+    {
+      "name": "ram-resume",
+      "title": "Ram Resume",
+      "basePath": "/studio",
+      "dataset": "production",
+      "schema": "4b8a7a02.create-schema.json"
+    }
+  ]
+}
