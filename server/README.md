@@ -1,69 +1,114 @@
-# AI Career Toolbox Server
+# RamResume Server
 
-This is the server-side component of the AI Career Toolbox application. It's built with Express.js and provides the backend API for the Next.js client.
+Express.js server providing authentication, AI integration, and API endpoints for RamResume.
 
-## Directory Structure
-
-```
-server/
-├── config/         # Configuration files
-├── middleware/     # Custom middleware functions
-├── models/         # Database models
-├── routes/         # API routes
-├── utils/          # Utility functions
-├── .env            # Environment variables (create this file)
-├── package.json    # Project dependencies and scripts
-└── server.js       # Main server file
-```
-
-## Setup and Installation
+## Setup
 
 1. Install dependencies:
 
-   ```
-   npm install
-   ```
+```bash
+npm install
+```
 
-2. Set up environment variables:
+2. Create `.env` file:
 
-   - Create `.env` with this sample
-   - Fill in the necessary environment variables
+```env
+# Server
+PORT=8000
+NODE_ENV=development
 
-   ```
-   CLIENT_URL=http://localhost:3000
-   SERVER_URL=http://localhost:8000
-   PORT=8000
-   MONGODB_URI=
-   GOOGLE_CLIENT_ID=
-   GOOGLE_CLIENT_SECRET=
-   SESSION_SECRET=
-   OPENAI_API_KEY=
-   ```
+# Client URL (for CORS)
+CLIENT_URL=http://localhost:3000
 
-3. Start the server:
-   - For development: `npm start`
-   <!-- - For production: `npm start` -->
+# MongoDB
+MONGODB_URI=your_mongodb_uri
+
+# Auth
+GOOGLE_CLIENT_ID=your_google_client_id
+GOOGLE_CLIENT_SECRET=your_google_client_secret
+SESSION_SECRET=your_session_secret
+
+# OpenAI
+OPENAI_API_KEY=your_openai_key
+
+# Security
+SITE_PASSWORD=123
+PAYLOAD_SECRET=your-payload-secret
+```
+
+3. Start development server:
+
+```bash
+npm start
+```
+
+## Project Structure
+
+```
+server/
+├── config/          # Configuration files
+├── controllers/     # Business logic
+├── middleware/      # Custom middleware
+├── models/          # Database models
+├── routes/          # API routes
+└── utils/          # Utility functions
+```
+
+## Available Scripts
+
+- `npm run dev`: Start development server with nodemon
+- `npm start`: Start production server
+- `npm run check`: Run ESLint
+- `npm test`: Run tests (not yet configured)
+
+## Dependencies
+
+### Production
+
+- `express`: Web framework
+- `mongoose`: MongoDB ODM
+- `passport` & `passport-google-oauth20`: Authentication
+- `openai`: OpenAI API client
+- `connect-mongo`: Session storage
+- `express-session`: Session management
+- `cors`: CORS support
+- `cookie-parser`: Cookie parsing
+- `dotenv`: Environment variables
+- `axios`: HTTP client
+
+### Development
+
+- `nodemon`: Development server
+- `eslint`: Linting
+- `prettier`: Code formatting
 
 ## API Endpoints
 
-- `GET /auth/google`: Google OAuth authentication
-- `GET /auth/logout`: User logout
-- `GET /api/user`: Get current user information
-- `POST /api/extract-keywords`: Send a request to the OpenAI API for keyword extraction
-- (Add other API endpoints here)
+### Auth Routes
 
-## Database
+- `GET /auth/google`: Google OAuth login
+- `GET /auth/google/callback`: OAuth callback
+- `GET /auth/logout`: Logout
+- `POST /auth/accept-terms`: Accept terms of service
 
-This server uses MongoDB. Make sure you have MongoDB installed and running, and provide the correct connection string in your `.env` file.
+### User Routes
 
-<!-- ## Testing
+- `GET /api/user`: Get user profile
+- `GET /api/usage`: Get usage statistics
 
-Run tests with:
+### Tool Routes
 
-```
-npm test
-``` -->
+- `POST /api/extract-keywords`: Extract keywords from job description
+- `POST /api/resume`: Enhance resume with AI
 
-<!-- ## Contributing
+## Development
 
-Please read the main [CONTRIBUTING.md](../CONTRIBUTING.md) file in the root directory for details on our code of conduct and the process for submitting pull requests. -->
+### Code Style
+
+- ESLint configuration with Prettier integration
+- Run `npm run check` before committing
+
+### Environment Variables
+
+- Never commit `.env` file
+- Update `README.md` when adding new variables
