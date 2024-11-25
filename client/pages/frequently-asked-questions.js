@@ -5,11 +5,11 @@ import { client } from "@/src/sanity/lib/client";
 
 export default function FAQ({ FAQPageData }) {
   return (
-    <PageContainer marginBottom={true} marginTop={true}>
+    <PageContainer marginBottom={true}>
       <GradientContainer>
-        <div className="flex flex-col gap-20">
-          <div className=" w-full flex flex-col items-center gap-2">
-            <h1 className="h2 text-fordham-white">Here to help</h1>
+        <div className="flex flex-col">
+          <div className=" w-full flex flex-col items-center gap-2 py-20 px-10">
+            <h1 className="h4 md:h3 text-fordham-white">Here to help</h1>
             <p className="body-txt-md text-center font-light text-fordham-light-gray/60 max-w-2xl">
               Frequently asked questions and resources to assist you.
             </p>
