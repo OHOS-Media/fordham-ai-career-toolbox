@@ -89,7 +89,7 @@ function MainToolbox({
   const notificationConfig = getNotificationConfig();
 
   return (
-    <div className="bg-fordham-brown rounded-[16px] w-full max-h-full flex flex-col">
+    <div className="bg-fordham-brown rounded-[16px] w-full max-h-full flex flex-col border-[1px] border-[#3B3533]">
       <div className="flex p-6 border-b-[1px] border-[#3B3533] gap-4">
         <h2 className="font-medium body-text-md text-fordham-white">TOOLBOX</h2>
         <IconPointFilled className="w-3 text-fordham-gray/60" />
