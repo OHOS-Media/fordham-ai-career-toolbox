@@ -66,8 +66,8 @@ export default function ToolboxStep2({ keywords }) {
         </p>
       </div>
       <div className="flex flex-wrap gap-4">
-        {keywords.slice(0, showAll ? keywords.length : initialKeywordCount).map((word, idx) => (
-          <Button key={idx} variant="tertiary" text={word} onClick={copyToClipboard}></Button>
+        {mockKeywords.slice(0, showAll ? keywords.length : initialKeywordCount).map((word, idx) => (
+          <Button key={idx} variant="tertiary" text={word} onClick={(e) => copyToClipboard(word)}></Button>
         ))}
         <Button
           variant="secondary"
