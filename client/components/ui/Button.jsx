@@ -26,7 +26,7 @@ const Button = ({
       default: "bg-transparent text-fordham-white border-[1px] border-fordham-white",
       hover: "bg-fordham-white bg-opacity-[5%] hover:text-fordham-gray",
       pressed:
-        "border-none bg-fordham-white bg-opacity-[5%] outline outline-[6px] outline-fordham-white/20 scale-95 shadow-inner",
+        "border-opacity-0 bg-fordham-white bg-opacity-[5%] outline outline-[6px] outline-fordham-white/20 scale-95 shadow-inner",
       disabled:
         "font-medium outline outline-fordham-dark-gray outline-[1px] text-fordham-dark-gray cursor-not-allowed",
     },
