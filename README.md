@@ -17,9 +17,6 @@ ramresume/
 
 - 🔍 Smart Keyword Extraction: Extract relevant keywords from job descriptions
 - 📝 Resume Optimization: Get AI-powered suggestions to improve your resume
-- 🤖 AI Interview Preparation: Practice with AI-generated interview questions
-- 📊 Application Tracking: Keep track of your job applications
-- 🎯 Skills Matching: Compare your skills with job requirements
 
 ## Prerequisites
 
@@ -47,16 +44,13 @@ Before you begin, ensure you have the following installed:
    For the client (create `client/.env.local`):
    ```
    NEXT_PUBLIC_SERVER_URL=http://localhost:8000
+   ...
    ```
 
    For the server (create `server/.env`):
    ```
    CLIENT_URL=http://localhost:3000
-   PORT=8000
-   MONGODB_URI=your_mongodb_connection_string
-   GOOGLE_CLIENT_ID=your_google_client_id
-   GOOGLE_CLIENT_SECRET=your_google_client_secret
-   SESSION_SECRET=your_session_secret
+   ...
    ```
 
 ## Development
@@ -93,10 +87,10 @@ In the root directory:
 - Next.js
 - React
 - Tailwind CSS
-- OpenAI API
 
 ### Backend
 - Express.js
 - MongoDB
 - Passport.js (Google OAuth)
 - AWS Lambda
+- OpenAI API
