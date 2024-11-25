@@ -1,13 +1,16 @@
 import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 import { useApi } from "@/hooks/useApi";
 import PageContainer from "@/components/PageContainer";
 import { Sidebar } from "@/components/ToolboxPage/SideBar";
 import MainToolbox from "@/components/ToolboxPage/MainToolbox";
 import ToolboxEnd from "@/components/ToolboxPage/ToolboxSteps/ToolboxEnd";
 import { useToolboxSteps } from "@/components/ToolboxPage/ToolboxSteps/useToolboxSteps";
+import ExitConfirmationModal from "@/components/ToolboxPage/ExitConfirmationModal";
 
 export default function Toolbox() {
   const { request, loading } = useApi();
+  const router = useRouter();
   const [state, setState] = useState({
     toolboxActive: true,
     activeStep: 1,
@@ -30,7 +33,19 @@ export default function Toolbox() {
 
   const updateState = (updates) => setState((prev) => ({ ...prev, ...updates }));
 
-  const handleDone = () => updateState({ exitModalActive: false, activeStep: 5 });
+  const handleReturnBtn = () => {
+    if (activeStep > 1) {
+      return updateState({ exitModalActive: true });
+    } else {
+      router.push("/");
+    }
+  };
+
+  const handleCancel = () => updateState({ exitModalActive: false });
+
+  const handleDone = () => {
+    router.push("/");
+  };
 
   const navigateStep = (direction) => {
     if (direction === "next" && activeStep < 5) {
@@ -87,18 +102,26 @@ export default function Toolbox() {
       </div>
 
       {exitModalActive && (
-        <div className="fixed inset-0 bg-fordham-black/30 backdrop-blur-sm z-40" />
+        <ExitConfirmationModal
+          setExitModalActive={(value) => updateState({ exitModalActive: value })}
+          handleDone={handleDone}
+          handleCancel={handleCancel}
+        />
       )}
 
       {toolboxActive ? (
         <div className="h-[700px] w-full flex flex-row gap-6">
-          <Sidebar activeStep={activeStep} />
+          <Sidebar
+            activeStep={activeStep}
+            handleReturnBtn={handleReturnBtn}
+            handleDone={handleDone}
+            setExitModalActive={(value) => updateState({ exitModalActive: value })}
+          />
           <MainToolbox
             activeStep={activeStep}
             decrementStep={() => navigateStep("prev")}
             incrementStep={() => navigateStep("next")}
             renderStep={renderStep}
-            setExitModalActive={(value) => updateState({ exitModalActive: value })}
             handleDone={handleDone}
             handleSubmit={handleSubmit}
             loading={loading}

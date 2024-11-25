@@ -1,18 +1,14 @@
 import React from "react";
-import ExitConfirmationModal from "./ExitConfirmationModal";
 import { IconPointFilled } from "@tabler/icons-react";
 import Button from "../ui/Button";
 import { useAuth } from "@/context/AuthContext";
 import Notification from "../ui/Notification";
 
 function MainToolbox({
-  setExitModalActive,
-  exitModalActive,
   decrementStep,
   incrementStep,
   activeStep,
   renderStep,
-  handleDone,
   handleSubmit,
   loading,
 }) {
@@ -127,18 +123,6 @@ function MainToolbox({
           </div>
         )}
       </div>
-
-      {exitModalActive && (
-        <>
-          <div className="fixed inset-0 bg-fordham-black/30 backdrop-blur-sm z-40" />
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50">
-            <ExitConfirmationModal
-              setExitModalActive={setExitModalActive}
-              handleDone={handleDone}
-            />
-          </div>
-        </>
-      )}
 
       {notificationConfig && (activeStep === 1 || activeStep === 3) && (
         <Notification
