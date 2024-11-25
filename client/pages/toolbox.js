@@ -91,7 +91,7 @@ export default function Toolbox() {
       )}
 
       {toolboxActive ? (
-        <div className="h-[830px] w-full flex flex-row gap-6">
+        <div className="h-[700px] w-full flex flex-row gap-6">
           <Sidebar activeStep={activeStep} />
           <MainToolbox
             activeStep={activeStep}
