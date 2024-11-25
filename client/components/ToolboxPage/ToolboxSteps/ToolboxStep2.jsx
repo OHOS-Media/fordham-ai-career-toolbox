@@ -69,11 +69,13 @@ export default function ToolboxStep2({ keywords }) {
         {keywords.slice(0, showAll ? keywords.length : initialKeywordCount).map((word, idx) => (
           <Button key={idx} variant="tertiary" text={word} onClick={copyToClipboard}></Button>
         ))}
-        <Button
-          variant="secondary"
-          text={`${showAll ? "Show less" : "Show more"}`}
-          onClick={() => setShowAll(!showAll)}
-        />
+        {keywords.length > initialKeywordCount && (
+          <Button
+            variant="secondary"
+            text={`${showAll ? "Show less" : "Show more"}`}
+            onClick={() => setShowAll(!showAll)}
+          />
+        )}
       </div>
     </div>
   );
