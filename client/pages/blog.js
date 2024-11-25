@@ -10,7 +10,7 @@ export default function Blog({ BlogPageData }) {
         <div className="flex flex-col">
           <div className=" w-full flex flex-col items-center gap-2 py-20 px-10">
             <h1 className="h4 md:h3 text-fordham-white">RamResume blog</h1>
-            <p className="body-txt-md text-center font-light text-fordham-light-gray/60 max-w-2xl">
+            <p className="body-txt-md text-center font-light text-fordham-light-gray/60">
               Your hub for all things job search and professional growth.
             </p>
           </div>
