@@ -19,6 +19,7 @@ export default function Toolbox() {
     keywords: [],
     resume: "",
     bulletPoints: [],
+    pendingNavigation: null,
   });
 
   const {
@@ -29,9 +30,32 @@ export default function Toolbox() {
     keywords,
     resume,
     bulletPoints,
+    pendingNavigation,
   } = state;
 
   const updateState = (updates) => setState((prev) => ({ ...prev, ...updates }));
+
+  // Handle beforeunload event
+  useEffect(() => {
+    const handleBeforeUnload = (e) => {
+      if (activeStep > 1) {
+        // Store the navigation event
+        updateState({
+          exitModalActive: true,
+          isLeavingPage: true,
+          pendingNavigation: e,
+        });
+
+        // Cancel the event and show our custom modal
+        e.preventDefault();
+        // Chrome requires returnValue to be set
+        e.returnValue = "";
+      }
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    return () => window.removeEventListener("beforeunload", handleBeforeUnload);
+  }, [activeStep]);
 
   const handleReturnBtn = () => {
     if (activeStep > 1) {
@@ -41,10 +65,27 @@ export default function Toolbox() {
     }
   };
 
-  const handleCancel = () => updateState({ exitModalActive: false });
+  const handleCancel = () => {
+    if (state.pendingNavigation) {
+      // If there was a pending navigation, prevent it
+      state.pendingNavigation.preventDefault();
+    }
+    updateState({
+      exitModalActive: false,
+      isLeavingPage: false,
+      pendingNavigation: null,
+    });
+  };
 
   const handleDone = () => {
-    router.push("/");
+    // Use state.isLeavingPage and state.pendingNavigation directly
+    if (state.isLeavingPage && state.pendingNavigation) {
+      // If user was trying to leave/reload the page, allow it now
+      window.onbeforeunload = null;
+      window.location.reload();
+    } else {
+      router.push("/");
+    }
   };
 
   const navigateStep = (direction) => {
