@@ -12,7 +12,7 @@ module.exports = function (passport) {
       async (accessToken, refreshToken, profile, done) => {
         try {
           const email = profile.emails[0].value;
-
+          // Uncomment to restrict authentication to Fordham emails
           // if (!email.endsWith("@fordham.edu")) {
           //   return done(null, false, {
           //     message: "Only Fordham University personnel are allowed.",
