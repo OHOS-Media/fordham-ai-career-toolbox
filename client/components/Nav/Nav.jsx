@@ -13,9 +13,8 @@ const navData = {
 };
 
 export default function Nav() {
-  const { isAuthenticated, login, user, error, setError } = useAuth();
+  const { login } = useAuth();
   const [isMobileScreen, setIsMobileScreen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
 
   // Handle screen resize for mobile/desktop switch
   useEffect(() => {
@@ -29,24 +28,8 @@ export default function Nav() {
   }, []);
 
   return isMobileScreen ? (
-    <MobileNav
-      navData={navData}
-      isAuthenticated={isAuthenticated}
-      login={login}
-      user={user}
-      error={error}
-      setError={setError}
-      scrolled={scrolled}
-    />
+    <MobileNav navData={navData} login={login} />
   ) : (
-    <WideNav
-      navData={navData}
-      isAuthenticated={isAuthenticated}
-      login={login}
-      user={user}
-      error={error}
-      setError={setError}
-      scrolled={scrolled}
-    />
+    <WideNav navData={navData} login={login} />
   );
 }
