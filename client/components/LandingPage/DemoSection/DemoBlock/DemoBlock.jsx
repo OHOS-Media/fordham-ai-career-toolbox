@@ -2,7 +2,6 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { urlFor } from "@/src/sanity/lib/image";
-
 import HighlightItem from "./HighlightItem";
 
 const slideVariants = {
@@ -37,7 +36,7 @@ const DemoBlock = ({ title, description, highlights, demoImage, imageLeft }) => 
         </div>
       </div>
 
-      <motion.motion.div
+      <motion.div
         custom={imageLeft ? "left" : "right"}
         variants={slideVariants}
         initial="offscreen"
@@ -55,7 +54,7 @@ const DemoBlock = ({ title, description, highlights, demoImage, imageLeft }) => 
           height={550}
           className="w-full"
         />
-      </motion.motion.div>
+      </motion.div>
     </FlipGrid>
   );
 };
