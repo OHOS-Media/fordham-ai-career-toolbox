@@ -3,7 +3,7 @@ import Logo from "../ui/Logo";
 import NavLink from "./NavLink";
 import AuthNavButton from "./AuthNavButton";
 
-export default function WideNav({ navData, isAuthenticated, login, user, error, setError }) {
+export default function WideNav({ navData, login }) {
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [visible, setVisible] = useState(true);
   const [atTop, setAtTop] = useState(true);
@@ -26,7 +26,7 @@ export default function WideNav({ navData, isAuthenticated, login, user, error, 
     <header
       className={`
         w-full sticky top-0 z-50 pt-10
-        transition-all duration-500 transform
+        transition-all duration-500 transform px-5
         ${visible ? "translate-y-0" : "-translate-y-full"}
       `}
     >
@@ -36,6 +36,7 @@ export default function WideNav({ navData, isAuthenticated, login, user, error, 
           flex justify-between items-center
           pl-6 pr-3 rounded-2xl
           bg-white/5 backdrop-blur-[15px]
+          border-[1px] border-[#3B3533]
           transition-all duration-300
         `}
       >
