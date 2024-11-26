@@ -46,17 +46,7 @@ const DemoBlock = ({ title, description, highlights, demoImage, imageLeft }) => 
           once: true,
           amount: 0.4,
         }}
-       
-        custom={imageLeft ? "left" : "right"}
-        variants={slideVariants}
-        initial="offscreen"
-        whileInView="onscreen"
-        viewport={{
-          once: true,
-          amount: 0.4,
-        }}
         className="w-full"
-      
       >
         <Image
           src={urlFor(demoImage).url()}
