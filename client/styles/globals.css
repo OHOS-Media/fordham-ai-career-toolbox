@@ -15,6 +15,16 @@
   .text-balance {
     text-wrap: balance;
   }
+
+  /* Chrome, Safari and Opera */
+  .scrollbar-hidden::-webkit-scrollbar {
+    display: none;
+  }
+
+  .scrollbar-hidden {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+  }
 }
 
 @layer base {
@@ -23,7 +33,6 @@
   .h2,
   .h3 {
     letter-spacing: 0rem;
-    line-height: 3.625rem;
   }
 
   .h1 {
@@ -44,7 +53,7 @@
   }
 
   .h5 {
-    @apply text-h5 font-medium;
+    @apply text-2xl font-medium;
   }
 
   .h6 {

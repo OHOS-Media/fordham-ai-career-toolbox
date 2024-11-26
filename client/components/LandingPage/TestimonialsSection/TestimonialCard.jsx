@@ -1,7 +1,7 @@
 const TestimonialCard = ({ quote, text, name, title, year }) => (
-  <div className="flex flex-col items-center justify-start w-full md:w-auto h-auto bg-fordham-white/5 p-4 md:p-6 rounded-[16px] gap-4 md:gap-6">
-    <h3 className="text-lg md:h5">&quot;{quote}&quot;</h3>
-    <p className="body-txt text-fordham-light-gray/60 text-center">{text}</p>
+  <div className="flex flex-col items-center justify-between min-h-[211px] min-w-[336px] bg-fordham-white/5 p-6 rounded-[16px] gap-6">
+    <h3 className="h5">&quot;{quote}&quot;</h3>
+    <p className="body-txt text-fordham-light-gray/60">{text}</p>
     <div className="w-full text-left">
       <p className="body-txt-sm font-medium text-fordham-white">{name}</p>
       <p className="body-txt-sm text-fordham-light-gray/60">

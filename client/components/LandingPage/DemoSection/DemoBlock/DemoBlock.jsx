@@ -24,13 +24,11 @@ const slideVariants = {
 
 const DemoBlock = ({ title, description, highlights, demoImage, imageLeft }) => {
   return (
-    <article
-      className={`flex flex-col w-full ${imageLeft ? "lg:flex-row-reverse" : "lg:flex-row "} items-center lg:justify-between gap-14 px-4 md:px-0 text-white z-10`}
-    >
-      <div className="flex flex-col w-full lg:w-1/2 gap-8">
-        <h2 className="h3 text-center md:text-left leading-tight">{title}</h2>
+    <FlipGrid imageLeft={imageLeft}>
+      <div className="flex flex-col w-full gap-8">
+        <h2 className="h5 md:h3 text-left leading-tight">{title}</h2>
 
-        <p className="body-txt">{description}</p>
+        <p className="body-txt-base">{description}</p>
 
         <div className="flex flex-col gap-2">
           {highlights.map((highlight, idx) => (
@@ -48,12 +46,39 @@ const DemoBlock = ({ title, description, highlights, demoImage, imageLeft }) => 
           once: true,
           amount: 0.4,
         }}
-        className="w-fit"
+        className="w-full"
       >
-        <Image src={urlFor(demoImage).url()} alt="Demo Screenshot" width={550} height={550} />
+        <Image
+          src={urlFor(demoImage).url()}
+          alt="Demo Screenshot"
+          width={550}
+          height={550}
+          className="w-full"
+        />
       </motion.div>
-    </article>
+    </FlipGrid>
   );
 };
 
 export default DemoBlock;
+
+const FlipGrid = ({ children, imageLeft = false }) => {
+  return (
+    <div
+      className={`
+      grid
+      grid-cols-1
+      md:grid-cols-2
+      gap-10
+      sm:gap-8
+      md:gap-16
+      items-center
+      w-full
+    text-fordham-white
+      ${imageLeft ? "md:[&>*:first-child]:order-last" : ""}
+    `}
+    >
+      {children}
+    </div>
+  );
+};
