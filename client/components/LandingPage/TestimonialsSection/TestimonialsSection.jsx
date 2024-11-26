@@ -8,9 +8,9 @@ const TestimonialsSection = ({ testimonials }) => {
   }
 
   return (
-    <section className="w-full text-fordham-white flex flex-col gap-[60px]">
-      <h2 className="h3 text-center">User stories</h2>
-      <div className="flex flex-row justify-center items-center gap-4">
+    <section className="w-full text-fordham-white flex flex-col">
+      <h2 className="h5 md:h3 font-bold text-center text-white mb-6 md:mb-[60px]">User stories</h2>
+      <div className="flex flex-row overflow-x-scroll gap-4 scrollbar-hidden w-full">
         {testimonials.map((testimonial, index) => (
           <TestimonialCard {...testimonial} key={index} />
         ))}
