@@ -24,6 +24,9 @@ router.get("/user", isAuthenticated, (req, res) => {
     profilePicture: req.user.profilePicture,
     hasAcceptedTerms: req.user.hasAcceptedTerms,
     acceptedTermsAt: req.user.acceptedTermsAt,
+    gradYear: req.user.gradYear,
+    major: req.user.major,
+    interestedPositions: req.user.interestedPositions,
   });
 });
 
@@ -37,6 +40,21 @@ router.get("/usage", isAuthenticated, async (req, res) => {
     });
   } catch (error) {
     res.status(500).json({ error: "Error fetching usage data" });
+  }
+});
+
+// PUT route to update user profile. We will add middleware to check user input later
+router.put("/user", isAuthenticated, async (req, res) => {
+  try {
+    const { gradYear, major, interestedPositions } = req.body;
+
+    const updateData = {};
+    if (gradYear) updateData.gradYear = gradYear;
+    if (major) updateData.major = major;
+    if (interestedPositions) updateData.interestedPositions = interestedPositions;
+  } catch (error) {
+    console.error("Error updating user:", error);
+    res.status(500).json({ error: "Failed to update user profile" });
   }
 });
 

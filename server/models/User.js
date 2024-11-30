@@ -37,6 +37,17 @@ const UserSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  gradYear: {
+    type: Number,
+  },
+  major: {
+    type: String,
+  },
+  interestedPositions: [
+    {
+      type: String,
+    },
+  ],
 });
 
 module.exports = mongoose.model("User", UserSchema);
