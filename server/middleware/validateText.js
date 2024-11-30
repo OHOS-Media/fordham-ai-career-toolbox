@@ -1,5 +1,5 @@
 // server/middleware/validateText.js
-const { TOOL_LIMITS, INAPPROPRIATE_CONTENT } = require("../config/toolLimits");
+const { TOOL_LIMITS, INAPPROPRIATE_CONTENT } = require("../config/constants");
 
 const countWords = (text) => {
   return text.trim().split(/\s+/).filter(Boolean).length;

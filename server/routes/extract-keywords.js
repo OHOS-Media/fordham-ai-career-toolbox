@@ -8,6 +8,7 @@ const requireTerms = require("../middleware/requireTerms.js");
 const { ensureAuthenticated } = require("../middleware/auth.js");
 
 const openai = new OpenAI(process.env.OPENAI_API_KEY);
+const { SYSTEM_PROMPT_KEYWORDS_EXTRACTION } = require("../config/constants");
 
 const { mockKeywords } = require("../mockdata");
 
@@ -28,7 +29,7 @@ router.post(
           { role: "system", content: "You are an expert career consultant." },
           {
             role: "user",
-            content: `Extract job-related keywords and key phrases from the following job description, limit to the top 20 most important keywords:\n\n${jobDescription}. Format the response as an array of strings.`,
+            content: SYSTEM_PROMPT_KEYWORDS_EXTRACTION + jobDescription,
           },
         ],
         model: "gpt-4o",
@@ -37,7 +38,7 @@ router.post(
       await decrementUsage(req.userUsage);
 
       let content = completion.choices[0].message.content;
-      // console.log("Raw OpenAI response:", content);
+      //console.log("Raw OpenAI response:", content);
 
       // Remove any markdown formatting
       content = content.replace(/```json\n|\n```/g, "");
