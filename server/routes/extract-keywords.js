@@ -26,7 +26,11 @@ router.post(
       // console.log("Sending request to OpenAI");
       const completion = await openai.chat.completions.create({
         messages: [
-          { role: "system", content: "You are an expert career consultant." },
+          {
+            role: "system",
+            content:
+              "You are an expert resume writer that works with top business school students to re-write their resumes more effectively.",
+          },
           {
             role: "user",
             content: SYSTEM_PROMPT_KEYWORDS_EXTRACTION + jobDescription,
