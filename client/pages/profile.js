@@ -33,14 +33,16 @@ export default function Profile() {
   return (
     <PageContainer marginBottom={true} marginTop={true}>
       <div className="flex flex-col items-center gap-6 bg-fordham-white/5 p-8 rounded-lg backdrop-blur-sm">
-        <div className="rounded-full overflow-hidden">
+        <div className="rounded-full overflow-hidden w-[200px] h-[200px]">
           <Image
             src={user.profilePicture}
             alt={user.displayName}
-            width={150}
-            height={150}
+            // Use a larger, higher-quality image URL but compress to 200px for better quality
+            width={400}
+            height={400}
             className="object-cover"
             priority
+            quality={100}
           />
         </div>
 
