@@ -27,12 +27,12 @@ module.exports = function (passport) {
               googleId: profile.id,
               displayName: profile.displayName,
               email: email,
-              profilePicture: profile.photos[0].value,
+              profilePicture: profile.photos[0].value.replace(/=s\d+-c/, "=s400-c"),
               hasAcceptedTerms: false,
             });
           } else {
             // Update existing user's profile picture
-            user.profilePicture = profile.photos[0].value;
+            user.profilePicture = profile.photos[0].value.replace(/=s\d+-c/, "=s400-c");
             await user.save();
           }
 
