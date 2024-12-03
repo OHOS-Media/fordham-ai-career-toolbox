@@ -5,7 +5,6 @@ const passport = require("passport");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
 const cors = require("cors");
-const passwordProtection = require("./middleware/passwordProtection");
 const cookieParser = require("cookie-parser");
 
 const app = express();
@@ -52,33 +51,21 @@ app.use(
 app.use(express.json());
 app.use(cookieParser());
 
-// Apply password protection to all routes except the password verification route
-// app.use((req, res, next) => {
-//   if (req.path === "/api/verify-password") {
-//     return next();
-//   }
-//   passwordProtection(req, res, next);
-// });
-
-// Password verification route
-// app.post("/api/verify-password", passwordProtection, (req, res) => {
-//   res.json({ success: true });
-// });
-
 // Passport middleware
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.json());
 require("./config/passport")(passport);
 
-app.use((req, res, next) => {
-  console.log("Request URL:", req.url);
-  console.log("SessionID:", req.sessionID);
-  console.log("Session:", JSON.stringify(req.session, null, 2));
-  console.log("Is Authenticated:", req.isAuthenticated());
-  console.log("User:", req.user ? req.user._id : "No user");
-  next();
-});
+// app.use((req, res, next) => {
+//   console.log("Request URL:", req.url);
+//   console.log("SessionID:", req.sessionID);
+//   console.log("Session:", JSON.stringify(req.session, null, 2));
+//   console.log("Is Authenticated:", req.isAuthenticated());
+//   console.log("User:", req.user ? req.user._id : "No user");
+//   next();
+// });
+
 // Routes
 app.use("/auth", require("./routes/auth"));
 app.use("/api", require("./routes/user"));
@@ -95,4 +82,4 @@ app.get("/", (req, res) => {
 app.use(require("./utils/errorHandler"));
 
 const PORT = process.env.PORT || 8000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(PORT, () => console.log(`Server running on port http://localhost:${PORT}`));
