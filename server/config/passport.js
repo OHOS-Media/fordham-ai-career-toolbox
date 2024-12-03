@@ -20,19 +20,20 @@ module.exports = function (passport) {
           // }
 
           let user = await User.findOne({ googleId: profile.id });
-
           if (!user) {
             // New user - they'll need to accept terms later
             user = await User.create({
               googleId: profile.id,
               displayName: profile.displayName,
               email: email,
-              profilePicture: profile.photos[0].value,
+              // Use a larger, higher-quality image URL
+              profilePicture: profile.photos[0].value.replace(/=s\d+-c/, "=s400-c"),
               hasAcceptedTerms: false,
             });
+            return done(null, newUser);
           } else {
             // Update existing user's profile picture
-            user.profilePicture = profile.photos[0].value;
+            user.profilePicture = profile.photos[0].value.replace(/=s\d+-c/, "=s400-c");
             await user.save();
           }
 
