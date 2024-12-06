@@ -5,10 +5,12 @@ export const footerType = defineType({
   title: "Footer",
   type: "document",
   fields: [
+    defineField({ name: "versionName", title: "Version Name", type: "string" }),
     defineField({
       name: "description",
       title: "Description",
       type: "text",
+      validation: (Rule) => Rule.required().error("Description is required."),
     }),
     defineField({
       name: "links",
@@ -45,6 +47,7 @@ export const footerType = defineType({
         { name: "email", title: "Email", type: "string" },
         { name: "phone", title: "Phone", type: "string" },
       ],
+      validation: (Rule) => Rule.required().error("Contact information is required."),
     }),
     defineField({
       name: "socialLinks",
@@ -62,4 +65,9 @@ export const footerType = defineType({
       ],
     }),
   ],
+  preview: {
+    select: {
+      title: "versionName",
+    },
+  },
 });
