@@ -1,5 +1,5 @@
 import { DocumentTextIcon } from "@sanity/icons";
-import { defineArrayMember, defineField, defineType } from "sanity";
+import { defineField, defineType } from "sanity";
 
 export const blogType = defineType({
   name: "blog",
@@ -10,6 +10,7 @@ export const blogType = defineType({
     defineField({
       name: "title",
       type: "string",
+      validation: (Rule) => Rule.required().error("Title is required."),
     }),
     defineField({
       name: "featured",
@@ -23,13 +24,20 @@ export const blogType = defineType({
         source: "title",
         slugify: (input) => `/blog/${input.toLowerCase().replace(/\s+/g, "-").slice(0, 200)}`,
       },
-      description: "Please ensure the slugs always start with /blog/...",
+      description: (
+        <>
+          Using the generate button is reccomended. Must start with /blog/...
+          <br />
+          ex: /blog/top-tips-on-how-to-succeed
+        </>
+      ),
       validation: (Rule) => Rule.required().error("Slug is required."),
     }),
     defineField({
       name: "author",
       type: "reference",
       to: { type: "author" },
+      validation: (Rule) => Rule.required().error("Author is required."),
     }),
     defineField({
       name: "mainImage",
@@ -44,14 +52,17 @@ export const blogType = defineType({
           title: "Alternative text",
         },
       ],
+      validation: (Rule) => Rule.required().error("Image is required."),
     }),
     defineField({
       name: "publishedAt",
       type: "datetime",
+      validation: (Rule) => Rule.required().error("Publish date is required."),
     }),
     defineField({
       name: "body",
       type: "blockContent",
+      validation: (Rule) => Rule.required().error("Content is required."),
     }),
   ],
   preview: {
