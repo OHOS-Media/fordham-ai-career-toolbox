@@ -10,6 +10,7 @@ export const authorType = defineType({
     defineField({
       name: "name",
       type: "string",
+      validation: (Rule) => Rule.required().error("Name is required."),
     }),
     defineField({
       name: "image",
