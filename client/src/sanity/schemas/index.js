@@ -6,7 +6,7 @@ import { faqType } from "./faqType";
 import { footerType } from "./footerType";
 import aboutPageType from "./aboutPageType";
 import teamMemberType from "./teamMemberType";
-import blogPageType from './blogPageType'
+import blogPageType from "./blogPageType";
 import faqPageType from "./faqPageType";
 
 export const schema = {

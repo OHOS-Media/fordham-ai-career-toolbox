@@ -92,14 +92,14 @@ const Footer = ({ data }) => {
             >
               OHOS Media
             </a>{" "}
-            in collaboration with{" "}
+            in collaboration with students from the{" "}
             <a
-              href="https://www.fordham.edu"
+              href="https://www.fordham.edu/gabelli-school-of-business/student-and-career-resources/undergraduate-personal-and-professional-development-center/"
               target="_blank"
               rel="noopener noreferrer"
               className="underline hover:text-white"
             >
-              Gabelli School of Business
+              Gabelli School of Business, Personal and Professional Development Center
             </a>
             . All rights reserved.
           </p>

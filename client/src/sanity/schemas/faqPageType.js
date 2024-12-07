@@ -22,4 +22,4 @@ const faqPageType = defineType({
   ],
 });
 
-export default faqPageType; 
+export default faqPageType;

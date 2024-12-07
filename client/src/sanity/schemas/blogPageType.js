@@ -22,4 +22,4 @@ const blogPageType = defineType({
   ],
 });
 
-export default blogPageType; 
+export default blogPageType;

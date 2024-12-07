@@ -13,7 +13,7 @@ export default function FAQ({ FAQPageData, faqPageContent }) {
               {faqPageContent?.title || "Here to help"}
             </h1>
             <p className="body-txt-md text-center font-light text-fordham-light-gray/60">
-              {faqPageContent?.description || 
+              {faqPageContent?.description ||
                 "Frequently asked questions and resources to assist you."}
             </p>
           </div>
@@ -27,7 +27,7 @@ export default function FAQ({ FAQPageData, faqPageContent }) {
 export async function getStaticProps() {
   const [FAQPageData, faqPageContent] = await Promise.all([
     client.fetch("*[_type == 'faq']"),
-    client.fetch(`*[_type == "faqPage"][0]`)
+    client.fetch(`*[_type == "faqPage"][0]`),
   ]);
 
   return {

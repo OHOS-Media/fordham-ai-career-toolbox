@@ -27,7 +27,9 @@ const AccordionItem = ({ title, content, bulletPoints, isOpen, onClick, variant,
       className="bg-fordham-white/5 rounded-[16px] pr-4 pl-[32px] py-4 hover:cursor-pointer"
     >
       <div className="flex justify-between items-center">
-        <h3 className="text-fordham-white body-txt-bold md:body-txt-md-bold mr-4 font-bold">{title}</h3>
+        <h3 className="text-fordham-white body-txt-bold md:body-txt-md-bold mr-4 font-bold">
+          {title}
+        </h3>
         <div className="flex items-center gap-2">
           {/* Copy button - only show in toolbox variant when section is open */}
           {variant === "toolbox" && isOpen && <CopyButton onCopy={handleCopy} />}
