@@ -1,17 +1,25 @@
 import BlogCard from "../LandingPage/BlogSection/BlogCard";
 
-export default function BlogsPreview({ BlogPageData }) {
-  if (BlogPageData && BlogPageData.length > 0) {
+const BlogsPreview = ({ BlogPageData }) => {
+  if (!BlogPageData || BlogPageData.length === 0) {
     return (
-      <section className="w-full container mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-8 md:gap-y-10">
-          {BlogPageData.map((blog, idx) => (
-            <BlogCard key={idx} {...blog} />
-          ))}
-        </div>
-      </section>
+      <div className="text-center py-20">
+        <p className="text-fordham-light-gray/60">No blog posts found.</p>
+      </div>
     );
-  } else {
-    return <p>No Blog Posts found...</p>;
   }
-}
+
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
+      {BlogPageData.map((blog, index) => (
+        <BlogCard
+          key={blog.slug.current}
+          {...blog}
+          priority={index < 3}
+        />
+      ))}
+    </div>
+  );
+};
+
+export default BlogsPreview;

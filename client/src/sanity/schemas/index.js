@@ -8,6 +8,7 @@ import aboutPageType from "./aboutPageType";
 import teamMemberType from "./teamMemberType";
 import blogPageType from "./blogPageType";
 import faqPageType from "./faqPageType";
+import { categoryType } from "./categoryType";
 
 export const schema = {
   types: [
@@ -21,5 +22,6 @@ export const schema = {
     teamMemberType,
     blogPageType,
     faqPageType,
+    categoryType,
   ],
 };

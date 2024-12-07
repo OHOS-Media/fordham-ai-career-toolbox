@@ -1,7 +1,7 @@
 // https://www.sanity.io/docs/structure-builder-cheat-sheet
 export const structure = (S) =>
   S.list()
-    .title("Website")
+    .title("CMS Studio")
     .items([
       // Top Level Pages
       S.documentTypeListItem("homepage").title("Home Page"),

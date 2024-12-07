@@ -2,44 +2,86 @@ import { PortableText } from "@portabletext/react";
 import Image from "next/image";
 import { urlFor } from "@/src/sanity/lib/image";
 
-const Block = ({ children }) => <div className="mb-6">{children}</div>;
-const H1 = ({ children }) => <h1 className="text-3xl font-bold mb-4 text-primary">{children}</h1>;
+const Block = ({ children }) => <div className="mb-8">{children}</div>;
+
+const H1 = ({ children }) => (
+  <h1 className="h2 text-fordham-white mb-8">{children}</h1>
+);
+
 const H2 = ({ children }) => (
-  <h2 className="text-2xl font-semibold mb-3 text-primary">{children}</h2>
+  <h2 className="h3 text-fordham-white mb-6">{children}</h2>
 );
+
 const H3 = ({ children }) => (
-  <h3 className="text-xl font-semibold mb-2 text-primary">{children}</h3>
+  <h3 className="h4 text-fordham-white mb-4">{children}</h3>
 );
+
 const H4 = ({ children }) => (
-  <h4 className="text-lg font-semibold mb-2 text-primary">{children}</h4>
+  <h4 className="h5 text-fordham-white mb-4">{children}</h4>
 );
-const Normal = ({ children }) => <p className="mb-4 text-secondary leading-relaxed">{children}</p>;
+
+const Normal = ({ children }) => (
+  <p className="text-fordham-light-gray/80 leading-relaxed mb-6">{children}</p>
+);
+
 const BlockQuote = ({ children }) => (
-  <blockquote className="border-l-4 border-primary pl-4 italic my-4 text-gray-600">
+  <blockquote className="border-l-4 border-fordham-brown pl-6 py-2 my-8 text-fordham-light-gray/60 italic">
     {children}
   </blockquote>
 );
+
 const Code = ({ children }) => (
-  <code className="bg-gray-100 rounded p-1 font-mono text-sm">{children}</code>
+  <code className="bg-fordham-white/5 rounded-lg px-2 py-1 font-mono text-fordham-white text-sm">
+    {children}
+  </code>
 );
-const ListItem = ({ children }) => <li className="mb-1">{children}</li>;
-const BulletList = ({ children }) => <ul className="list-disc pl-5 mb-4">{children}</ul>;
-const NumberedList = ({ children }) => <ol className="list-decimal pl-5 mb-4">{children}</ol>;
+
+const ListItem = ({ children }) => (
+  <li className="text-fordham-light-gray/80 mb-3">{children}</li>
+);
+
+const BulletList = ({ children }) => (
+  <ul className="list-disc pl-6 mb-8 space-y-2 marker:text-fordham-brown">
+    {children}
+  </ul>
+);
+
+const NumberedList = ({ children }) => (
+  <ol className="list-decimal pl-6 mb-8 space-y-2 marker:text-fordham-brown">
+    {children}
+  </ol>
+);
 
 const SanityImage = ({ value }) => {
   return (
-    <div className="my-8">
+    <figure className="my-10">
       <Image
         src={urlFor(value).url()}
         alt={value.alt || " "}
-        width={800}
-        height={500}
-        className="rounded-lg"
+        width={1200}
+        height={700}
+        className="w-full rounded-[16px] object-cover"
       />
       {value.caption && (
-        <figcaption className="text-center text-sm text-gray-500 mt-2">{value.caption}</figcaption>
+        <figcaption className="text-center text-sm text-fordham-light-gray/60 mt-4">
+          {value.caption}
+        </figcaption>
       )}
-    </div>
+    </figure>
+  );
+};
+
+const Link = ({ value, children }) => {
+  const target = (value?.href || "").startsWith("http") ? "_blank" : undefined;
+  return (
+    <a
+      href={value?.href}
+      target={target}
+      rel={target === "_blank" ? "noopener noreferrer" : undefined}
+      className="text-fordham-brown hover:text-fordham-white transition-colors underline underline-offset-4"
+    >
+      {children}
+    </a>
   );
 };
 
@@ -59,6 +101,7 @@ const components = {
   listItem: ListItem,
   marks: {
     code: Code,
+    link: Link,
   },
   types: {
     image: SanityImage,
@@ -67,7 +110,7 @@ const components = {
 
 const StyledPortableText = ({ value }) => {
   return (
-    <div className="prose max-w-none">
+    <div className="w-full">
       <PortableText value={value} components={components} />
     </div>
   );

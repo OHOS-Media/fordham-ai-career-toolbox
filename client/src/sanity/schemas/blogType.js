@@ -64,6 +64,12 @@ export const blogType = defineType({
       type: "blockContent",
       validation: (Rule) => Rule.required().error("Content is required."),
     }),
+    defineField({
+      name: "categories",
+      title: "Categories",
+      type: "array",
+      of: [{ type: "reference", to: { type: "category" } }],
+    }),
   ],
   preview: {
     select: {
