@@ -62,7 +62,53 @@ export const blogType = defineType({
     defineField({
       name: "body",
       type: "blockContent",
-      validation: (Rule) => Rule.required().error("Content is required."),
+      description: (
+        <>
+          Please use appropriate headings for your content.
+          <br />
+          Start with H2 for main sections.
+          <br />
+          Use H3 for subsections.
+          <br />
+          Use H4 for minor sections.
+        </>
+      ),
+      options: {
+        spellCheck: true,
+        decorators: [
+          { title: "Strong", value: "strong" },
+          { title: "Emphasis", value: "em" },
+          { title: "Underline", value: "underline" },
+          { title: "Strike", value: "strike-through" },
+          { title: "Code", value: "code" },
+          { title: "Highlight", value: "highlight" },
+          { title: "Superscript", value: "sup" },
+          { title: "Subscript", value: "sub" },
+          { title: "Small", value: "small" },
+        ],
+        styles: [
+          { title: "Normal", value: "normal" },
+          { title: "H2", value: "h2" },
+          { title: "H3", value: "h3" },
+          { title: "H4", value: "h4" },
+          { title: "Quote", value: "blockquote" },
+          { title: "Large Quote", value: "blockquote-large" },
+          { title: "Lead Paragraph", value: "lead" },
+          { title: "Note", value: "note" },
+          { title: "Warning", value: "warning" },
+        ],
+        lists: [
+          { title: "Bullet", value: "bullet" },
+          { title: "Numbered", value: "number" },
+          { title: "Check List", value: "checkbox" },
+        ],
+      },
+      validation: (Rule) =>
+        Rule.custom((blocks, context) => {
+          if (context.document?.contentType !== "blockContent") return true;
+          if (!blocks) return "Content is required.";
+          return true;
+        }),
     }),
     defineField({
       name: "categories",
