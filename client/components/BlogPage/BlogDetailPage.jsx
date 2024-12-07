@@ -49,7 +49,7 @@ const BlogDetailPage = ({ blog, relatedPosts }) => {
         <StyledPortableText value={blog.body} />
       </div>
 
-      {blog.author && (
+      {/* {blog.author && (
         <div className="mt-12 bg-fordham-white/5 p-8 rounded-[16px]">
           <div className="flex items-start gap-6">
             <Image
@@ -69,7 +69,7 @@ const BlogDetailPage = ({ blog, relatedPosts }) => {
             </div>
           </div>
         </div>
-      )}
+      )} */}
 
       {relatedPosts && relatedPosts.length > 0 && (
         <div className="mt-20">
