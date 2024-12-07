@@ -1,194 +1,73 @@
 import PageContainer from "@/components/PageContainer";
 import GradientContainer from "@/components/ui/GradientContainer";
+import { client } from "@/src/sanity/lib/client";
 import { IconBrandGithubFilled, IconBrandLinkedinFilled, IconWorld } from "@tabler/icons-react";
 import { useState, useEffect } from "react";
 
-export default function About() {
-  const teamMembers = [
-    {
-      name: "Kent Scholla",
-      role: "Program Leader",
-      affiliation: "Gabelli Gen A.I. Incubator",
-      responsibilities:
-        "Leading the Gabelli Gen A.I. Incubator program and fostering innovation in artificial intelligence applications.",
-      links: {
-        linkedin: "https://www.linkedin.com/in/kentscholla",
-        github: null,
-        portfolio: null,
-      },
+// Query to fetch about page data
+export const aboutPageQuery = `
+*[_type == "aboutPage"][0] {
+  title,
+  description,
+  "teamMembers": teamMembers[]-> {
+    name,
+    role,
+    student,
+    studentInformation {
+      school,
+      major,
+      graduation
     },
-    {
-      name: "Bach Le",
-      role: "OHOS Lead Manager",
-      affiliation: "OHOS Media",
-      responsibilities:
-        "Leading the OHOS team and driving strategic initiatives with expertise from Fordham Gabelli School of Business.",
-      links: {
-        linkedin: "https://www.linkedin.com/in/bachhoangle/",
-        github: null,
-        portfolio: null,
-      },
+    teamMemberInformation {
+      company,
+      responsibilities
     },
-    {
-      name: "Cass Walters",
-      role: "Software Engineer",
-      affiliation: "OHOS Media",
-      responsibilities:
-        "Developing and implementing technical solutions for OHOS Media's innovative platforms.",
-      links: {
-        linkedin: "#",
-        github: "#",
-        portfolio: "#",
-      },
+    socialMediaLinks {
+      linkedIn,
+      gitHub,
+      website
+    }
+  }
+}
+`;
+// Fetch data at build time
+export async function getStaticProps() {
+  const aboutData = await client.fetch(aboutPageQuery);
+
+  return {
+    props: {
+      aboutData,
     },
-    {
-      name: "Chanbin Moon",
-      role: "UX Designer",
-      affiliation: "OHOS Media",
-      responsibilities:
-        "Creating user-centered designs and enhancing the user experience across OHOS Media's platforms.",
+    revalidate: 60, // Revalidate every minute
+  };
+}
+
+export default function About({ aboutData }) {
+  const { title, description, teamMembers } = aboutData;
+
+  // Format team members data to match the expected structure
+  const formattedTeamMembers = teamMembers
+    .map((member) => ({
+      name: member.name,
+      role: member.role,
+      affiliation: member.student
+        ? member.studentInformation?.school
+        : member.teamMemberInformation?.company,
+      major: member.student ? member.studentInformation?.major : null,
+      graduation: member.student ? member.studentInformation?.graduation : null,
+      responsibilities: member.student ? null : member.teamMemberInformation?.responsibilities,
       links: {
-        linkedin: "#",
-        github: null,
-        portfolio: "#",
+        linkedin: member.socialMediaLinks?.linkedIn || null,
+        github: member.socialMediaLinks?.gitHub || null,
+        portfolio: member.socialMediaLinks?.website || null,
       },
-    },
-    {
-      name: "Tanisha Shah",
-      role: "UX Designer",
-      affiliation: "OHOS Media",
-      responsibilities:
-        "Designing intuitive user interfaces and improving user experience for OHOS Media's products.",
-      links: {
-        linkedin: "#",
-        github: null,
-        portfolio: "#",
-      },
-    },
-    {
-      name: "Daniel Groner",
-      role: "Associate Clinical Professor",
-      affiliation: "Fordham Gabelli School of Business",
-      responsibilities:
-        "Teaching Information, Technology, and Operations while providing academic guidance to the project.",
-      links: {
-        linkedin: null,
-        github: null,
-        portfolio:
-          "https://www.fordham.edu/gabelli-school-of-business/faculty/full-time-faculty/daniel-groner/",
-      },
-    },
-    {
-      name: "Akulina Kashchei",
-      role: "Summer Intern",
-      affiliation: "Fordham Gabelli School of Business",
-      major: "Economics and Global Business",
-      graduation: "2026",
-      links: {
-        linkedin: "https://www.linkedin.com/in/akulina-kashchei/",
-        github: null,
-        portfolio: null,
-      },
-    },
-    {
-      name: "Ciaran Scott",
-      role: "Summer Intern",
-      affiliation: "Fordham Gabelli School of Business",
-      major: "Information Systems with concentration in Fintech",
-      graduation: "2025",
-      links: {
-        linkedin: "https://www.linkedin.com/in/ciaran-scott-/",
-        github: null,
-        portfolio: null,
-      },
-    },
-    {
-      name: "Dieu Anh Nguyen",
-      role: "Summer Intern",
-      affiliation: "Fordham Gabelli School of Business",
-      major: "Information Systems with concentration in Fintech and minor in Economics",
-      graduation: "2026",
-      links: {
-        linkedin: "https://www.linkedin.com/in/dieuanh-julia-nguyen/",
-        github: null,
-        portfolio: null,
-      },
-    },
-    {
-      name: "Eden Kavanaugh",
-      role: "Summer Intern",
-      affiliation: "Fordham Gabelli School of Business",
-      major: "Information Systems with concentration in Global Business",
-      graduation: "2025",
-      links: {
-        linkedin: "https://www.linkedin.com/in/edenkavanagh/",
-        github: null,
-        portfolio: null,
-      },
-    },
-    {
-      name: "Jacqueline Kilb",
-      role: "Summer Intern",
-      affiliation: "Fordham Gabelli School of Business",
-      major: "Information Systems with concentration in Process and Quality Analytics",
-      graduation: "2025",
-      links: {
-        linkedin: "https://www.linkedin.com/in/jacqueline-kilb/",
-        github: null,
-        portfolio: null,
-      },
-    },
-    {
-      name: "James Sprizzo",
-      role: "Summer Intern",
-      affiliation: "Fordham Gabelli School of Business",
-      major: "Finance",
-      graduation: "2025",
-      links: {
-        linkedin: "https://www.linkedin.com/in/james-sprizzo/",
-        github: null,
-        portfolio: null,
-      },
-    },
-    {
-      name: "Kelly Andreasen",
-      role: "Summer Intern",
-      affiliation: "Fordham Gabelli School of Business",
-      major: "Information Systems",
-      graduation: "2025",
-      links: {
-        linkedin: "https://www.linkedin.com/in/kellyandreasen/",
-        github: null,
-        portfolio: null,
-      },
-    },
-    {
-      name: "Megan Kuck",
-      role: "Summer Intern",
-      affiliation: "Fordham Gabelli School of Business",
-      major: "Accounting Information Systems",
-      graduation: "2026",
-      links: {
-        linkedin: "https://www.linkedin.com/in/megan-kuck/",
-        github: null,
-        portfolio: null,
-      },
-    },
-    {
-      name: "Ray Rico",
-      role: "Summer Intern",
-      affiliation: "Fordham Gabelli School of Business",
-      major: "Global Business with concentration in Digital Media and Technology",
-      graduation: "2025",
-      links: {
-        linkedin: "https://www.linkedin.com/in/raymondgrico/",
-        github: null,
-        portfolio: null,
-      },
-    },
-  ].sort((a, b) => a.name.localeCompare(b.name));
+    }))
+    .sort((a, b) => a.name.localeCompare(b.name));
+
   const [mounted, setMounted] = useState(false);
-  const letterIndex = [...new Set(teamMembers.map((member) => member.name[0].toUpperCase()))];
+  const letterIndex = [
+    ...new Set(formattedTeamMembers.map((member) => member.name[0].toUpperCase())),
+  ];
   const [activeLetter, setActiveLetter] = useState(letterIndex[0]);
 
   useEffect(() => {
@@ -199,20 +78,21 @@ export default function About() {
     <>
       <PageContainer marginBottom={true} className="relative">
         <GradientContainer>
-          <div className=" w-full flex flex-col items-center gap-2 py-20 px-10">
-            <h1 className="h4 md:h3 text-fordham-white">About us</h1>
+          <div className="w-full flex flex-col items-center gap-2 py-20 px-10">
+            <h1 className="h4 md:h3 text-fordham-white">{title || "About us"}</h1>
             <p className="body-txt-md px-0 md:px-20 text-center font-light text-fordham-light-gray/60">
-              We're grateful to have an amazing team of talented, dedicated individuals driving our
-              product forward. Together, we're building something incredible.
+              {description ||
+                "We're grateful to have an amazing team of talented, dedicated individuals driving our product forward. Together, we're building something incredible."}
             </p>
           </div>
 
           <div className="relative">
             <div className="team-members-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mr-10 md:mr-0">
-              {teamMembers.map((member, index) => {
+              {formattedTeamMembers.map((member, index) => {
                 const isFirstWithLetter =
                   index === 0 ||
-                  member.name[0].toUpperCase() !== teamMembers[index - 1].name[0].toUpperCase();
+                  member.name[0].toUpperCase() !==
+                    formattedTeamMembers[index - 1].name[0].toUpperCase();
 
                 return (
                   <div
@@ -231,10 +111,12 @@ export default function About() {
 
                     <div className="py-5 flex-grow">
                       <div className="space-y-4">
-                        <div>
-                          <p className="text-base mb-2 text-fordham-light-gray/60">Affiliation</p>
-                          <p className="text-fordham-white">{member.affiliation}</p>
-                        </div>
+                        {member.affiliation && (
+                          <div>
+                            <p className="text-base mb-2 text-fordham-light-gray/60">Affiliation</p>
+                            <p className="text-fordham-white">{member.affiliation}</p>
+                          </div>
+                        )}
 
                         {member.major && (
                           <div>
@@ -264,24 +146,36 @@ export default function About() {
                     <div className="border-b border-fordham-dark-gray"></div>
 
                     <div className="flex space-x-4 pt-5">
-                      <a
-                        href={member.links.linkedin}
-                        className="w-[40px] h-[40px] flex items-center justify-center text-white bg-fordham-dark-gray rounded-full hover:bg-fordham-dark-gray/80 transition"
-                      >
-                        <IconBrandLinkedinFilled className="w-4 h-4" />
-                      </a>
-                      <a
-                        href={member.links.github}
-                        className="w-[40px] h-[40px] flex items-center justify-center text-white bg-fordham-dark-gray rounded-full hover:bg-fordham-dark-gray/80 transition"
-                      >
-                        <IconBrandGithubFilled className="w-4 h-4" />
-                      </a>
-                      <a
-                        href={member.links.portfolio}
-                        className="w-[40px] h-[40px] flex items-center justify-center text-white bg-fordham-dark-gray rounded-full hover:bg-fordham-dark-gray/80 transition"
-                      >
-                        <IconWorld className="w-4 h-4" />
-                      </a>
+                      {member.links.linkedin && (
+                        <a
+                          href={member.links.linkedin}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="w-[40px] h-[40px] flex items-center justify-center text-white bg-fordham-dark-gray rounded-full hover:bg-fordham-dark-gray/80 transition"
+                        >
+                          <IconBrandLinkedinFilled className="w-4 h-4" />
+                        </a>
+                      )}
+                      {member.links.github && (
+                        <a
+                          href={member.links.github}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="w-[40px] h-[40px] flex items-center justify-center text-white bg-fordham-dark-gray rounded-full hover:bg-fordham-dark-gray/80 transition"
+                        >
+                          <IconBrandGithubFilled className="w-4 h-4" />
+                        </a>
+                      )}
+                      {member.links.portfolio && (
+                        <a
+                          href={member.links.portfolio}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="w-[40px] h-[40px] flex items-center justify-center text-white bg-fordham-dark-gray rounded-full hover:bg-fordham-dark-gray/80 transition"
+                        >
+                          <IconWorld className="w-4 h-4" />
+                        </a>
+                      )}
                     </div>
                   </div>
                 );
@@ -358,7 +252,7 @@ const ScrollingLetterIndex = ({ letterIndex, activeLetter, setActiveLetter }) =>
 
     let currentPosition = scrollPosition + windowHeight / 2;
 
-    return Math.max(minScroll, Math.min(maxScroll, currentPosition)) - 100;
+    return Math.max(minScroll, Math.min(maxScroll, currentPosition)) - 200;
   };
 
   return (

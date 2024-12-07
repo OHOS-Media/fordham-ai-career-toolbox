@@ -193,6 +193,34 @@ export const homePageType = defineType({
         collapsed: true,
       },
     }),
+    defineField({
+      name: "blogSection",
+      title: "Blog Section",
+      type: "object",
+      fields: [
+        {
+          name: "featuredBlogsTitle",
+          title: "Featured Blogs Title",
+          type: "string",
+          description: "The title shown above the featured blog posts",
+          validation: (Rule) => Rule.required(),
+        },
+      ],
+    }),
+    defineField({
+      name: "userStorySection",
+      title: "User Story Section",
+      type: "object",
+      fields: [
+        {
+          name: "userStoriesTitle",
+          title: "User Stories Title",
+          type: "string",
+          description: "The title shown in the testimonials section",
+          validation: (Rule) => Rule.required(),
+        },
+      ],
+    }),
   ],
   preview: {
     select: {
