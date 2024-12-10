@@ -33,7 +33,8 @@ const Button = ({
     tertiary: {
       default: "font-light bg-[#3D3836] text-fordham-white",
       hover: "hover:text-fordham-light-gray",
-      pressed: "bg-fordham-white/5 text-fordham-light-gray outline outline-[6px] outline-fordham-white/20 scale-95 shadow-inner",
+      pressed:
+        "bg-fordham-white/5 text-fordham-light-gray outline outline-[6px] outline-fordham-white/20 scale-95 shadow-inner",
       disabled: "text-fordham-dark-gray cursor-not-allowed",
     },
   };

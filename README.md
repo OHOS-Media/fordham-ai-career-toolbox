@@ -21,6 +21,7 @@ ramresume/
 ## Prerequisites
 
 Before you begin, ensure you have the following installed:
+
 - Node.js (v16 or later)
 - npm (v8 or later)
 - MongoDB (v4.4 or later)
@@ -28,26 +29,31 @@ Before you begin, ensure you have the following installed:
 ## Installation
 
 1. Clone the repository:
+
    ```bash
    git clone https://github.com/OHOS-Media/ramresume.git
    cd ramresume
    ```
 
 2. Install dependencies for all packages:
+
    ```bash
    npm run install-all
    ```
+
    This command will install dependencies for the root project, client, and server.
 
 3. Set up environment variables:
 
    For the client (create `client/.env.local`):
+
    ```
    NEXT_PUBLIC_SERVER_URL=http://localhost:8000
    ...
    ```
 
    For the server (create `server/.env`):
+
    ```
    CLIENT_URL=http://localhost:3000
    ...
@@ -56,21 +62,25 @@ Before you begin, ensure you have the following installed:
 ## Development
 
 Start both the client and server in development mode with a single command:
+
 ```bash
 npm run dev
 ```
 
 This will concurrently run:
+
 - Client on http://localhost:3000
 - Server on http://localhost:8000
 
 To run services individually:
+
 - Client only: `npm run client`
 - Server only: `npm run server`
 
 ## Available Scripts
 
 In the root directory:
+
 - `npm run dev`: Start both client and server in development mode
 - `npm run install-all`: Install dependencies for all packages
 - `npm run client`: Start only the client
@@ -84,11 +94,13 @@ In the root directory:
 ## Tech Stack
 
 ### Frontend
+
 - Next.js
 - React
 - Tailwind CSS
 
 ### Backend
+
 - Express.js
 - MongoDB
 - Passport.js (Google OAuth)

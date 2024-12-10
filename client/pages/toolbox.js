@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { useApi } from "@/hooks/useApi";
+import { useAuth } from "@/context/AuthContext";
+import { toast } from "react-hot-toast";
 import PageContainer from "@/components/PageContainer";
 import { Sidebar } from "@/components/ToolboxPage/SideBar";
 import MainToolbox from "@/components/ToolboxPage/MainToolbox";
@@ -11,6 +13,7 @@ import ExitConfirmationModal from "@/components/ToolboxPage/ExitConfirmationModa
 export default function Toolbox() {
   const { request, loading } = useApi();
   const router = useRouter();
+  const { user, loading: authLoading } = useAuth();
   const [state, setState] = useState({
     toolboxActive: true,
     activeStep: 1,
@@ -127,6 +130,24 @@ export default function Toolbox() {
     updateState,
     navigateStep,
   });
+
+  // Add authentication check with a ref to track if we've shown the toast
+  useEffect(() => {
+    let redirecting = false;
+
+    if (!authLoading && !user && !redirecting) {
+      redirecting = true;
+      toast.error("Please log in to use the toolbox", {
+        id: "auth-error",
+      });
+      router.push("/");
+    }
+  }, [user, authLoading, router]);
+
+  // If loading or not authenticated, don't render the page content
+  if (authLoading || !user) {
+    return null;
+  }
 
   return (
     <PageContainer

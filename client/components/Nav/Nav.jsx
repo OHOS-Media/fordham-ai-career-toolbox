@@ -6,9 +6,9 @@ import MobileNav from "./MobileNav/MobileNav";
 const navData = {
   links: [
     { title: "Toolbox", href: "/toolbox" },
-    { title: "About Us", href: "/about-us" },
+    { title: "About", href: "/about" },
     { title: "Blog", href: "/blog" },
-    { title: "F.A.Q", href: "/frequently-asked-questions" },
+    { title: "FAQ", href: "/frequently-asked-questions" },
   ],
 };
 

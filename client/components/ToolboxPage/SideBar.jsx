@@ -7,11 +7,7 @@ import {
 } from "@tabler/icons-react";
 import Button from "../ui/Button";
 
-export const Sidebar = ({
-  activeStep,
-  progress,
-  handleReturnBtn,
-}) => (
+export const Sidebar = ({ activeStep, progress, handleReturnBtn }) => (
   <div className="w-[300px] flex flex-shrink-0 flex-col justify-between min-h-full bg-fordham-brown rounded-[16px] border-[1px] border-[#3B3533]">
     {/* Top Section */}
     <div>

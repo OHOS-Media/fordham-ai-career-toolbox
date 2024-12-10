@@ -14,10 +14,7 @@
                           "flag": "uri",
                           "constraint": {
                             "options": {
-                              "scheme": [
-                                "/^http$/",
-                                "/^https$/"
-                              ],
+                              "scheme": ["/^http$/", "/^https$/"],
                               "allowRelative": false,
                               "relativeOnly": false,
                               "allowCredentials": false

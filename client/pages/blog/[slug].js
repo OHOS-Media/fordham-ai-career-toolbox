@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import { client } from "@/src/sanity/lib/client";
 import BlogDetailPage from "@/components/BlogPage/BlogDetailPage";
+import { IconArrowLeft } from "@tabler/icons-react";
 
 export default function BlogPost({ blog, relatedPosts }) {
   const router = useRouter();
@@ -10,9 +11,21 @@ export default function BlogPost({ blog, relatedPosts }) {
   }
 
   return (
-    <div className="min-h-screen flex flex-col gap-10 items-center w-full py-36">
-      <h1 className="h1 text-secondary">Blogs</h1>
-      <BlogDetailPage blog={blog} relatedPosts={relatedPosts} />
+    <div className="min-h-screen flex flex-col w-full py-20 md:py-28">
+      <div className="max-w-5xl mx-auto px-4 w-full">
+        <button
+          onClick={() => router.push("/blog")}
+          className="group flex items-center gap-2 text-fordham-light-gray/60 hover:text-fordham-white transition-colors mb-8"
+        >
+          <IconArrowLeft 
+            size={20} 
+            className="group-hover:-translate-x-1 transition-transform" 
+          />
+          Back to blogs
+        </button>
+        
+        <BlogDetailPage blog={blog} relatedPosts={relatedPosts} />
+      </div>
     </div>
   );
 }
