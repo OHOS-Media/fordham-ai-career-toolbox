@@ -118,6 +118,9 @@ export default function Toolbox() {
       navigateStep("next");
     } catch (error) {
       console.error("Request failed:", error);
+      if (error.message.includes("exceeds limit")) {
+        toast.error(error.message);
+      }
     }
   };
 
