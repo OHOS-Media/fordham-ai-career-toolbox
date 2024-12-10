@@ -20,6 +20,7 @@ module.exports = function (passport) {
           // }
 
           let user = await User.findOne({ googleId: profile.id });
+
           if (!user) {
             // New user - they'll need to accept terms later
             user = await User.create({
@@ -29,7 +30,6 @@ module.exports = function (passport) {
               profilePicture: profile.photos[0].value.replace(/=s\d+-c/, "=s400-c"),
               hasAcceptedTerms: false,
             });
-            return done(null, newUser);
           } else {
             // Update existing user's profile picture
             user.profilePicture = profile.photos[0].value.replace(/=s\d+-c/, "=s400-c");
