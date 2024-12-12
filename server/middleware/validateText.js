@@ -15,7 +15,7 @@ const validateText = (toolName) => {
   return async (req, res, next) => {
     try {
       let text;
-      if (toolName === "EXTRACT_KEYWORDS") {
+      if (toolName === "KEYWORD_EXTRACTOR") {
         text = req.body.jobDescription;
       } else if (toolName === "RESUME_ENHANCER") {
         text = req.body.resume;

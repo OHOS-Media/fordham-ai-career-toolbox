@@ -24,14 +24,14 @@ exports.SYSTEM_PROMPT_KEYWORDS_EXTRACTION = `
 `;
 
 exports.SYSTEM_PROMPT_RESUME_ENHANCER = `
-  Next take these keywords and include them as you rewrite the following bullet points in my resume see below. 
+  Next take this array of keywords and include them as you rewrite the following bullet points in my resume see below. 
   For these bullet points, I do not want to be perceived as a “doer,” but rather as an “achiever” or a leader. 
   A few too many of my resume sentences are task-based and not results-based so my resume sometimes tends to tell people what I did instead of what I achieved. 
   Please show me my original bullet point and below it show me 3 alternatives for each bullet point. 
   Indicate in UNDERLINE anywhere you included an ATS keyword (so I can see the keywords that you used). 
   Please use only information that can be honestly attributed from my resume. 
   If you cannot easily re-write a bullet point because of lack of experience, BOLD ITALICS any suggestions for including a stronger result and use placeholders for quantitative results that I may not have but that you recommend that I include, such as ""... resulting in X% increase in conversion rates.""
-  Here are my bullet points and remember your recommendations should align with a student who is entry-level:\n\n
+  Here are my resume including bullet points and remember your recommendations should align with a student who is entry-level:\n\n
 `;
 
 exports.SYSTEM_PROMPT_COVER_LETTER = `

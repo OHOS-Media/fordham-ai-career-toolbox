@@ -7,7 +7,7 @@ const requireTerms = require("../middleware/requireTerms.js");
 const { ensureAuthenticated } = require("../middleware/auth.js");
 
 const openai = new OpenAI(process.env.OPENAI_API_KEY);
-// const { SYSTEM_PROMPT_RESUME_ENHANCER } = require("../config/constants");
+const { SYSTEM_PROMPT_RESUME_ENHANCER } = require("../config/constants");
 
 const { mockBulletPoints } = require("../mockdata");
 
@@ -35,7 +35,11 @@ router.post(
           { role: "system", content: "You are an expert career consultant." },
           {
             role: "user",
-            content: `Based on this array of keywords, I must integrate them into my resume. I am going to enter my resume and will need you to suggest where I can put these keywords. \n\nResume:\n${resume}\n\nJob Description:\n${jobDescription}. Format the response as a Javascript array of object with the experience as the key and bullet points as the value such as: [{"company name only 1":["enhanced bullet point 1",...]}]`,
+            content:
+              SYSTEM_PROMPT_RESUME_ENHANCER +
+              `\n\nResume:\n${resume}\n\nJob Description:\n${jobDescription}. 
+              Format the response as a Javascript array of object with the experience as the key and bullet points as the value such as: 
+              [{"company name only 1":["enhanced bullet point 1",...]}]`,
           },
         ],
         model: "gpt-4o",
