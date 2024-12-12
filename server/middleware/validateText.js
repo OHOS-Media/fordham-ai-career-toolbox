@@ -14,7 +14,13 @@ const validateText = (toolName) => {
   // Return the middleware function
   return async (req, res, next) => {
     try {
-      const text = req.body.jobDescription || req.body.resume;
+      let text;
+      if (toolName === "EXTRACT_KEYWORDS") {
+        text = req.body.jobDescription;
+      } else if (toolName === "RESUME_ENHANCER") {
+        text = req.body.resume;
+      }
+
       const wordLimit = TOOL_LIMITS[toolName];
 
       if (!text) {

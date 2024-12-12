@@ -1,7 +1,7 @@
 // constants.js
 exports.TOOL_LIMITS = {
   KEYWORD_EXTRACTOR: 700,
-  RESUME_ENHANCER: 1000,
+  RESUME_ENHANCER: 700,
   // Add other tools as needed
 };
 
