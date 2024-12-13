@@ -4,21 +4,13 @@ import { urlFor } from "@/src/sanity/lib/image";
 
 const Block = ({ children }) => <div className="mb-8">{children}</div>;
 
-const H1 = ({ children }) => (
-  <h1 className="h2 text-fordham-white mb-8">{children}</h1>
-);
+const H1 = ({ children }) => <h1 className="h2 text-fordham-white mb-8">{children}</h1>;
 
-const H2 = ({ children }) => (
-  <h2 className="h3 text-fordham-white mb-6">{children}</h2>
-);
+const H2 = ({ children }) => <h2 className="h3 text-fordham-white mb-6">{children}</h2>;
 
-const H3 = ({ children }) => (
-  <h3 className="h4 text-fordham-white mb-4">{children}</h3>
-);
+const H3 = ({ children }) => <h3 className="h4 text-fordham-white mb-4">{children}</h3>;
 
-const H4 = ({ children }) => (
-  <h4 className="h5 text-fordham-white mb-4">{children}</h4>
-);
+const H4 = ({ children }) => <h4 className="h5 text-fordham-white mb-4">{children}</h4>;
 
 const Normal = ({ children }) => (
   <p className="text-fordham-light-gray leading-relaxed mb-6">{children}</p>
@@ -36,20 +28,14 @@ const Code = ({ children }) => (
   </code>
 );
 
-const ListItem = ({ children }) => (
-  <li className="text-fordham-light-gray mb-3">{children}</li>
-);
+const ListItem = ({ children }) => <li className="text-fordham-light-gray mb-3">{children}</li>;
 
 const BulletList = ({ children }) => (
-  <ul className="list-disc pl-6 mb-8 space-y-2 marker:text-fordham-light-gray">
-    {children}
-  </ul>
+  <ul className="list-disc pl-6 mb-8 space-y-2 marker:text-fordham-light-gray">{children}</ul>
 );
 
 const NumberedList = ({ children }) => (
-  <ol className="list-decimal pl-6 mb-8 space-y-2 marker:text-fordham-light-gray">
-    {children}
-  </ol>
+  <ol className="list-decimal pl-6 mb-8 space-y-2 marker:text-fordham-light-gray">{children}</ol>
 );
 
 const SanityImage = ({ value }) => {
