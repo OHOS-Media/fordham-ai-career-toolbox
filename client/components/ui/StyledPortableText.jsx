@@ -21,7 +21,7 @@ const H4 = ({ children }) => (
 );
 
 const Normal = ({ children }) => (
-  <p className="text-fordham-light-gray/80 leading-relaxed mb-6">{children}</p>
+  <p className="text-fordham-light-gray leading-relaxed mb-6">{children}</p>
 );
 
 const BlockQuote = ({ children }) => (
@@ -37,17 +37,17 @@ const Code = ({ children }) => (
 );
 
 const ListItem = ({ children }) => (
-  <li className="text-fordham-light-gray/80 mb-3">{children}</li>
+  <li className="text-fordham-light-gray mb-3">{children}</li>
 );
 
 const BulletList = ({ children }) => (
-  <ul className="list-disc pl-6 mb-8 space-y-2 marker:text-fordham-brown">
+  <ul className="list-disc pl-6 mb-8 space-y-2 marker:text-fordham-light-gray">
     {children}
   </ul>
 );
 
 const NumberedList = ({ children }) => (
-  <ol className="list-decimal pl-6 mb-8 space-y-2 marker:text-fordham-brown">
+  <ol className="list-decimal pl-6 mb-8 space-y-2 marker:text-fordham-light-gray">
     {children}
   </ol>
 );
@@ -78,7 +78,7 @@ const Link = ({ value, children }) => {
       href={value?.href}
       target={target}
       rel={target === "_blank" ? "noopener noreferrer" : undefined}
-      className="text-fordham-brown hover:text-fordham-white transition-colors underline underline-offset-4"
+      className="text-fordham-light-gray hover:text-fordham-white transition-colors underline underline-offset-4"
     >
       {children}
     </a>
