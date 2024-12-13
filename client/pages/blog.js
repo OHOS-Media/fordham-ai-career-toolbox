@@ -145,7 +145,7 @@ const FeaturedBlogCard = (post) => {
             </div>
           </div>
           <Link
-            href={`/${post.slug.current}`}
+            href={`${post.slug.current}`}
             className="ml-auto px-6 py-2 rounded-full bg-fordham-white/10 hover:bg-fordham-white/20 text-fordham-white transition-colors"
           >
             Read more
