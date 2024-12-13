@@ -160,7 +160,7 @@ export default function Toolbox() {
         marginBottom={true}
         marginTop={true}
         limitedWidth={true}
-        className="max-w-7xl flex flex-col gap-20 border"
+        className="max-w-7xl flex flex-col gap-20"
       >
         <div className="w-full flex flex-col items-center gap-2 z-10">
           <h1 className="h2 text-fordham-white">Toolbox</h1>
