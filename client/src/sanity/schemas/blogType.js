@@ -22,13 +22,18 @@ export const blogType = defineType({
       type: "slug",
       options: {
         source: "title",
-        slugify: (input) => `/blog/${input.toLowerCase().replace(/\s+/g, "-").slice(0, 200)}`,
+        slugify: (input) =>
+          `/blog/${input
+            .toLowerCase()
+            .replace(/[^\w\s]/g, "")
+            .replace(/\s+/g, "-")
+            .slice(0, 200)}`,
       },
       description: (
         <>
-          Using the generate button is reccomended. Must start with /blog/...
+          Using the generate button is recommended.
           <br />
-          ex: /blog/top-tips-on-how-to-succeed
+          ex: /blog/awsome-blog-post
         </>
       ),
       validation: (Rule) => Rule.required().error("Slug is required."),
