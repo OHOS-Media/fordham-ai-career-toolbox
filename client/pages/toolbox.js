@@ -9,6 +9,7 @@ import MainToolbox from "@/components/ToolboxPage/MainToolbox";
 import ToolboxEnd from "@/components/ToolboxPage/ToolboxSteps/ToolboxEnd";
 import { useToolboxSteps } from "@/components/ToolboxPage/ToolboxSteps/useToolboxSteps";
 import ExitConfirmationModal from "@/components/ToolboxPage/ExitConfirmationModal";
+import GradientContainer from "@/components/ui/GradientContainer";
 
 export default function Toolbox() {
   const { request, loading } = useApi();
@@ -153,48 +154,51 @@ export default function Toolbox() {
   }
 
   return (
-    <PageContainer
-      marginBottom={true}
-      marginTop={true}
-      limitedWidth={true}
-      className="max-w-7xl flex flex-col gap-20"
-    >
-      <div className="w-full flex flex-col items-center gap-2">
-        <h1 className="h2 text-fordham-white">Toolbox</h1>
-        <p className="body-txt-md text-center font-light text-fordham-light-gray/60 max-w-2xl">
-          Follow the steps below to tailor your resume for the specific job application.
-        </p>
-      </div>
-
-      {exitModalActive && (
-        <ExitConfirmationModal
-          setExitModalActive={(value) => updateState({ exitModalActive: value })}
-          handleDone={handleDone}
-          handleCancel={handleCancel}
-        />
-      )}
-
-      {toolboxActive ? (
-        <div className="h-[700px] w-full flex flex-row gap-6">
-          <Sidebar
-            activeStep={activeStep}
-            handleReturnBtn={handleReturnBtn}
-            handleDone={handleDone}
-            setExitModalActive={(value) => updateState({ exitModalActive: value })}
-          />
-          <MainToolbox
-            activeStep={activeStep}
-            decrementStep={() => navigateStep("prev")}
-            incrementStep={() => navigateStep("next")}
-            renderStep={renderStep}
-            handleDone={handleDone}
-            handleSubmit={handleSubmit}
-            loading={loading}
-          />
+    <>
+      <GradientContainer />
+      <PageContainer
+        marginBottom={true}
+        marginTop={true}
+        limitedWidth={true}
+        className="max-w-7xl flex flex-col gap-20"
+      >
+        <div className="w-full flex flex-col items-center gap-2 z-10">
+          <h1 className="h2 text-fordham-white">Toolbox</h1>
+          <p className="body-txt-md text-center font-light text-fordham-light-gray/60 max-w-2xl">
+            Follow the steps below to tailor your resume for the specific job application.
+          </p>
         </div>
-      ) : (
-        <ToolboxEnd />
-      )}
-    </PageContainer>
+
+        {exitModalActive && (
+          <ExitConfirmationModal
+            setExitModalActive={(value) => updateState({ exitModalActive: value })}
+            handleDone={handleDone}
+            handleCancel={handleCancel}
+          />
+        )}
+
+        {toolboxActive ? (
+          <div className="h-[700px] w-full flex flex-row gap-6 z-10">
+            <Sidebar
+              activeStep={activeStep}
+              handleReturnBtn={handleReturnBtn}
+              handleDone={handleDone}
+              setExitModalActive={(value) => updateState({ exitModalActive: value })}
+            />
+            <MainToolbox
+              activeStep={activeStep}
+              decrementStep={() => navigateStep("prev")}
+              incrementStep={() => navigateStep("next")}
+              renderStep={renderStep}
+              handleDone={handleDone}
+              handleSubmit={handleSubmit}
+              loading={loading}
+            />
+          </div>
+        ) : (
+          <ToolboxEnd />
+        )}
+      </PageContainer>
+    </>
   );
 }

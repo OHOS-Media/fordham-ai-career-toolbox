@@ -10,10 +10,10 @@ import GradientContainer from "@/components/ui/GradientContainer";
 
 export default function Home({ HomePageData }) {
   return (
-    <div className="flex flex-col items-center justify-center gap-[160px] mt-20 md:mt-[160px]">
+    <div className="flex flex-col items-center justify-center gap-[160px]">
       <GradientContainer>
         <PageContainer limitedWidth={true}>
-          <div className="flex flex-col items-center justify-center gap-20 md:gap-[160px]">
+          <div className="flex flex-col items-center justify-center gap-20 mt-20 md:gap-[160px]">
             <Hero {...HomePageData.hero} />
             <FeaturesSection {...HomePageData.features} />
           </div>

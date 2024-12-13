@@ -24,7 +24,7 @@ const AccordionItem = ({ title, content, bulletPoints, isOpen, onClick, variant,
   return (
     <div
       onClick={onClick}
-      className="bg-fordham-white/5 rounded-[16px] pr-4 pl-[32px] py-4 hover:cursor-pointer"
+      className="bg-fordham-brown rounded-[16px] pr-4 pl-[32px] py-4 hover:cursor-pointer"
     >
       <div className="flex justify-between items-center">
         <h3 className="text-fordham-white body-txt-bold md:body-txt-md-bold mr-4 font-bold">

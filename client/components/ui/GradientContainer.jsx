@@ -24,7 +24,7 @@ export default function GradientContainer({ children }) {
       <img
         src="/assets/Gradient.png"
         alt="Gradient background"
-        className="absolute w-[700px] h-[700px] top-[-20%] left-[45%] pointer-events-none rotate-90"
+        className="absolute w-[700px] h-[700px] -top-32 left-[45%] pointer-events-none"
         aria-hidden="true"
       />
 
