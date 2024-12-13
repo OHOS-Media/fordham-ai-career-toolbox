@@ -7,26 +7,46 @@ import { client } from "@/src/sanity/lib/client.js";
 import { Toaster } from "react-hot-toast";
 import posthog from "posthog-js";
 import { PostHogProvider } from "posthog-js/react";
+import { useRouter } from "next/router";
 
 const inter_init = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
 });
 
-if (typeof window !== "undefined") {
-  // checks that we are client-side
-  posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
-    api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST || "https://us.i.posthog.com",
-    person_profiles: "identified_only", // or 'always' to create profiles for anonymous users as well
-    loaded: (posthog) => {
-      if (process.env.NODE_ENV === "development") posthog.debug(); // debug mode in development
-    },
-  });
-}
-
 export default function App({ Component, pageProps }) {
   const [footerData, setFooterData] = useState(null);
+  const router = useRouter();
 
+  // PostHog Initialization and Page View Tracking
+  useEffect(() => {
+    if (!posthog.__loaded) {
+      posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
+        api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST || "https://us.i.posthog.com",
+        loaded: (posthog) => {
+          if (process.env.NODE_ENV === "development") {
+            posthog.debug();
+          }
+        },
+        capture_pageview: false,
+      });
+    }
+
+    const handleRouteChange = () => {
+      posthog.capture("$pageview", {
+        path: window.location.pathname,
+      });
+    };
+
+    handleRouteChange();
+    router.events.on("routeChangeComplete", handleRouteChange);
+
+    return () => {
+      router.events.off("routeChangeComplete", handleRouteChange);
+    };
+  }, [router.events]);
+
+  // Footer Data Fetching
   useEffect(() => {
     const fetchFooterData = async () => {
       try {
