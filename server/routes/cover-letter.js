@@ -1,19 +1,19 @@
 const express = require("express");
 const router = express.Router();
 const { OpenAI } = require("openai");
-const { isAuthenticated } = require("../middleware/auth");
-const requireTerms = require("../middleware/requireTerms");
-const validateText = require("../middleware/validateText");
-const { decrementUsage } = require("../utils/usage");
-const { SYSTEM_PROMPT_COVER_LETTER } = require("../config/constants");
 
+const { validateText } = require("../middleware/validateText.js");
+const requireTerms = require("../middleware/requireTerms.js");
+const { ensureAuthenticated } = require("../middleware/auth.js");
+
+const { SYSTEM_PROMPT_COVER_LETTER } = require("../config/constants");
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
 router.post(
   "/cover-letter",
-  isAuthenticated,
+  ensureAuthenticated,
   requireTerms,
   validateText("COVER_LETTER"),
   async (req, res) => {
@@ -39,8 +39,6 @@ router.post(
         ],
         model: "gpt-4o",
       });
-
-      await decrementUsage(req.userUsage);
 
       const coverLetter = completion.choices[0].message.content.trim();
 
