@@ -20,8 +20,6 @@ export default function Profile() {
     checkUsage();
   }, [checkUsage]);
 
-  console.log("usage:", usage);
-
   if (loading || !user) {
     return (
       <div className="min-h-screen flex items-center justify-center">

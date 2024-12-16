@@ -5,7 +5,7 @@ const { checkUsage } = require("../controllers/UserUsage.controller.js");
 
 // Middleware to check if user is authenticated
 const isAuthenticated = (req, res, next) => {
-  console.log("isAuthenticated:", req.isAuthenticated());
+  // console.log("isAuthenticated:", req.isAuthenticated());
   if (req.isAuthenticated()) {
     return next();
   }
@@ -16,7 +16,7 @@ const isAuthenticated = (req, res, next) => {
 router.get("/user", isAuthenticated, (req, res) => {
   // console.log("Session:", req.session);
   // console.log("User:", req.user);
-  console.log("User route accessed, user:", req.user);
+  // console.log("User route accessed, user:", req.user);
   res.json({
     id: req.user.id,
     displayName: req.user.displayName,

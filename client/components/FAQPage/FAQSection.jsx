@@ -2,7 +2,6 @@ import Accordion from "../Accordion/Accordion";
 
 const FAQSection = ({ FAQPageData }) => {
   const handleCopy = (copiedText) => {
-    console.log("Copied:", copiedText);
     // Additional handling if needed
   };
 

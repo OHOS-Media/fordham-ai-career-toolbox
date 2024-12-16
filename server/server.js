@@ -57,15 +57,6 @@ app.use(passport.session());
 app.use(express.json());
 require("./config/passport")(passport);
 
-// app.use((req, res, next) => {
-//   console.log("Request URL:", req.url);
-//   console.log("SessionID:", req.sessionID);
-//   console.log("Session:", JSON.stringify(req.session, null, 2));
-//   console.log("Is Authenticated:", req.isAuthenticated());
-//   console.log("User:", req.user ? req.user._id : "No user");
-//   next();
-// });
-
 // Routes
 app.use("/auth", require("./routes/auth"));
 app.use("/api", require("./routes/user"));
