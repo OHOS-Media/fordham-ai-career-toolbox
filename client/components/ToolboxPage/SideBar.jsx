@@ -125,6 +125,20 @@ export const Sidebar = ({ activeStep, progress, handleReturnBtn }) => (
                     Get bullet points
                   </p>
                 </div>
+                <div className="flex gap-4">
+                  <div
+                    className={`mx-[6px] rounded-full w-1 h-auto ${
+                      activeStep === 5 ? "bg-red-500" : "bg-fordham-gray/40"
+                    }`}
+                  ></div>
+                  <p
+                    className={`body-txt-md ${
+                      activeStep === 5 ? "text-fordham-white" : "text-fordham-gray/60"
+                    }`}
+                  >
+                    Get cover letter
+                  </p>
+                </div>
               </div>
             )}
           </div>
@@ -139,11 +153,11 @@ export const Sidebar = ({ activeStep, progress, handleReturnBtn }) => (
         <div className="h-3 bg-fordham-dark-gray rounded-full w-full">
           <div
             className="h-full bg-gradient-to-r from-[#7E1515] via-[#BE2929] to-[#F34848] rounded-full transition-all duration-300"
-            style={{ width: `${(activeStep / 4) * 100}%` }}
+            style={{ width: `${(activeStep / 5) * 100}%` }}
           />
         </div>
         <p className="body-txt-sm text-fordham-gray -translate-y-1">
-          {Math.round((activeStep / 4) * 100)}%
+          {Math.round((activeStep / 5) * 100)}%
         </p>
       </div>
 

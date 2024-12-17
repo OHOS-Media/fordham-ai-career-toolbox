@@ -15,7 +15,7 @@ function MainToolbox({
   const { usageError, checkUsage } = useAuth();
 
   const handleButtonClick = async (e) => {
-    if (activeStep === 1 || activeStep === 3) {
+    if (activeStep === 1 || activeStep === 3 || activeStep === 4) {
       const hasTokens = await checkUsage();
       if (!hasTokens) return;
     }
@@ -50,8 +50,16 @@ function MainToolbox({
       case 4:
         return [
           {
+            text: loading ? "Processing..." : "Get cover letter",
+            onClick: handleButtonClick,
+            disabled: isDisabled,
+          },
+        ];
+      case 5:
+        return [
+          {
             text: "Browse more features",
-            onClick: () => alert("This feature is not yet implemented."),
+            onClick: () => incrementStep(),
           },
         ];
       default:
@@ -63,9 +71,22 @@ function MainToolbox({
     if (loading) {
       return {
         type: "loading",
-        title: activeStep === 1 ? "Extracting keywords" : "Extracting bullet points",
-        message: `Hang tight! We are currently analyzing the ${
-          activeStep === 1 ? "keywords" : "bullet points"
+        title:
+          activeStep === 1
+            ? "Extracting keywords"
+            : activeStep === 3
+              ? "Extracting bullet points"
+              : activeStep === 4
+                ? "Generating cover letter"
+                : "",
+        message: `Hang tight! We are currently ${
+          activeStep === 1
+            ? "analyzing the keywords"
+            : activeStep === 3
+              ? "analyzing the bullet points"
+              : activeStep === 4
+                ? "generating your cover letter"
+                : ""
         }.`,
       };
     }
@@ -124,7 +145,7 @@ function MainToolbox({
         )}
       </div>
 
-      {notificationConfig && (activeStep === 1 || activeStep === 3) && (
+      {notificationConfig && (activeStep === 1 || activeStep === 3 || activeStep == 4) && (
         <Notification
           type={notificationConfig.type}
           title={notificationConfig.title}

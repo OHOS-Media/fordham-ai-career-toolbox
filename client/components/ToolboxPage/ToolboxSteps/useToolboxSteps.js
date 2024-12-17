@@ -3,6 +3,7 @@ import ToolboxStep1 from "./ToolboxStep1";
 import ToolboxStep2 from "./ToolboxStep2";
 import ToolboxStep3 from "./ToolboxStep3";
 import ToolboxStep4 from "./ToolboxStep4";
+import ToolboxStep5 from "./ToolboxStep5";
 
 export const useToolboxSteps = ({ state, updateState, navigateStep }) => {
   const renderStep = useCallback(() => {
@@ -34,6 +35,15 @@ export const useToolboxSteps = ({ state, updateState, navigateStep }) => {
       4: (
         <ToolboxStep4
           bulletPoints={state.bulletPoints}
+          incrementStep={() => navigateStep("next")}
+        />
+      ),
+      5: (
+        <ToolboxStep5
+          resume={state.resume}
+          jobDescription={state.jobDescription}
+          setCoverLetter={(value) => updateState({ coverLetter: value })}
+          coverLetter={state.coverLetter}
           incrementStep={() => navigateStep("next")}
         />
       ),

@@ -115,6 +115,15 @@ export default function Toolbox() {
           body: JSON.stringify({ jobDescription, resume }),
         });
         updateState({ bulletPoints: data });
+      } else if (activeStep === 4) {
+        const data = await request("/api/cover-letter", {
+          method: "POST",
+          body: JSON.stringify({ jobDescription, resume }),
+        });
+
+        console.log(activeStep + data);
+
+        updateState({ coverLetter: data.coverLetter });
       }
       navigateStep("next");
     } catch (error) {
@@ -126,7 +135,7 @@ export default function Toolbox() {
   };
 
   useEffect(() => {
-    if (activeStep > 4) updateState({ toolboxActive: false });
+    if (activeStep > 5) updateState({ toolboxActive: false });
   }, [activeStep]);
 
   const { renderStep } = useToolboxSteps({
