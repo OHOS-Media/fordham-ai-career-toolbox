@@ -7,7 +7,7 @@ export default function ExitConfirmationModal({ setExitModalActive, handleDone }
 
   return (
     <div className="fixed flex justify-center items-center inset-0 bg-black/50 z-50 w-screen h-screen overflow-hidden overscroll-none">
-      <div className={`absolute justify-center z-50 animate-fadeIn`}>
+      <div className={"absolute justify-center z-50 animate-fadeIn"}>
         <div className="bg-fordham-white shadow-lg rounded-[16px] p-6 w-fit">
           <div className="flex flex-col items-start gap-6 w-full">
             <div className="flex flex-col gap-2">

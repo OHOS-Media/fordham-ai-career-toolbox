@@ -102,7 +102,7 @@ export const Sidebar = ({ activeStep, progress, handleReturnBtn }) => (
                     className={`mx-[6px] rounded-full w-1 h-auto ${
                       activeStep === 3 ? "bg-red-500" : "bg-fordham-gray/40"
                     }`}
-                  ></div> 
+                  ></div>
                   <p
                     className={`body-txt-md ${
                       activeStep === 3 ? "text-fordham-white" : "text-fordham-gray/60"

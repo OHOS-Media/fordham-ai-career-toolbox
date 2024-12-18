@@ -17,13 +17,10 @@ export default function BlogPost({ blog, relatedPosts }) {
           onClick={() => router.push("/blog")}
           className="group flex items-center gap-2 text-fordham-light-gray/60 hover:text-fordham-white transition-colors mb-8"
         >
-          <IconArrowLeft 
-            size={20} 
-            className="group-hover:-translate-x-1 transition-transform" 
-          />
+          <IconArrowLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
           Back to blogs
         </button>
-        
+
         <BlogDetailPage blog={blog} relatedPosts={relatedPosts} />
       </div>
     </div>
@@ -32,7 +29,7 @@ export default function BlogPost({ blog, relatedPosts }) {
 
 export async function getStaticPaths() {
   try {
-    const paths = await client.fetch(`*[_type == "blog" && defined(slug.current)].slug.current`);
+    const paths = await client.fetch('*[_type == "blog" && defined(slug.current)].slug.current');
 
     return {
       paths: paths.map((slug) => ({ params: { slug: slug.split("/").pop() } })),

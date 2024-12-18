@@ -50,7 +50,7 @@ export default function App({ Component, pageProps }) {
   useEffect(() => {
     const fetchFooterData = async () => {
       try {
-        const data = await client.fetch(`*[_type == "footer"][0]`);
+        const data = await client.fetch('*[_type == "footer"][0]');
         setFooterData(data);
       } catch (error) {
         console.error("Error fetching footer data:", error);

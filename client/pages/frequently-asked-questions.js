@@ -27,7 +27,7 @@ export default function FAQ({ FAQPageData, faqPageContent }) {
 export async function getStaticProps() {
   const [FAQPageData, faqPageContent] = await Promise.all([
     client.fetch("*[_type == 'faq']"),
-    client.fetch(`*[_type == "faqPage"][0]`),
+    client.fetch('*[_type == "faqPage"][0]'),
   ]);
 
   return {

@@ -167,7 +167,7 @@ export async function getStaticProps() {
       "author": author->{name, image},
       "categories": categories[]->title
     }`),
-    client.fetch(`*[_type == "blogPage"][0]`),
+    client.fetch('*[_type == "blogPage"][0]'),
   ]);
 
   return {
