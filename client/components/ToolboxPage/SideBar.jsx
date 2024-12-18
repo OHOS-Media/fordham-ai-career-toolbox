@@ -76,18 +76,18 @@ export const Sidebar = ({ activeStep, progress, handleReturnBtn }) => (
           {/* Resume Enhancer */}
           <div
             className={`${
-              activeStep >= 3 ? "bg-fordham-white/5" : ""
+              activeStep >= 3 && activeStep <= 4 ? "bg-fordham-white/5" : ""
             } p-4 rounded-[8px] flex flex-col gap-4 transition-all duration-300`}
           >
             <div className="text-fordham-white w-full flex items-center gap-4">
-              {activeStep >= 3 ? (
+              {activeStep >= 3 && activeStep <= 4 ? (
                 <IconChevronDown className="w-4 font-bold" />
               ) : (
                 <IconChevronRight className="w-4 font-bold" />
               )}
               <div
                 className={`flex gap-2 body-txt font-bold ${
-                  activeStep >= 3 ? "text-fordham-white" : "text-fordham-gray/60"
+                  activeStep >= 3 && activeStep <= 4 ? "text-fordham-white" : "text-fordham-gray/60"
                 }`}
               >
                 <IconFileText className="w-4" />
@@ -95,14 +95,14 @@ export const Sidebar = ({ activeStep, progress, handleReturnBtn }) => (
               </div>
             </div>
             {/* Show steps only when in resume enhancer phase */}
-            {activeStep >= 3 && (
+            {activeStep >= 3 && activeStep <= 4 && (
               <div className="flex flex-col gap-4">
                 <div className="flex gap-4">
                   <div
                     className={`mx-[6px] rounded-full w-1 h-auto ${
                       activeStep === 3 ? "bg-red-500" : "bg-fordham-gray/40"
                     }`}
-                  ></div>
+                  ></div> 
                   <p
                     className={`body-txt-md ${
                       activeStep === 3 ? "text-fordham-white" : "text-fordham-gray/60"
@@ -125,6 +125,34 @@ export const Sidebar = ({ activeStep, progress, handleReturnBtn }) => (
                     Get bullet points
                   </p>
                 </div>
+              </div>
+            )}
+          </div>
+
+          {/* Cover letter generator */}
+          <div
+            className={`${
+              activeStep >= 5 ? "bg-fordham-white/5" : ""
+            } p-4 rounded-[8px] flex flex-col gap-4 transition-all duration-300`}
+          >
+            <div className="text-fordham-white w-full flex items-center gap-4">
+              {activeStep >= 5 ? (
+                <IconChevronDown className="w-4 font-bold" />
+              ) : (
+                <IconChevronRight className="w-4 font-bold" />
+              )}
+              <div
+                className={`flex gap-2 body-txt font-bold ${
+                  activeStep >= 5 ? "text-fordham-white" : "text-fordham-gray/60"
+                }`}
+              >
+                <IconFileText className="w-4" />
+                <p>Cover letter</p>
+              </div>
+            </div>
+            {/* Show steps only when in cover letter phase */}
+            {activeStep >= 5 && (
+              <div className="flex flex-col gap-4">
                 <div className="flex gap-4">
                   <div
                     className={`mx-[6px] rounded-full w-1 h-auto ${
