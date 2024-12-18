@@ -58,8 +58,8 @@ function MainToolbox({
       case 5:
         return [
           {
-            text: "Browse more features",
-            onClick: () => incrementStep(),
+            text: "Start over",
+            onClick: () => decrementStep(4),
           },
         ];
       default:

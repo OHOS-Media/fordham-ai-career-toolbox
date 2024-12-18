@@ -1,7 +1,7 @@
 import { IconMinus, IconPlus } from "@tabler/icons-react";
 import CopyButton from "./CopyButton";
 
-const AccordionItem = ({ title, content, bulletPoints, isOpen, onClick, variant, onCopy }) => {
+const AccordionItem = ({ title, content, bulletPoints, isOpen, onToggle, variant, onCopy }) => {
   const handleCopy = async () => {
     const textToCopy = bulletPoints ? bulletPoints.join("\n") : content;
     await navigator.clipboard.writeText(textToCopy);
@@ -22,10 +22,7 @@ const AccordionItem = ({ title, content, bulletPoints, isOpen, onClick, variant,
   };
 
   return (
-    <div
-      onClick={onClick}
-      className="bg-fordham-brown rounded-[16px] pr-4 pl-[32px] py-4 hover:cursor-pointer"
-    >
+    <div className="bg-fordham-white/5 rounded-[16px] pr-4 pl-[32px] py-4">
       <div className="flex justify-between items-center">
         <h3 className="text-fordham-white body-txt-bold md:body-txt-md-bold mr-4 font-bold">
           {title}
@@ -34,8 +31,12 @@ const AccordionItem = ({ title, content, bulletPoints, isOpen, onClick, variant,
           {/* Copy button - only show in toolbox variant when section is open */}
           {variant === "toolbox" && isOpen && <CopyButton onCopy={handleCopy} />}
 
-          {/* Toggle button */}
+          {/* Toggle button - onClick moved here */}
           <button
+            onClick={(e) => {
+              e.stopPropagation(); // Prevent event bubbling
+              onToggle();
+            }}
             className="bg-fordham-white/5 rounded-[8px] hover:bg-fordham-white/20 p-3 transition-colors duration-200 cursor-pointer"
             aria-label={isOpen ? "Close section" : "Open section"}
           >
